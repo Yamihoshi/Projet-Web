@@ -1,0 +1,541 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"ex",
+				"export	keyword"
+			],
+			[
+				"cons",
+				"constructor	keyword"
+			],
+			[
+				"nu",
+				"number	keyword"
+			],
+			[
+				"pri",
+				"private	keyword"
+			],
+			[
+				"mo",
+				"motPropose"
+			],
+			[
+				"m",
+				"motPropose"
+			],
+			[
+				"mot",
+				"motPropose"
+			],
+			[
+				"wid",
+				"width"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"background",
+				"background-image"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"pad",
+				"padding"
+			],
+			[
+				"padd",
+				"padding-left"
+			],
+			[
+				"max",
+				"max-height"
+			],
+			[
+				"nb",
+				"nbArc"
+			],
+			[
+				"Tou",
+				"Touites"
+			],
+			[
+				"ID",
+				"ID_msgSource"
+			],
+			[
+				"ID_m",
+				"ID_msgSource"
+			],
+			[
+				"ID_",
+				"ID_msg"
+			],
+			[
+				"Con",
+				"ContenuH"
+			],
+			[
+				"Toui",
+				"TouitesPublics"
+			],
+			[
+				"T",
+				"TouitesNormaux"
+			],
+			[
+				"id",
+				"ID_auteur"
+			],
+			[
+				"A",
+				"Arobase"
+			],
+			[
+				"ID_a",
+				"ID_arobase"
+			],
+			[
+				"N",
+				"NULL"
+			],
+			[
+				"I",
+				"ID_Receveur"
+			],
+			[
+				"Ta",
+				"TABLE"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "index.html",
+			"settings":
+			{
+				"buffer_size": 1142,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/Touitos.ts",
+			"settings":
+			{
+				"buffer_size": 582,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/Message.ts",
+			"settings":
+			{
+				"buffer_size": 190,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/main.ts",
+			"settings":
+			{
+				"buffer_size": 114,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "Packages/C++/C++ Single File.sublime-build",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/C++/C++ Single File.sublime-build",
+					""
+				],
+				[
+					"Packages/C++/C++ Single File.sublime-build",
+					"Run"
+				]
+			],
+			[
+				"Packages/C++/C++ Single File.sublime-build",
+				"Run"
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 58.0,
+		"last_filter": "show",
+		"selected_items":
+		[
+			[
+				"show",
+				"TypeScript: Show Error List"
+			],
+			[
+				"inde",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"indent",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"typescript sh",
+				"TypeScript: Show Error List"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 400.0
+	},
+	"console":
+	{
+		"height": 114.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) ",
+			" import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) "
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Users/Maxime/Documents/GitHub/Projet-Web",
+		"/C/Users/Maxime/Documents/GitHub/Projet-Web/app",
+		"/C/Users/Maxime/Documents/GitHub/Projet-Web/BDD Creation"
+	],
+	"file_history":
+	[
+		"/C/Users/Maxime/Documents/GitHub/Projet-Web/representationTouitos.html",
+		"/C/Users/Maxime/Documents/GitHub/Projet-Web/BDD Creation/creation.sql",
+		"/C/Users/Maxime/Documents/GitHub/Projet-Web/app/Message.ts",
+		"/C/Users/Maxime/Documents/GitHub/Projet-Web/app/app.main.ts",
+		"/C/Users/Maxime/Documents/GitHub/Projet-Web/app/app.Touitos.ts",
+		"/C/Users/Maxime/Documents/GitHub/Projet-Web/Message.ts",
+		"/C/Users/Maxime/Documents/GitHub/Projet-Web/app.main.ts",
+		"/C/Users/Maxime/Documents/GitHub/Projet-Web/app.Touitos.ts",
+		"/C/Users/Maxime/Documents/GitHub/Projet-Web/tsconfig.json",
+		"/C/Users/Maxime/Documents/GitHub/Projet-Web/app.Touitos.js",
+		"/C/Users/Maxime/Documents/GitHub/Projet-Web/node_modules/weinre/web/client/ShowMoreDataGridNode.js",
+		"/C/Users/Maxime/Documents/GitHub/Projet-Web/package.json",
+		"/C/Users/Maxime/Documents/GitHub/Projet-Web/angular2/README.md",
+		"/C/Users/Maxime/Documents/GitHub/Projet-Web/typings.json",
+		"/C/Users/Maxime/Documents/GitHub/Projet-L3/js/script.js",
+		"/C/Users/Maxime/Documents/GitHub/Projet-L3/index.html",
+		"/C/Users/Maxime/Documents/GitHub/Projet-L3/script.js",
+		"/C/Users/Maxime/Desktop/BONINI/script.js",
+		"/C/Users/Maxime/Desktop/BONINI/style.css",
+		"/C/Users/Maxime/Desktop/BONINI/BODINI.html",
+		"/C/Users/Maxime/Desktop/BODINI",
+		"/C/Users/Maxime/AppData/Local/Temp/graphe_3.txt",
+		"/C/Users/Maxime/AppData/Local/Temp/graphe_1-1.txt",
+		"/C/Users/Maxime/Desktop/bodini.txt",
+		"/C/Users/Maxime/Documents/GitHub/Graphe/graphe_6.txt",
+		"/D/MICROSOFT Office PRO Plus 2016 v16.0.4266.1003 RTM + Activator [TechTools.NET]/MICROSOFT Office PRO Plus 2016 v16.0.4266.1003 RTM + Activator [TechTools.NET]/KMSAuto Net 2015 v1.3.8 Portable/readme/readme_fr.txt",
+		"/C/Users/Maxime/Documents/My Games/Binding of Isaac Rebirth/log.txt",
+		"/C/Users/Maxime/Documents/GitHub/Graphe/graphe_1.txt",
+		"/C/Users/Maxime/Documents/GitHub/Graphe/script.js",
+		"/C/Users/Maxime/Desktop/GitHubLog.txt",
+		"/E/Nouveau document texte (2).txt",
+		"/C/Users/Maxime/Desktop/script.js",
+		"/C/Users/Maxime/Documents/GitHub/Graphe/graphe_2.txt",
+		"/C/Users/Maxime/Documents/GitHub/Graphe/graphe_7.txt",
+		"/C/Users/Maxime/Documents/GitHub/Graphe/test.txt",
+		"/C/Users/Maxime/Downloads/graphe_1.txt",
+		"/C/Users/Maxime/AppData/Local/Temp/graphe_15.txt",
+		"/C/Users/Maxime/AppData/Local/Temp/l3_touitos.sql",
+		"/C/Program Files (x86)/eclipse/eclipse.ini",
+		"/C/Users/Maxime/Desktop/creation.sql",
+		"/C/Users/Maxime/Documents/BDD/script"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 90.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"};\n",
+			"any CPU",
+			"<TypeScriptModuleKind>",
+			"-",
+			"_"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			""
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1142,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1126,
+								1126
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"typescript_plugin_format_options":
+							{
+								"convertTabsToSpaces": false,
+								"indentSize": 4,
+								"tabSize": 4
+							}
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "app/Touitos.ts",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 582,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								361,
+								361
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/TypeScript/TypeScript.tmLanguage",
+							"translate_tabs_to_spaces": false,
+							"use_tab_stops": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/Message.ts",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 190,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								38,
+								38
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/TypeScript/TypeScript.tmLanguage",
+							"use_tab_stops": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "app/main.ts",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 114,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								110,
+								110
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/TypeScript/TypeScript.tmLanguage",
+							"typescript_plugin_format_options":
+							{
+								"convertTabsToSpaces": false,
+								"indentSize": 4,
+								"tabSize": 4
+							},
+							"use_tab_stops": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 22.0
+	},
+	"input":
+	{
+		"height": 29.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.doc":
+	{
+		"height": 0.0
+	},
+	"output.errorlist":
+	{
+		"height": 296.0
+	},
+	"output.exec":
+	{
+		"height": 88.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Packages/TypeScript/TypeScript.sublime-build",
+	"project": "projet.sublime-project",
+	"replace":
+	{
+		"height": 40.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 278.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
