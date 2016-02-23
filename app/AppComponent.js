@@ -29,13 +29,13 @@ System.register(['angular2/router', './AppProfil.component', 'angular2/core'], f
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: "\n    <h1>{{title}}</h1>\n    <a [routerLink]=\"['Membre']\">Membres</a>\n  <router-outlet></router-outlet>\n  <script> console.log(\"fdp\");</script>",
+                        template: "\n    <h1>{{title}}</h1>\n    <a [routerLink]=\"['Membre']\">Membres</a>\n  <router-outlet></router-outlet>",
                         directives: [AppProfil_component_1.AppProfil, router_1.ROUTER_DIRECTIVES],
                         providers: [router_1.ROUTER_PROVIDERS]
                     }),
                     router_1.RouteConfig([
                         {
-                            path: '/member/',
+                            path: '/',
                             name: 'Membre',
                             component: AppProfil_component_1.AppProfil
                         }

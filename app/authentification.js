@@ -1,4 +1,4 @@
-System.register(['angular2/core', './Message'], function(exports_1) {
+System.register(['angular2/core'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,39 +8,28 @@ System.register(['angular2/core', './Message'], function(exports_1) {
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, Message_1;
-    var MessagesComponent;
+    var core_1;
+    var authentification;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
-            },
-            function (Message_1_1) {
-                Message_1 = Message_1_1;
             }],
         execute: function() {
-            MessagesComponent = (function () {
-                function MessagesComponent() {
+            authentification = (function () {
+                function authentification() {
                 }
-                __decorate([
-                    core_1.Inject(Message_1.Message), 
-                    __metadata('design:type', Array)
-                ], MessagesComponent.prototype, "messages", void 0);
-                MessagesComponent = __decorate([
+                authentification = __decorate([
                     core_1.Component({
-                        selector: 'message',
-                        inputs: ['messages']
-                    }),
-                    core_1.View({
-                        templateUrl: "messages.html",
-                        directives: [MessagesComponent]
+                        selector: 'authentification',
+                        templateUrl: '/authentification.html'
                     }), 
                     __metadata('design:paramtypes', [])
-                ], MessagesComponent);
-                return MessagesComponent;
+                ], authentification);
+                return authentification;
             })();
-            exports_1("MessagesComponent", MessagesComponent);
+            exports_1("authentification", authentification);
         }
     }
 });
-//# sourceMappingURL=Messages.component.js.map
+//# sourceMappingURL=authentification.js.map

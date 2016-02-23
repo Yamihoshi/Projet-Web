@@ -24,9 +24,11 @@ System.register(['./Messages.component', 'angular2/core'], function(exports_1) {
                 }
                 TouitosComponent = __decorate([
                     core_1.Component({
-                        selector: 'my-current',
-                        templateUrl: './representationTouitos.html',
+                        selector: 'my-profil',
                         inputs: ['touitos'],
+                    }),
+                    core_1.View({
+                        templateUrl: './representationTouitos.html',
                         directives: [Messages_component_1.MessagesComponent]
                     }), 
                     __metadata('design:paramtypes', [])

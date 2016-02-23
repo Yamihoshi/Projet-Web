@@ -4,4 +4,4 @@
 <h1>{{touitos.nom}}</h1>
 <h2>{{touitos.email}}</h2>
 <h3>{{touitos.statut}}</h3>
-<message *ngIf="touitos.message" [message] = "touitos.message"></message>
+<message *ngIf="touitos.messagesPublic" [messages] = "touitos.messagesPublic"></message>

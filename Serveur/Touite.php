@@ -1,7 +1,11 @@
 <?php
 
-	class Message{
-		protected $auteur;
+	class Touite{
+
+
+
+		protected $id_$id_auteur; //id
+        protected $id_message; // id
 		protected $date;
 		protected $texte;
 		protected $reponse;
@@ -9,14 +13,14 @@
 
 	/**
 	 * Class Constructor
-	 * @param    $auteur   
+	 * @param    $id_auteur   
 	 * @param    $date   
 	 * @param    $texte   
 	 * @param    $reponse   
 	 */
-	public function __construct($auteur, $date, $texte, $reponse)
+	public function __construct($id_auteur, $date, $texte, $reponse)
 	{
-		$this->auteur = $auteur;
+		$this->id_auteur = $id_auteur;
 		$this->date = $date;
 		$this->texte = $texte;
 		$this->reponse = $reponse;
@@ -41,21 +45,21 @@
      *
      * @return mixed
      */
-    public function getAuteur()
+    public function getIdAuteur()
     {
-        return $this->auteur;
+        return $this->id_auteur;
     }
 
     /**
      * Sets the value of auteur.
      *
-     * @param mixed $auteur the auteur
+     * @param mixed $id_auteur the auteur
      *
      * @return self
      */
-    private function _setAuteur($auteur)
+    private function _setIdAuteur($id_auteur)
     {
-        $this->auteur = $auteur;
+        $this->id_auteur = $id_auteur;
 
         return $this;
     }
@@ -128,6 +132,30 @@
     private function _setReponse($reponse)
     {
         $this->reponse = $reponse;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of id_message.
+     *
+     * @return mixed
+     */
+    public function getIdMessage()
+    {
+        return $this->id_message;
+    }
+
+    /**
+     * Sets the value of id_message.
+     *
+     * @param mixed $id_message the id message
+     *
+     * @return self
+     */
+    protected function setIdMessage($id_message)
+    {
+        $this->id_message = $id_message;
 
         return $this;
     }

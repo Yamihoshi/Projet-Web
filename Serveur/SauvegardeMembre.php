@@ -7,21 +7,18 @@ class GestionSauvegarde
   {
     $this->setDb($db);
   }
-
-  public function add(Membre $perso)
+  public function add(Touitos $perso)
   {
-    $q = $this->_db->prepare('INSERT INTO personnages SET nom = :nom, forcePerso = :forcePerso, degats = :degats, niveau = :niveau, experience = :experience');
-
-    $q->bindValue(':nom', $perso->nom());
-    $q->bindValue(':forcePerso', $perso->forcePerso(), PDO::PARAM_INT);
-    $q->bindValue(':degats', $perso->degats(), PDO::PARAM_INT);
-    $q->bindValue(':niveau', $perso->niveau(), PDO::PARAM_INT);
-    $q->bindValue(':experience', $perso->experience(), PDO::PARAM_INT);
-
+    $q = $this->_db->prepare('INSERT INTO touitos VALUES(NULL, :nom, :mail, :PWD, :statut, :photo)');
+    $q->bindValue(':nom', $perso->getNom(), PDO::PARAM_STR);
+    $q->bindValue(':mail', $perso->getMail(), PDO::PARAM_STR);
+    $q->bindValue(':PWD', $perso->getPWD(), PDO::PARAM_STR);
+    $q->bindValue(':statut', $perso->getStatut(), PDO::PARAM_STR);
+    $q->bindValue(':photo', $perso->getPhoto(), PDO::PARAM_STR);
     $q->execute();
   }
 
-  public function delete(Personnage $perso)
+  public function delete(Touitos $perso)
   {
     $this->_db->exec('DELETE FROM touitos WHERE id = '.$perso->getId();
   }
@@ -30,35 +27,32 @@ class GestionSauvegarde
   {
     $id = (int) $id;
 
-    $q = $this->_db->query('SELECT id, nom, forcePerso, degats, niveau, experience FROM personnages WHERE id = '.$id);
+    $q = $this->_db->query('SELECT id, nom, mail, PWD, photo FROM Touitos WHERE id = '.$id);
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
 
-    return new Personnage($donnees);
+    return new Touitos($donnees);
   }
 
   public function getList()
   {
     $persos = [];
-
-    $q = $this->_db->query('SELECT id, nom, forcePerso, degats, niveau, experience FROM personnages ORDER BY nom');
-
+    $q = $this->_db->query('SELECT id, nom, mail, statut, photo FROM Touitos ORDER BY nom');
     while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
     {
-      $persos[] = new Personnage($donnees);
+      $persos[] = new Touitos($donnees);
     }
-
     return $persos;
   }
 
-  public function update(Personnage $perso)
+  public function update(Touitos $perso)
   {
-    $q = $this->_db->prepare('UPDATE personnages SET forcePerso = :forcePerso, degats = :degats, niveau = :niveau, experience = :experience WHERE id = :id');
+    $q = $this->_db->prepare('UPDATE Touitos SET mail = :mail, nom = :nom, statut = :statut, photo = :photo WHERE id = :id');
 
-    $q->bindValue(':forcePerso', $perso->forcePerso(), PDO::PARAM_INT);
-    $q->bindValue(':degats', $perso->degats(), PDO::PARAM_INT);
-    $q->bindValue(':niveau', $perso->niveau(), PDO::PARAM_INT);
-    $q->bindValue(':experience', $perso->experience(), PDO::PARAM_INT);
-    $q->bindValue(':id', $perso->id(), PDO::PARAM_INT);
+    $q->bindValue(':mail', $perso->getMail(), PDO::PARAM_STR);
+    $q->bindValue(':nom', $perso->getNom(), PDO::PARAM_STR);
+    $q->bindValue(':statut', $perso->getStatut(), PDO::PARAM_STR);
+    $q->bindValue(':photo', $perso->getPhoto(), PDO::PARAM_STR);
+    $q->bindValue(':id', $perso->getId(), PDO::PARAM_INT);
 
     $q->execute();
   }

@@ -24,10 +24,9 @@ System.register(['angular2/core', './Message', './Touitos'], function(exports_1)
         execute: function() {
             TouitosService = (function () {
                 function TouitosService() {
-                    this.hero = new Touitos_1.Touitos(15, "Loski", "los@g.com", "photo.org", "Occupé", [new Message_1.Message(4, 1, new Date(1995, 3), "cucul", null)], null);
+                    this.hero = new Touitos_1.Touitos(15, "Loski", "los@g.com", "photo.org", "Occupé", [new Message_1.Message(4, 1, new Date(1995, 3), "cucul", [new Message_1.Message(4, 1, new Date(1995, 3), "Bite", null), new Message_1.Message(4, 1, new Date(1995, 3), "Enfoiré", null)])], null);
                 }
                 TouitosService.prototype.getTouitos = function () {
-                    console.log(new Message_1.Message(4, 1, new Date(1995, 3), "cucul", null));
                     return this.hero;
                 };
                 TouitosService = __decorate([
@@ -40,5 +39,4 @@ System.register(['angular2/core', './Message', './Touitos'], function(exports_1)
         }
     }
 });
-// 
 //# sourceMappingURL=Touitos.service.js.map

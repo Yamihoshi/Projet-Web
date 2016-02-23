@@ -1,5 +1,7 @@
+<script>console.log(messages) </script>
 <ul>
-	<li *ng-repeat="message.length">
-		
+	<li *ngFor="#message of messages" message="message">
+		{{message.texte}}
+		<message *ngIf="message.reponse" style="color=yellow" [messages]="message.reponse"></message>
 	</li>
 </ul>

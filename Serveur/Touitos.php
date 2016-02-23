@@ -1,4 +1,4 @@
-<?php
+PWD<?php
 	/**
 	* 
 	*/
@@ -6,13 +6,12 @@
 	{
 		private $nom;
 		private $mail;
-		private $date;
 		private $mail;
 		private $messagePublic;
 		private $messagePrive;
 		private $photo;
 		private $statut;
-		private $mdp;
+		private $PWD;
 
 	/**
 	 * Class Constructor
@@ -24,9 +23,9 @@
 	 * @param    $messagePrive   
 	 * @param    $photo   
 	 * @param    $statut   
-	 * @param    $mdp   
+	 * @param    $PWD   
 	 */
-	public function __construct($nom, $mail, $date, $mail, $messagePublic, $messagePrive, $photo, $statut, $mdp)
+	public function __construct($nom, $mail, $date, $mail, $messagePublic, $messagePrive, $photo, $statut, $PWD)
 	{
 		$this->nom = $nom;
 		$this->mail = $mail;
@@ -36,10 +35,10 @@
 		$this->messagePrive = $messagePrive;
 		$this->photo = $photo;
 		$this->statut = $statut;
-		$this->mdp = $mdp;
+		$this->PWD = $PWD;
 	}
 
-	// Sans mdp
+	// Sans PWD
 	public function __construct($nom, $mail, $date, $mail, $messagePublic, $messagePrive, $photo, $statut)
 	{
 		$this->nom = $nom;
@@ -256,25 +255,25 @@
 	    }
 
 	    /**
-	     * Gets the value of mdp.
+	     * Gets the value of PWD.
 	     *
 	     * @return mixed
 	     */
-	    public function getMdp()
+	    public function getPWD()
 	    {
-	        return $this->mdp;
+	        return $this->PWD;
 	    }
 
 	    /**
-	     * Sets the value of mdp.
+	     * Sets the value of PWD.
 	     *
-	     * @param mixed $mdp the mdp
+	     * @param mixed $PWD the PWD
 	     *
 	     * @return self
 	     */
-	    private function _setMdp($mdp)
+	    private function _setPWD($PWD)
 	    {
-	        $this->mdp = $mdp;
+	        $this->PWD = $PWD;
 	        return $this;
 	    }
 }

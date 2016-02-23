@@ -30,16 +30,16 @@ System.register(['angular2/core', './Touitos.component', './Touitos.service'], f
                     this.touitos = this._touitosService.getTouitos();
                 };
                 AppProfil.prototype.ngOnInit = function () {
-                    console.log("pd");
                     this.getTouitos();
-                    console.log(this.touitos);
                 };
                 AppProfil = __decorate([
                     core_1.Component({
                         selector: 'touitos',
-                        directives: [Touitos_component_1.TouitosComponent],
-                        template: "<my-current [touitos]=\"touitos\"></my-current>",
                         providers: [Touitos_service_1.TouitosService]
+                    }),
+                    core_1.View({
+                        template: "<my-profil [touitos]=\"touitos\"></my-profil>",
+                        directives: [Touitos_component_1.TouitosComponent]
                     }), 
                     __metadata('design:paramtypes', [Touitos_service_1.TouitosService])
                 ], AppProfil);

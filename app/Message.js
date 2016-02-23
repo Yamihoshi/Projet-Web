@@ -1,9 +1,4 @@
 System.register([], function(exports_1) {
-    var __extends = (this && this.__extends) || function (d, b) {
-        for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
     var Message, MessagePrive;
     return {
         setters:[],
@@ -19,13 +14,12 @@ System.register([], function(exports_1) {
                 return Message;
             })();
             exports_1("Message", Message);
-            MessagePrive = (function (_super) {
-                __extends(MessagePrive, _super);
-                function MessagePrive() {
-                    _super.apply(this, arguments);
+            MessagePrive = (function () {
+                function MessagePrive(idDestinaire) {
+                    this.idDestinaire = idDestinaire;
                 }
                 return MessagePrive;
-            })(Message);
+            })();
             exports_1("MessagePrive", MessagePrive);
         }
     }

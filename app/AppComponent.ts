@@ -8,15 +8,14 @@ import {Component, OnInit} from 'angular2/core';
   template: `
     <h1>{{title}}</h1>
     <a [routerLink]="['Membre']">Membres</a>
-  <router-outlet></router-outlet>
-  <script> console.log("fdp");</script>`,
+  <router-outlet></router-outlet>`,
   directives: [AppProfil, ROUTER_DIRECTIVES],
   providers: [ROUTER_PROVIDERS]
 })
 
 @RouteConfig([
   {
-    path: '/member/',
+    path: '/',
     name: 'Membre',
     component: AppProfil
   }

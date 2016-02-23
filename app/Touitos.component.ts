@@ -1,15 +1,19 @@
 import {MessagesComponent} from './Messages.component';
 import {Message, MessagePrive} from './Message';
-import {Component,Input,Injectable} from 'angular2/core';
+import {Component, View, Input,Injectable, Directive} from 'angular2/core';
 import {AppProfil} from './AppProfil.component';
 
 
 @Component({
-	selector: 'my-current',
-	templateUrl: './representationTouitos.html',
+	selector: 'my-profil',
 	inputs: ['touitos'],
-	directives:[MessagesComponent]
 })
+
+@View({
+	templateUrl: './representationTouitos.html',
+	directives: [MessagesComponent]
+})
+
 
 export class TouitosComponent{
 

@@ -1,9 +1,9 @@
 CREATE TABLE touitos
 (
 	id INTEGER PRIMARY KEY AUTO_INCREMENT,
-	pseudonyme VARCHAR(50) NOT NULL,
+	nom VARCHAR(50) NOT NULL,
 	email VARCHAR(50) NOT NULL,
-	motPasse VARCHAR(50) NOT NULL,
+	PWD VARCHAR(50) NOT NULL,
 	photo VARCHAR(1) NOT NULL,
 	statut VARCHAR(50)
 );
@@ -18,18 +18,13 @@ CREATE TABLE suivre
 	FOREIGN KEY (idReceveur) REFERENCES touitos(id)
 );
 
+
+
 CREATE TABLE touites
 (
 	idMsg INTEGER PRIMARY KEY AUTO_INCREMENT,
 	dateT DATE NOT NULL,
 	texte VARCHAR(140) NOT NULL
-);
-
-CREATE TABLE touitesPublics
-(
-	idMsg INTEGER PRIMARY KEY,
-	idAuteur INTEGER NOT NULL,
-	FOREIGN KEY (idMsg) REFERENCES touites(idMsg),
 	FOREIGN KEY (idAuteur) REFERENCES touitos(id)
 );
 
@@ -50,7 +45,7 @@ CREATE TABLE contenuH
 	idMsg INTEGER,
 	idHashtag INTEGER,
 	PRIMARY KEY(idMsg,idHashtag),
-	FOREIGN KEY (idMsg) REFERENCES touitesPublics(idMsg),
+	FOREIGN KEY (idMsg) REFERENCES touites(idMsg),
 	FOREIGN KEY (idHashtag) REFERENCES hashtags(idHashtag)
 );
 
@@ -59,30 +54,30 @@ CREATE TABLE contenuA
 	idMsg INTEGER,
 	idArobase INTEGER,
 	PRIMARY KEY(idMsg,idArobase),
-	FOREIGN KEY (idMsg) REFERENCES touitesPublics(idMsg),
+	FOREIGN KEY (idMsg) REFERENCES touites(idMsg),
 	FOREIGN KEY (idArobase) REFERENCES arobases(idArobase)
 );
 
 CREATE TABLE touitesNormaux
 (
 	idMsg INTEGER PRIMARY KEY,
-	FOREIGN KEY (idMsg) REFERENCES touitesPublics(idMsg)
+	FOREIGN KEY (idMsg) REFERENCES touites(idMsg)
 );
 
 CREATE TABLE touitesReponses
 (
 	idMsgRep INTEGER PRIMARY KEY,
 	idMsgSource INTEGER NOT NULL,
-	FOREIGN KEY (idMsgRep) REFERENCES touitesPublics(idMsg),
-	FOREIGN KEY (idMsgSource) REFERENCES touitesPublics(idMsg)
+	FOREIGN KEY (idMsgRep) REFERENCES touites(idMsg),
+	FOREIGN KEY (idMsgSource) REFERENCES touites(idMsg)
 );
 
 CREATE TABLE retouites
 (
 	idMsgRet INTEGER PRIMARY KEY,
 	idMsgSource INTEGER NOT NULL,
-	FOREIGN KEY (idMsgRet) REFERENCES touitesPublics(idMsg),
-	FOREIGN KEY (idMsgSource) REFERENCES touitesPublics(idMsg)
+	FOREIGN KEY (idMsgRet) REFERENCES touites(idMsg),
+	FOREIGN KEY (idMsgSource) REFERENCES touites(idMsg)
 );
 
 CREATE TABLE touitesPrives
