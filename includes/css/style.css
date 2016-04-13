@@ -1,0 +1,98 @@
+body{
+}
+
+.connectForm
+{
+	margin: 0 auto;
+	width: 40%;
+	border:solid 1px black;
+}
+
+.connectForm input
+{
+	display:block;
+	text-align: center;
+	margin-top:20px;
+	margin-left:auto;
+	margin-right:auto;
+	width:40%;
+	height:40px;
+}
+
+nav
+{
+	border:solid 1px black;
+	width:100%;
+	top:0;
+	right:0;
+	left:0;
+	position:fixed;
+	z-index:100;
+	padding:10px;
+}
+
+.spacer
+{
+	clear:both;
+}
+
+nav a
+{
+	text-decoration:none;
+	cursor:pointer;
+}
+
+.connectButton
+{
+	cursor:pointer;
+	background-color:#12BDCD;
+	color:white;
+	font-weight:bold;
+	/*text-shadow: 1px 1px #000000;*/
+}
+
+#nyan_nyan
+{
+	margin: 0 auto;
+	width: 500px;
+	height:500px;
+
+}
+
+#pageDisplay
+{
+	margin-top:80px;
+}
+
+ul
+{
+	list-style-type:none;
+	margin:0;
+    padding: 0;
+}
+
+ul li 
+{
+	display:inline-block;
+}
+
+#connectLink a
+{
+	margin-right:10px;
+	color:white;
+	font-weight:bold;
+	background-color:#12BDCD;
+	padding:10px;
+	right:100px;
+	text-align:center;
+}
+
+input[type="search"]
+{
+	-webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  height:25px;
+  text-align:center;
+  padding:5px;
+}
