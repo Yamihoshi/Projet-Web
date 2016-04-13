@@ -1,5 +1,5 @@
 <?php
-class GestionSauvegarde
+class touitosHandler
 {
   private $_db; // Instance de PDO
 
@@ -20,23 +20,40 @@ class GestionSauvegarde
 
   public function delete(Touitos $perso)
   {
-    $this->_db->exec('DELETE FROM touitos WHERE id = '.$perso->getId();
+    $this->_db->exec('DELETE FROM touitos WHERE id = '.$perso->getId());
   }
 
   public function get($id)
   {
     $id = (int) $id;
 
-    $q = $this->_db->query('SELECT id, nom, mail, PWD, photo FROM Touitos WHERE id = '.$id);
+    $q = $this->_db->query('SELECT id, nom, mail, PWD, photo, statut FROM Touitos WHERE id = '.$id);
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
 
-    return new Touitos($donnees);
+    if(!empty($donnees))
+      return new Touitos($donnees);
+    else
+      return null;
+  }
+
+  public function getbyName($name)
+  {
+
+    $q = $this->_db->prepare('SELECT id, nom, mail, PWD, photo, statut FROM Touitos WHERE nom = :usr');
+    $q->bindValue(':usr', $name, PDO::PARAM_STR);
+     $q->execute();
+    $donnees = $q->fetch(PDO::FETCH_ASSOC);
+
+    if(!empty($donnees))
+      return new Touitos($donnees);
+    else
+      return null;
   }
 
   public function getList()
   {
     $persos = [];
-    $q = $this->_db->query('SELECT id, nom, mail, statut, photo FROM Touitos ORDER BY nom');
+    $q = $this->_db->query('SELECT id, nom, mail, statut, photo, statut FROM Touitos ORDER BY nom');
     while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
     {
       $persos[] = new Touitos($donnees);

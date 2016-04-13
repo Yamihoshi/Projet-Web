@@ -96,3 +96,23 @@ input[type="search"]
   text-align:center;
   padding:5px;
 }
+
+#details_left_infos
+{
+	float:left;
+	border:solid 1px black;
+	width:10%;
+	overflow:hidden;
+}
+
+#details_photo
+{
+	width:50%;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#details_photo img
+{
+	width:100%;
+}

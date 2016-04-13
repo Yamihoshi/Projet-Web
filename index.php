@@ -10,7 +10,7 @@
 			<li><input type="search" placeholder="Chercher un Touitos" name="search"></li>
 			<li id="connectLink">
 				<a href="inscriptions.php">S'inscrire</a>
-				<a href="connexion.php">Se connecter</a>
+				<a href="login.php">Se connecter</a>
 			</li>
 		</ul>
 	</nav>

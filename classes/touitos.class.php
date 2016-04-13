@@ -4,61 +4,66 @@
 	*/
 	class Touitos
 	{
-		private $nom;
-		private $mail;
-		private $mail;
-		private $messagePublic;
-		private $messagePrive;
-		private $photo;
-		private $statut;
-		private $PWD;
+		private $_nom;
+		private $_mail;
+		private $_photo;
+		private $_statut;
+		private $_PWD;
 
 	/**
 	 * Class Constructor
 	 * @param    $nom   
 	 * @param    $mail   
 	 * @param    $date   
-	 * @param    $mail   
-	 * @param    $messagePublic   
-	 * @param    $messagePrive   
+	 * @param    $mail    
 	 * @param    $photo   
 	 * @param    $statut   
 	 * @param    $PWD   
 	 */
-	public function __construct($nom, $mail, $date, $mail, $messagePublic, $messagePrive, $photo, $statut, $PWD)
+	
+
+	/*
+
+ Tu peux pas créer plusieurs constructeurs wesh !!! go stop l'Angular Loski
+
+
+	public function __construct($nom, $mail, $date, $mail, $photo, $statut, $PWD)
 	{
-		$this->nom = $nom;
-		$this->mail = $mail;
-		$this->date = $date;
-		$this->mail = $mail;
-		$this->messagePublic = $messagePublic;
-		$this->messagePrive = $messagePrive;
-		$this->photo = $photo;
-		$this->statut = $statut;
-		$this->PWD = $PWD;
+		$this->_nom = $nom;
+		$this->_mail = $mail;
+		$this->_date = $date;
+		$this->_mail = $mail;
+		$this->_photo = $photo;
+		$this->_statut = $statut;
+		$this->_PWD = $PWD;
 	}
 
+
+
+
 	// Sans PWD
-	public function __construct($nom, $mail, $date, $mail, $messagePublic, $messagePrive, $photo, $statut)
+	public function __construct($nom, $mail, $date, $mail, $photo, $statut)
 	{
-		$this->nom = $nom;
-		$this->mail = $mail;
-		$this->date = $date;
-		$this->mail = $mail;
-		$this->messagePublic = $messagePublic;
-		$this->messagePrive = $messagePrive;
-		$this->photo = $photo;
-		$this->statut = $statut;
-	}
+		$this->_nom = $nom;
+		$this->_mail = $mail;
+		$this->_date = $date;
+		$this->_mail = $mail;
+		$this->_messagePublic = $messagePublic;
+		$this->_messagePrive = $messagePrive;
+		$this->_photo = $photo;
+		$this->_statut = $statut;
+	}*/
 
     public function __construct(array $donnees)
     {
+
       foreach ($donnees as $key => $value)
       {
         // On récupère le nom du setter correspondant à l'attribut.
-        $method = 'set'.ucfirst($key);
+        $method = '_set'.ucfirst($key);
         // Si le setter correspondant existe.
-        if (method_exists($this, $method))
+        //if (method_exists($this, $method))
+       	if(in_array($method,get_class_methods($this)))
         {
           // On appelle le setter.
           $this->$method($value);
@@ -74,20 +79,17 @@
 	     */
 	    public function getNom()
 	    {
-	        return $this->nom;
+	        return $this->_nom;
 	    }
 
 	    /**
 	     * Sets the value of nom.
 	     *
 	     * @param mixed $nom the nom
-	     *
-	     * @return self
 	     */
 	    private function _setNom($nom)
 	    {
-	        $this->nom = $nom;
-	        return $this;
+	        $this->_nom = $nom;
 	    }
 
 	    /**
@@ -97,7 +99,7 @@
 	     */
 	    public function getMail()
 	    {
-	        return $this->mail;
+	        return $this->_mail;
 	    }
 
 	    /**
@@ -105,107 +107,11 @@
 	     *
 	     * @param mixed $mail the mail
 	     *
-	     * @return self
 	     */
 	    private function _setMail($mail)
 	    {
-	        $this->mail = $mail;
+	        $this->_mail = $mail;
 
-	        return $this;
-	    }
-
-	    /**
-	     * Gets the value of date.
-	     *
-	     * @return mixed
-	     */
-	    public function getDate()
-	    {
-	        return $this->date;
-	    }
-
-	    /**
-	     * Sets the value of date.
-	     *
-	     * @param mixed $date the date
-	     *
-	     * @return self
-	     */
-	    private function _setDate($date)
-	    {
-	        $this->date = $date;
-
-	        return $this;
-	    }
-
-	    /**
-	     * Gets the value of mail.
-	     *
-	     * @return mixed
-	     */
-	    public function getMail()
-	    {
-	        return $this->mail;
-	    }
-
-	    /**
-	     * Sets the value of mail.
-	     *
-	     * @param mixed $mail the mail
-	     *
-	     * @return self
-	     */
-	    private function _setMail($mail)
-	    {
-	        $this->mail = $mail;
-
-	        return $this;
-	    }
-
-	    /**
-	     * Gets the value of messagePublic.
-	     *
-	     * @return mixed
-	     */
-	    public function getMessagePublic()
-	    {
-	        return $this->messagePublic;
-	    }
-
-	    /**
-	     * Sets the value of messagePublic.
-	     *
-	     * @param mixed $messagePublic the message public
-	     *
-	     * @return self
-	     */
-	    private function _setMessagePublic($messagePublic)
-	    {
-	        $this->messagePublic = $messagePublic;
-	        return $this;
-	    }
-
-	    /**
-	     * Gets the value of messagePrive.
-	     *
-	     * @return mixed
-	     */
-	    public function getMessagePrive()
-	    {
-	        return $this->messagePrive;
-	    }
-
-	    /**
-	     * Sets the value of messagePrive.
-	     *
-	     * @param mixed $messagePrive the message prive
-	     *
-	     * @return self
-	     */
-	    private function _setMessagePrive($messagePrive)
-	    {
-	        $this->messagePrive = $messagePrive;
-	        return $this;
 	    }
 
 	    /**
@@ -215,7 +121,7 @@
 	     */
 	    public function getPhoto()
 	    {
-	        return $this->photo;
+	        return $this->_photo;
 	    }
 
 	    /**
@@ -223,12 +129,10 @@
 	     *
 	     * @param mixed $photo the photo
 	     *
-	     * @return self
 	     */
 	    private function _setPhoto($photo)
 	    {
-	        $this->photo = $photo;
-	        return $this;
+	        $this->_photo = $photo;
 	    }
 
 	    /**
@@ -238,7 +142,7 @@
 	     */
 	    public function getStatut()
 	    {
-	        return $this->statut;
+	        return $this->_statut;
 	    }
 
 	    /**
@@ -250,8 +154,7 @@
 	     */
 	    private function _setStatut($statut)
 	    {
-	        $this->statut = $statut;
-	        return $this;
+	        $this->_statut = $statut;
 	    }
 
 	    /**
@@ -261,7 +164,7 @@
 	     */
 	    public function getPWD()
 	    {
-	        return $this->PWD;
+	        return $this->_PWD;
 	    }
 
 	    /**
@@ -273,7 +176,6 @@
 	     */
 	    private function _setPWD($PWD)
 	    {
-	        $this->PWD = $PWD;
-	        return $this;
+	        $this->_PWD = $PWD;
 	    }
 }
