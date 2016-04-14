@@ -9,7 +9,7 @@ class touitosHandler
   }
   public function add(Touitos $perso)
   {
-    $q = $this->_db->prepare('INSERT INTO touitos VALUES(NULL, :nom, :mail, :PWD, :statut, :photo)');
+    $q = $this->_db->prepare('INSERT INTO touitos(nom,mail,pwd,statut,photo) VALUES(:nom, :mail, :PWD, :statut, :photo)');
     $q->bindValue(':nom', $perso->getNom(), PDO::PARAM_STR);
     $q->bindValue(':mail', $perso->getMail(), PDO::PARAM_STR);
     $q->bindValue(':PWD', $perso->getPWD(), PDO::PARAM_STR);

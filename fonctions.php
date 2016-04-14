@@ -46,4 +46,23 @@
 			}
 		echo '</div>';
 	}
+
+	function addTouitos($data,$bd)
+	{
+		//test si user existe
+
+		$photo=array('photo' => 'N');
+		$data=$data+$photo;
+
+		$th=new TouitosHandler($bd);
+
+		$test=$th->getByName($data['nom']);
+		if($test!=null)
+			return -1;
+		else
+		{
+			$touitos=new Touitos($data);
+			$th->add($touitos);
+		}
+	}
 ?>
