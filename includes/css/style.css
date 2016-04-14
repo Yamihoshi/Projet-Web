@@ -5,7 +5,7 @@ body{
 {
 	margin: 0 auto;
 	width: 40%;
-	border:solid 1px black;
+	border: 1px solid black;
 }
 
 .connectForm input
@@ -21,7 +21,7 @@ body{
 
 nav
 {
-	border:solid 1px black;
+	border: 1px  solid black;
 	width:100%;
 	top:0;
 	right:0;
@@ -100,7 +100,7 @@ input[type="search"]
 #details_left_infos
 {
 	float:left;
-	border:solid 1px black;
+	border: 1px solid black;
 	width:10%;
 	overflow:hidden;
 }
@@ -115,4 +115,35 @@ input[type="search"]
 #details_photo img
 {
 	width:100%;
+}
+
+#searchResult
+{
+	width:40%;
+	margin:auto;
+}
+
+.result_photo img
+{
+	width:100px;
+	height:100px;
+	float:left;
+}
+
+.resultLine
+{
+	width:100%;
+	height:100px;
+	font-weight:bold;
+	vertical-align: middle;
+}
+
+.resultLine:hover
+{
+	cursor:pointer;
+	border:2px solid black;
+
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
 }

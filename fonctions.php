@@ -17,13 +17,33 @@
 		echo '</div>';
 	}
 
+	function getPhoto($user)
+	{
+		if($user->getPhoto()=='O')
+			return '<img src="files/pictures/'.$user->getNom().'.jpg">';
+		else
+			return '<img src="includes/images/no_pic.jpg">';
+	}
+
 	function show_Photos($user)
 	{
 		echo '<div id="details_photo">';
-		if($user->getPhoto()=='O')
-			echo '<img src="files/pictures/'.$user->getNom().'.jpg">';
-		else
-			echo '<img src=includes/images/no_pic.jpg>';
+			echo getPhoto($user);
+		echo '</div>';
+	}
+
+	function searchByName($str,$bd)
+	{
+		$th=new TouitosHandler($bd);
+		$res=$th->searchByName($str);
+		echo '<div id="searchResult">';
+			foreach($res as $key=>$touitos)
+			{
+				echo '<div class="resultLine">';
+					echo '<span class="result_photo">'.getPhoto($touitos).'</span>';
+					echo '<span class="result_name">'.$touitos->getNom().'</span>';
+				echo '</div>';
+			}
 		echo '</div>';
 	}
 ?>

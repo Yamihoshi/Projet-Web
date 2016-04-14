@@ -61,6 +61,19 @@ class touitosHandler
     return $persos;
   }
 
+  public function searchByName($name)
+  {
+    $persos = [];
+    $q = $this->_db->prepare('SELECT id, nom, mail, statut, photo, statut FROM Touitos WHERE nom LIKE :nom ORDER BY nom');
+    $q->bindValue(':nom',"%$name%", PDO::PARAM_STR);
+    $q->execute();
+    while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+    {
+      $persos[] = new Touitos($donnees);
+    }
+    return $persos;
+  }
+
   public function update(Touitos $perso)
   {
     $q = $this->_db->prepare('UPDATE Touitos SET mail = :mail, nom = :nom, statut = :statut, photo = :photo WHERE id = :id');

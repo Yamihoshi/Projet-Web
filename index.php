@@ -3,11 +3,12 @@
 	<title>Touiteur</title>
 	<link rel="stylesheet" href="includes/css/style.css">
 	<script src="includes/js/jquery-1.11.3.min.js"></script>
+	<script src="includes/js/script.js"></script>
 </head>
 <body>
 	<nav>
 		<ul>
-			<li><input type="search" placeholder="Chercher un Touitos" name="search"></li>
+			<li><input type="search" placeholder="Chercher un Touitos" id="searchBar" name="search"></li>
 			<li id="connectLink">
 				<a href="inscriptions.php">S'inscrire</a>
 				<a href="login.php">Se connecter</a>
