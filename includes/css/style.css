@@ -8,7 +8,7 @@ body{
 	border: 1px solid black;
 }
 
-.connectForm input
+.connectForm input 
 {
 	display:block;
 	text-align: center;
@@ -18,10 +18,22 @@ body{
 	width:40%;
 	height:40px;
 }
+ 
+.connectForm div
+{
+	margin-left:auto;
+	margin-right:auto;
+	width:40%;
+	color:red;
+	font-weight:bold;
+	text-align:center;
+}
 
 nav
 {
 	border: 1px  solid black;
+	height:70px;
+	overflow:hidden;
 	width:100%;
 	top:0;
 	right:0;
@@ -29,6 +41,12 @@ nav
 	position:fixed;
 	z-index:100;
 	padding:10px;
+}
+
+nav img
+{
+	width:50px;
+	height:50px;
 }
 
 .spacer
