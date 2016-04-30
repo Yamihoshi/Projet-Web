@@ -1,4 +1,5 @@
 body{
+	font-family:"Tahoma";
 }
 
 .connectForm
@@ -33,7 +34,6 @@ nav
 {
 	border: 1px  solid black;
 	height:70px;
-	overflow:hidden;
 	width:100%;
 	top:0;
 	right:0;
@@ -56,10 +56,11 @@ nav img
 	clear:both;
 }
 
-nav a
+a
 {
 	text-decoration:none;
 	cursor:pointer;
+	color:black;
 }
 
 .connectButton
@@ -117,24 +118,38 @@ input[type="search"]
   padding:5px;
 }
 
-#details_left_infos
+#profile_left_infos
 {
 	float:left;
 	border: 1px solid black;
-	width:10%;
-	overflow:hidden;
+	width:280px;
 }
 
-#details_photo
+#profile_photo
 {
-	width:50%;
+	width:240px;
+	height:240px;
 	margin-left:auto;
 	margin-right:auto;
 }
 
-#details_photo img
+#profile_name
+{
+	font-size:22px;
+	font-weight:bold;
+	text-align:center;
+}
+
+#profile_photo img
 {
 	width:100%;
+}
+
+#profile_pseudo
+{
+	font-size:16px;
+	font-style:italic;
+	text-align:center;
 }
 
 #searchResult
@@ -168,7 +183,7 @@ input[type="search"]
 	margin-top:10px;
 }
 
-.resultLine,
+/*.resultLine,
 {
 	width:100%;
 	height:100px;
@@ -176,7 +191,7 @@ input[type="search"]
 	vertical-align: middle;
 	margin-top:10px;
 	vertical-align:middle;
-}
+}*/
 
 .touitosDiv
 {

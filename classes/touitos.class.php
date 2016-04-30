@@ -4,6 +4,7 @@
 	*/
 	class Touitos
 	{
+		private $_id;
 		private $_pseudo;
 		private $_nom;
 		private $_mail;
@@ -188,5 +189,15 @@
 	    public function _setPWD($PWD)
 	    {
 	        $this->_PWD = $PWD;
+	    }
+
+	    public function getId()
+	    {
+	    	return $this->_id;
+	    }
+
+	    public function _setId($id)
+	    {
+	    	$this->_id=$id;
 	    }
 }

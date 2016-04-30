@@ -8,39 +8,8 @@
 <body>
 <?php 
 
-require('fonctions.php');
+include('nav.php');
 
-session_start();
-	echo '<nav>
-		<ul>
-			<li><input type="search" placeholder="Chercher un Touitos" id="searchBar" name="search"></li>';
-
-			if(isset($_SESSION['user']))
-			{
-				$th=new TouitosHandler($bd);
-				$usr=$th->getbyName($_SESSION['user']);
-				echo '<li>'.getPhoto($usr).'</li>';
-			}
-
-			echo '<li id="connectLink">';
-
-
-				if(!isset($_SESSION['user']))
-				{
-					echo '<a href="inscriptions.php">S\'inscrire</a>
-						<a href="login.php">Se connecter</a>';
-				}
-				else
-				{
-					echo '<form action="logout.php" method="post" >
-							<input id="disconnectButton" class="connectButton" type="submit" value="Se déconnecter">
-						</form>';
-				}
-
-		echo'
-			</li>
-		</ul>
-	</nav>';
 ?>
 	<div id="pageDisplay">
 		<div id="nyan_nyan">

@@ -29,7 +29,7 @@
 			<form action="inscriptions.php" method="post">
 				<input type="text" name="nom" id="username" placeholder="Nom d\'utilisateur" required>';
 
-				if($mailExists==true)
+				if($userExists==true)
 					echo '<div>Ce nom d\'utilisateur est déjà pris</div>';
 
 
