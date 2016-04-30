@@ -153,10 +153,22 @@ input[type="search"]
 
 .result_name
 {
-	text-align:center;
+	font-weight:bold;
+	font-size:17px;
 }
 
-.resultLine
+.result_pseudo
+{
+	font-size:13px;
+	font-style:italic;
+}
+.result_statut
+{
+	text-align:left;
+	margin-top:10px;
+}
+
+.resultLine,
 {
 	width:100%;
 	height:100px;
@@ -166,7 +178,16 @@ input[type="search"]
 	vertical-align:middle;
 }
 
-.resultLine:hover
+.touitosDiv
+{
+	width:100px;
+	height:200px;
+	text-align:center;
+	display:inline-block;
+	margin-right:10px;
+}
+
+.resultLine:hover,.touitosDiv:hover
 {
 	cursor:pointer;
 	border:2px solid black;

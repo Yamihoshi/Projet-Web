@@ -100,7 +100,7 @@
 
 	   	public function getPseudo()
 	    {
-	        return $this->pseudo;
+	        return $this->_pseudo;
 	    }
 
 	    /**

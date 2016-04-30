@@ -37,11 +37,18 @@
 		$th=new TouitosHandler($bd);
 		$res=$th->searchByName($str);
 		echo '<div id="searchResult">';
-			foreach($res as $key=>$touitos)
+		foreach($res as $key=>$touitos)
 			{
-				echo '<div class="resultLine">';
+				/*echo '<div class="resultLine">';
 					echo '<span class="result_photo">'.getPhoto($touitos).'</span>';
-					echo '<span class="result_name">'.$touitos->getNom().'</span>';
+					echo '<span class="result_name">'.$touitos->getPseudo().'</span>';
+				echo '</div>';*/
+
+				echo '<div class="touitosDiv">';
+					echo '<div class="result_photo">'.getPhoto($touitos).'</div>';
+					echo '<div class="result_name">'.$touitos->getNom().'</div>';
+					echo '<div class="result_pseudo">@'.$touitos->getPseudo().'</div>';
+					echo '<div class="result_statut">'.$touitos->getStatut().'</div>';
 				echo '</div>';
 			}
 		echo '</div>';
