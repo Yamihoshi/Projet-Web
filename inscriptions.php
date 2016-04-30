@@ -11,7 +11,7 @@
 		require('fonctions.php');
 		require('config/connexion.php');
 
-$userExists=false;
+		$userExists=false;
 
 		if(isset($_POST['nom']))
 		{
@@ -29,7 +29,7 @@ $userExists=false;
 			<form action="inscriptions.php" method="post">
 				<input type="text" name="nom" id="username" placeholder="Nom d\'utilisateur" required>';
 
-				if($userExists==true)
+				if($mailExists==true)
 					echo '<div>Ce nom d\'utilisateur est déjà pris</div>';
 
 

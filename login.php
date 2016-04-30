@@ -16,8 +16,8 @@ $badLogin=false;
 
 	if(isset($_POST['login']))
 	{
-		$mail=$_POST['login'];
-		$req=$bd->prepare("SELECT PWD FROM touitos WHERE mail=\"$mail\"");
+		$pseudo=$_POST['login'];
+		$req=$bd->prepare("SELECT PWD FROM touitos WHERE pseudo=\"$pseudo\"");
 		$req->execute();
 		$tab=$req->fetch(PDO::FETCH_ASSOC);
 		if(!empty($tab))
@@ -26,7 +26,7 @@ $badLogin=false;
 
 			if(md5($_POST['password'])==$pass)
 			{
-				$_SESSION['user']=$username;
+				$_SESSION['user']=$pseudo;
 			}
 			else
 				$badLogin=true;

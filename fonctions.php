@@ -22,7 +22,7 @@
 		if($user->getPhoto()=='O')
 			return '<img src="files/pictures/'.$user->getNom().'.jpg">';
 		else
-			return '<img src="includes/images/no_pic.jpg">';
+			return '<img src="includes/img/no_pic.png">';
 	}
 
 	function show_Photos($user)
@@ -56,7 +56,8 @@
 
 		$th=new TouitosHandler($bd);
 
-		$test=$th->getByName($data['nom']);
+		//$test=$th->getByName($data['nom']);
+		$test=$th->getByMail($data['mail']);
 		if($test!=null)
 			return -1;
 		else

@@ -4,6 +4,7 @@
 	*/
 	class Touitos
 	{
+		private $_pseudo;
 		private $_nom;
 		private $_mail;
 		private $_photo;
@@ -87,9 +88,19 @@
 	     *
 	     * @param mixed $nom the nom
 	     */
-	    private function _setNom($nom)
+	    public function _setNom($nom)
 	    {
 	        $this->_nom = $nom;
+	    }
+
+	   	public function _setPseudo($pseudo)
+	    {
+	        $this->_pseudo = $pseudo;
+	    }
+
+	   	public function getPseudo()
+	    {
+	        return $this->pseudo;
 	    }
 
 	    /**
@@ -108,7 +119,7 @@
 	     * @param mixed $mail the mail
 	     *
 	     */
-	    private function _setMail($mail)
+	    public function _setMail($mail)
 	    {
 	        $this->_mail = $mail;
 
@@ -130,7 +141,7 @@
 	     * @param mixed $photo the photo
 	     *
 	     */
-	    private function _setPhoto($photo)
+	    public function _setPhoto($photo)
 	    {
 	        $this->_photo = $photo;
 	    }
@@ -152,7 +163,7 @@
 	     *
 	     * @return self
 	     */
-	    private function _setStatut($statut)
+	    public function _setStatut($statut)
 	    {
 	        $this->_statut = $statut;
 	    }
@@ -174,7 +185,7 @@
 	     *
 	     * @return self
 	     */
-	    private function _setPWD($PWD)
+	    public function _setPWD($PWD)
 	    {
 	        $this->_PWD = $PWD;
 	    }

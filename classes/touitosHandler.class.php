@@ -9,8 +9,8 @@ class touitosHandler
   }
   public function add(Touitos $perso)
   {
-    $q = $this->_db->prepare('INSERT INTO touitos(nom,mail,pwd,statut,photo) VALUES(:nom, :mail, :PWD, :statut, :photo)');
-    $q->bindValue(':nom', $perso->getNom(), PDO::PARAM_STR);
+    $q = $this->_db->prepare('INSERT INTO touitos(pseudo,mail,pwd,statut,photo) VALUES(:pseudo, :mail, :PWD, :statut, :photo)');
+    $q->bindValue(':pseudo', $perso->getPseudo(), PDO::PARAM_STR);
     $q->bindValue(':mail', $perso->getMail(), PDO::PARAM_STR);
     $q->bindValue(':PWD', $perso->getPWD(), PDO::PARAM_STR);
     $q->bindValue(':statut', $perso->getStatut(), PDO::PARAM_STR);
@@ -27,7 +27,7 @@ class touitosHandler
   {
     $id = (int) $id;
 
-    $q = $this->_db->query('SELECT id, nom, mail, PWD, photo, statut FROM Touitos WHERE id = '.$id);
+    $q = $this->_db->query('SELECT id, nom,pseudo, mail, PWD, photo, statut FROM Touitos WHERE id = '.$id);
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
 
     if(!empty($donnees))
@@ -38,8 +38,7 @@ class touitosHandler
 
   public function getbyName($name)
   {
-
-    $q = $this->_db->prepare('SELECT id, nom, mail, PWD, photo, statut FROM Touitos WHERE nom = :usr');
+    $q = $this->_db->prepare('SELECT id, nom,pseudo, mail, PWD, photo, statut FROM Touitos WHERE pseudo = :usr');
     $q->bindValue(':usr', $name, PDO::PARAM_STR);
      $q->execute();
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
@@ -53,7 +52,7 @@ class touitosHandler
   public function getList()
   {
     $persos = [];
-    $q = $this->_db->query('SELECT id, nom, mail, statut, photo, statut FROM Touitos ORDER BY nom');
+    $q = $this->_db->query('SELECT id, nom, mail,pseudo, statut, photo, statut FROM Touitos ORDER BY nom');
     while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
     {
       $persos[] = new Touitos($donnees);
@@ -64,7 +63,7 @@ class touitosHandler
   public function searchByName($name)
   {
     $persos = [];
-    $q = $this->_db->prepare('SELECT id, nom, mail, statut, photo, statut FROM Touitos WHERE nom LIKE :nom ORDER BY nom');
+    $q = $this->_db->prepare('SELECT id, nom, mail,pseudo, statut, photo, statut FROM Touitos WHERE nom LIKE :nom ORDER BY nom');
     $q->bindValue(':nom',"%$name%", PDO::PARAM_STR);
     $q->execute();
     while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
@@ -76,13 +75,14 @@ class touitosHandler
 
   public function update(Touitos $perso)
   {
-    $q = $this->_db->prepare('UPDATE Touitos SET mail = :mail, nom = :nom, statut = :statut, photo = :photo WHERE id = :id');
+    $q = $this->_db->prepare('UPDATE Touitos SET mail = :mail, pseudo=:pseudo,nom = :nom, statut = :statut, photo = :photo WHERE id = :id');
 
     $q->bindValue(':mail', $perso->getMail(), PDO::PARAM_STR);
     $q->bindValue(':nom', $perso->getNom(), PDO::PARAM_STR);
     $q->bindValue(':statut', $perso->getStatut(), PDO::PARAM_STR);
     $q->bindValue(':photo', $perso->getPhoto(), PDO::PARAM_STR);
     $q->bindValue(':id', $perso->getId(), PDO::PARAM_INT);
+    $q->bindValue(':pseudo', $perso->getPseudo(), PDO::PARAM_INT);
 
     $q->execute();
   }

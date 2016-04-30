@@ -15,14 +15,11 @@ session_start();
 	}
 	else 
 	{
-		if(isset($_POST['logout']))
-		{
 			$_SESSION['login']='';
 			session_unset();
 			session_destroy();
 
 			header('Location: index.php');
-		}
 	}
 ?>
 </body>

@@ -33,7 +33,6 @@ session_start();
 				else
 				{
 					echo '<form action="logout.php" method="post" >
-							<input type="hidden" name="logout">
 							<input id="disconnectButton" class="connectButton" type="submit" value="Se déconnecter">
 						</form>';
 				}
