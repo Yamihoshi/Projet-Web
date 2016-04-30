@@ -68,7 +68,28 @@ $(document).ready(function()
 
     $("#ongletSelect>li").click(function()
     {   
-        
+        /*
+            0 -> Touites
+            1 -> Suivi
+            2 -> Suiveurs
+        */
+
+        var index = $('#ongletSelect').index(this);
+
+        if(index==0)
+        {
+
+        }
+        else if(index==1)
+        {
+            
+        }
+        else if(index==2)
+        {
+            
+        }
+
+
     });
 
 

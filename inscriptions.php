@@ -13,21 +13,21 @@
 
 		$userExists=false;
 
-		if(isset($_POST['nom']))
+		if(isset($_POST['pseudo']))
 		{
 			if(addTouitos($_POST,$bd)==-1)
 				$userExists=true;
 			else
 			{
 				session_start();
-				$_SESSION['user']=$_POST['nom'];
+				$_SESSION['user']=$_POST['pseudo'];
 				header('Location: index.php');
 			}
 		}
 			echo 
 		'<div class="connectForm" id="subscribeForm">
 			<form action="inscriptions.php" method="post">
-				<input type="text" name="nom" id="username" placeholder="Nom d\'utilisateur" required>';
+				<input type="text" name="pseudo" id="username" placeholder="Nom d\'utilisateur" required>';
 
 				if($userExists==true)
 					echo '<div>Ce nom d\'utilisateur est déjà pris</div>';

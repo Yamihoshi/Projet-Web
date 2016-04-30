@@ -62,12 +62,12 @@
 					echo '<span class="result_name">'.$touitos->getPseudo().'</span>';
 				echo '</div>';*/
 
-				echo '<a href="profile.php?user='.$touitos->getPseudo().'"><div class="touitosDiv">';
+				echo '<div class="touitosDiv"><a href="profile.php?user='.$touitos->getPseudo().'">';
 					echo '<div class="result_photo">'.getPhoto($touitos).'</div>';
 					echo '<div class="result_name">'.$touitos->getNom().'</div>';
 					echo '<div class="result_pseudo">@'.$touitos->getPseudo().'</div>';
 					echo '<div class="result_statut">'.$touitos->getStatut().'</div>';
-				echo '</div></a>';
+				echo '</a></div>';
 			}
 		echo '</div>';
 	}
