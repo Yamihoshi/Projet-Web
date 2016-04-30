@@ -41,13 +41,10 @@ $badLogin=false;
 				<form id="loginForm" action="login.php" method="post">
 					<input type="text" id="login" name="login" placeholder="Login" required>';
 
-		if($unknow==true)
-			echo '<div>username non existant</div>';
-
 		echo '<input type="password" id="pass" name="password" placeholder="Mot de passe" required>';
 
-		if($badLogin==true)
-			echo "<div>Mot de passe incorrect</div>";
+		if($unknow==true || $badLogin==true)
+			echo "<div id=\"loginError\">Login ou mot de passe incorrect</div>";
 		
 		echo '<input class="connectButton" type="submit" value="Se Connecter">
 				</form>
