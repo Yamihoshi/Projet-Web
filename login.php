@@ -16,8 +16,8 @@ $badLogin=false;
 
 	if(isset($_POST['login']))
 	{
-		$username=$_POST['login'];
-		$req=$bd->prepare("SELECT PWD FROM touitos WHERE nom=\"$username\"");
+		$mail=$_POST['login'];
+		$req=$bd->prepare("SELECT PWD FROM touitos WHERE mail=\"$mail\"");
 		$req->execute();
 		$tab=$req->fetch(PDO::FETCH_ASSOC);
 		if(!empty($tab))

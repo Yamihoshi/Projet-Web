@@ -94,7 +94,7 @@ ul li
 	display:inline-block;
 }
 
-#connectLink a
+#connectLink a,#disconnectButton
 {
 	margin-right:10px;
 	color:white;

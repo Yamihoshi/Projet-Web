@@ -34,7 +34,7 @@ session_start();
 				{
 					echo '<form action="logout.php" method="post" >
 							<input type="hidden" name="logout">
-							<input class="connectButton" type="submit" value="Se déconnecter">
+							<input id="disconnectButton" class="connectButton" type="submit" value="Se déconnecter">
 						</form>';
 				}
 
