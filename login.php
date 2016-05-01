@@ -1,6 +1,7 @@
 ﻿<?php
 header('content-type: application/json');
 require_once('config/connexion.php');
+session_start();
 
 $unknow=false;
 $badLogin=false;

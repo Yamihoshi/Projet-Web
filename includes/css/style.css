@@ -317,3 +317,9 @@ input[type="search"]
 	-moz-border-radius: 2px;
 	border-radius: 2px;
 }
+
+.loginError
+{
+	color:red;
+	font-weight:bold;
+}

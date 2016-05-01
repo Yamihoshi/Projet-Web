@@ -63,7 +63,7 @@ $(document).ready(function()
                 }
                 else{
                     $('.modal-footer').html('');
-                    $('.modal-footer').html('Login ou mot de passe incorrect.');
+                    $('.modal-footer').html('<div class="loginError">Login ou mot de passe incorrect.</div>');
                 }
             }
         });
@@ -88,7 +88,7 @@ $(document).ready(function()
                 }
                 else{
                     $('.modal-footer').html('');
-                    $('.modal-footer').html('Ce nom d\'utilisateur est déjà utilisé.');
+                    $('.modal-footer').html('<div class="loginError">Ce nom d\'utilisateur est déjà utilisé.</div>');
                 }
             },
              error : function(resultat, statut, erreur){

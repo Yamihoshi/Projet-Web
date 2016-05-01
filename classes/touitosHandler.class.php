@@ -13,7 +13,7 @@ class touitosHandler
     $q->bindValue(':pseudo', $perso->getPseudo(), PDO::PARAM_STR);
     $q->bindValue(':nom', $perso->getPseudo(), PDO::PARAM_STR);
     $q->bindValue(':mail', $perso->getMail(), PDO::PARAM_STR);
-    $q->bindValue(':PWD', $perso->getPWD(), PDO::PARAM_STR);
+    $q->bindValue(':PWD', md5($perso->getPWD()), PDO::PARAM_STR);
     $q->bindValue(':statut', $perso->getStatut(), PDO::PARAM_STR);
     $q->bindValue(':photo', $perso->getPhoto(), PDO::PARAM_STR);
     $q->execute();
