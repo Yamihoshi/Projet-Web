@@ -1,6 +1,6 @@
 function resetEditButton()
 {
-    var balise ='<input id="edit_profile" class="connectButton" type="button" value="Editer les informations">';
+    var balise ='<button type="button" id="edit_profile">Editer les informations</button>';
 
     $("#editDiv").html(balise);
 }
@@ -30,6 +30,72 @@ $(document).ready(function()
 			});
     	}
 	});
+    function modalIni(name, html){
+        $('.modal-header h2').html(name);
+        $('.modal-body').html(html);
+        $('.modal-footer').html('');
+        $('#myModal').toggle();
+    }
+    $('#connexion').click(function(){
+        modalIni('Connexion', '<form id="loginForm"><input type="text" id="login" name="login" placeholder="Login" required><input type="password" id="password" name="password" placeholder="Mot de passe" required><button type="submit">Se Connecter</button></form>');
+    });
+    $('#inscription').click(function(){
+        modalIni('Inscription', '<form id="inscriptionForm"><input type="text" id="login" name="login" placeholder="Login" required><input type="password" id="password" name="password" placeholder="Mot de passe" required><input type="mail" name="mail" id="mail" placeholder="Adresse mail" required><button type="submit">Se Connecter</button></form>');
+    });
+    $('.close').click(function(){
+        $('#myModal').toggle();
+    });
+
+    $('.modal').on('submit' , '#loginForm', function(event){
+        event.preventDefault();
+        $.ajax({
+            type:"POST",
+            url:"login.php",
+            data:
+                {
+                    login:$('#login').val(),
+                    password: $('#password').val()
+                },
+            dataType:'json',
+            success: function(data){
+                if(data.reussit){
+                    location.reload(true); 
+                }
+                else{
+                    $('.modal-footer').html('');
+                    $('.modal-footer').html('Login ou mot de passe incorrect.');
+                }
+            }
+        });
+    });
+    $('.modal').on('submit' , '#inscriptionForm', function(event){
+        event.preventDefault();
+        $.ajax({
+            type:"POST",
+            url:"inscription.php",
+            data:
+                {
+                    pseudo:$('#login').val(),
+                    PWD: $('#password').val(),
+                    mail: $('#mail').val()
+                },
+            dataType:'json',
+            success: function(response, statut){
+                console.log(response.reussit);
+                if(response.reussit){
+                    location.reload(true);
+                    console.log("hey");
+                }
+                else{
+                    $('.modal-footer').html('');
+                    $('.modal-footer').html('Ce nom d\'utilisateur est déjà utilisé.');
+                }
+            },
+             error : function(resultat, statut, erreur){
+                console.log(resultat + erreur);
+            }
+        });
+    });
 
     $("#editDiv").on('click',"#edit_profile",function()
     {
@@ -38,8 +104,8 @@ $(document).ready(function()
         $("#profile_statut").html('<textarea id="editStatut" previous="'+$("#profile_statut").text()+'" >'+$("#profile_statut").text()+'</textarea>');
 
 
-        var balise ='<input id="cancelEdit" class="cancelButton" type="button" value="Annuler">';
-        balise+='<input id="saveEdit" class="validateButton" type="button" value="Enregistrer les modifications">';
+        var balise ='<button id="cancelEdit" type="button"> Annuler</button>';
+        balise+='<button type="button" id="saveEdit">Enregistrer les modifications</button>';
 
         $("#editDiv").html(balise);
 
@@ -65,6 +131,8 @@ $(document).ready(function()
         });
 
     });
+    
+
 
     $("#ongletSelect>li").click(function()
     {   

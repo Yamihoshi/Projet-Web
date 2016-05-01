@@ -1,7 +1,130 @@
 body{
 	font-family:"Tahoma";
+	background-color: #CEE5DD;
+}
+nav
+{
+	border: 1px  solid black;
+	height:70px;
+	width:100%;
+	top:0;
+	right:0;
+	left:0;
+	position:fixed;
+	z-index:100;
+	padding:10px;
+	background-color: #6C8299;
+}
+#timeline, #profile_left_infos, .modal-header{
+	background-color: #A3C3E5;
+}
+#pageDisplay
+{
+	padding-top:80px;
+	width: 1500px;
+	margin:auto;
+}
+#ongletSelect{
+	margin:auto;
+}
+#timeline{
+	float: left;
+	width: 50%;
+	margin:0 15px;
+}
+#timeline, #profile_left_infos{
+	border-radius: 8px;
+	border:1px solid black;
 }
 
+
+#timeline textarea{ 
+	resize:none;
+	width:50%;
+	margin: auto;
+	height: 30px;
+	transition: background-color 0.3s linear 0s;
+	background-color: #555555;
+	border:none;
+	padding: none;
+}
+#timeline textarea:focus{
+	height: 50px;
+	background-color: white;
+}
+#timeline form{
+	text-align: center;
+}
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 20%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+.modal-body input, .modal-body button{
+	display: block;
+	margin:7px auto;
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 2px 16px;
+    color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer{
+	color:red;
+	text-align: center;
+}
 #k_left
 {
 	float:left;
@@ -26,53 +149,25 @@ body{
 
 }
 
-.connectForm
-{
-	margin: 0 auto;
-	width: 40%;
-	border: 1px solid black;
-}
-
-.connectForm input,.connectForm div
-{
-	margin-left:auto;
-	margin-right:auto;
-	display:block;
-	text-align: center;
-	margin-top:20px;
-	width:40%;
-}
-
-.connectForm input 
-{
-	height:40px;
-}
- 
-#loginError
-{
-	color:red;
-	font-weight:bold;
-}
-
-nav
-{
-	border: 1px  solid black;
-	height:70px;
-	width:100%;
-	top:0;
-	right:0;
-	left:0;
-	position:fixed;
-	z-index:100;
-	padding:10px;
-	background-color:#003366;
-	
-}
-
 nav img
 {
 	width:50px;
 	height:50px;
+}
+
+button, input[type="submit"]{
+	background-color: #ff5252;
+	cursor: pointer;
+	color: white;
+}
+
+input, button{
+	border-radius: 11px;
+	font-weight: 900;
+	border:1px solid black;
+	height: 35px;
+	text-align: center;
+	margin-top: 20px;
 }
 
 .spacer
@@ -87,21 +182,6 @@ a
 	color:black;
 }
 
-.connectButton
-{
-	cursor:pointer;
-	background-color:#12BDCD;
-	color:white;
-	font-weight:bold;
-	/*text-shadow: 1px 1px #000000;*/
-}
-
-
-
-#pageDisplay
-{
-	margin-top:80px;
-}
 
 ul
 {
@@ -115,12 +195,11 @@ ul li
 	display:inline-block;
 }
 
-#connectLink a,#disconnectButton
+#connectLink a
 {
 	margin-right:10px;
 	color:white;
 	font-weight:bold;
-	background-color:#12BDCD;
 	padding:10px;
 	right:100px;
 	text-align:center;
@@ -139,14 +218,13 @@ input[type="search"]
 #profile_left_infos
 {
 	float:left;
-	border: 1px solid black;
-	width:280px;
+	width:16%;
 }
 
 #profile_photo
 {
-	width:240px;
-	height:240px;
+	width:150px;
+	height:150px;
 	margin-left:auto;
 	margin-right:auto;
 }

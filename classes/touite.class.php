@@ -2,15 +2,11 @@
 
 	class Touite{
 
-
-
-		protected $id_$id_auteur; //id
+		protected $id_auteur; //id
         protected $id_message; // id
 		protected $date;
 		protected $texte;
 		protected $reponse;
-
-
 	/**
 	 * Class Constructor
 	 * @param    $id_auteur   
@@ -18,13 +14,7 @@
 	 * @param    $texte   
 	 * @param    $reponse   
 	 */
-	public function __construct($id_auteur, $date, $texte, $reponse)
-	{
-		$this->id_auteur = $id_auteur;
-		$this->date = $date;
-		$this->texte = $texte;
-		$this->reponse = $reponse;
-	}
+
     public function __construct(array $donnees)
     {
       foreach ($donnees as $key => $value)
@@ -159,4 +149,5 @@
 
         return $this;
     }
+
 }

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 	
 	require_once("classes/touitos.class.php");
 	require_once("classes/TouitosHandler.class.php");
