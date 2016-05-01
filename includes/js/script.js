@@ -93,4 +93,34 @@ $(document).ready(function()
     });
 
 
+var nyan=0;
+
+function nyanF()
+{
+    if(nyan==0)
+    {
+        $("#nyan_nyan img").attr("src","nyan_.jpg");
+        $("#nyan_nyan img").css("height","480");
+        $("#nyan_nyan img").css("width","480");
+        nyan=1;
+    }
+    else
+    {
+        $("#nyan_nyan img").attr("src","nyan.jpg");
+        $("#nyan_nyan img").css("height","720");
+        $("#nyan_nyan img").css("width","480");
+        nyan=0;
+    }
+}
+
+window.setInterval(function(){
+  /// call your function here
+  $("#nyan_nyan img").hide();
+  nyanF();
+  $("#nyan_nyan img").animate({height:'toggle',width:'toggle'},600)
+}, 2000);
+
+
+
+
 });
