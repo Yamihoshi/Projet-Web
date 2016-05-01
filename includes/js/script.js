@@ -7,7 +7,7 @@ function resetEditButton()
 
 function resetInfos()
 {
-    $("#profile_name").html($("#touitos_pseudo").val());
+    $("#profile_name").html($("#editName").attr('previous'));
     $("#profile_statut").html($("#editStatut").attr('previous'));
 }
 
@@ -100,7 +100,7 @@ $(document).ready(function()
     $("#editDiv").on('click',"#edit_profile",function()
     {
 
-        $("#profile_name").html('<input id="editName" type="text" name="editName" value="'+$("#profile_name").text()+'">');
+        $("#profile_name").html('<input id="editName" type="text" name="editName" previous="'+$("#profile_name").text()+'" value="'+$("#profile_name").text()+'">');
         $("#profile_statut").html('<textarea id="editStatut" previous="'+$("#profile_statut").text()+'" >'+$("#profile_statut").text()+'</textarea>');
 
 

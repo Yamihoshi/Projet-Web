@@ -248,6 +248,12 @@ input[type="search"]
 	text-align:center;
 }
 
+#profile_statut
+{
+	width:100%;
+	word-wrap: break-word;
+}
+
 #searchResult
 {
 	width:70%;
@@ -283,6 +289,7 @@ input[type="search"]
 	font-style:italic;
 	text-align:center;
 }
+
 .result_statut
 {
 	margin-top:10px;
