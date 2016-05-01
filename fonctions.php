@@ -64,9 +64,11 @@
 
 				echo '<div class="touitosDiv"><a href="profile.php?user='.$touitos->getPseudo().'">';
 					echo '<div class="result_photo">'.getPhoto($touitos).'</div>';
-					echo '<div class="result_name">'.$touitos->getNom().'</div>';
-					echo '<div class="result_pseudo">@'.$touitos->getPseudo().'</div>';
-					echo '<div class="result_statut">'.$touitos->getStatut().'</div>';
+					echo '<div class="result_details">';
+						echo '<div class="result_name">'.$touitos->getNom().'</div>';
+						echo '<div class="result_pseudo">@'.$touitos->getPseudo().'</div>';
+						echo '<div class="result_statut">'.$touitos->getStatut().'</div>';
+					echo '</div>';
 				echo '</a></div>';
 			}
 		echo '</div>';

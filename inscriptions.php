@@ -30,7 +30,7 @@
 				<input type="text" name="pseudo" id="username" placeholder="Nom d\'utilisateur" required>';
 
 				if($userExists==true)
-					echo '<div>Ce nom d\'utilisateur est déjà pris</div>';
+					echo '<div id="LoginError">Ce nom d\'utilisateur est déjà pris</div>';
 
 
 			echo'	<input type="password" name="PWD" id="password" placeholder="Mot de passe" required>
