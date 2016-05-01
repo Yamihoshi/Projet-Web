@@ -117,8 +117,13 @@ window.setInterval(function(){
   /// call your function here
   $("#nyan_nyan img").hide();
   nyanF();
-  $("#nyan_nyan img").animate({height:'toggle',width:'toggle'},600)
-}, 2000);
+  $("#nyan_nyan img").animate({height:'toggle',width:'toggle'},600);
+
+    setTimeout(function () {
+    $("#nyan_nyan img").animate({height:'toggle',width:'toggle'},600);
+    }, 2000);
+
+}, 3000);
 
 
 
