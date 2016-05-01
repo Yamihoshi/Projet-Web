@@ -85,7 +85,7 @@
 		$th=new TouitosHandler($bd);
 
 		//$test=$th->getByName($data['nom']);
-		$test=$th->getByName($data['mail']);
+		$test=$th->getByName($data['pseudo']);
 		if($test!=null)
 			return -1;
 		else
