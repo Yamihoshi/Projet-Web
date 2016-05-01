@@ -8,7 +8,7 @@ session_start();
 	}
 	else 
 	{
-			$_SESSION['login']='';
+			$_SESSION['user']='';
 			session_unset();
 			session_destroy();
 
