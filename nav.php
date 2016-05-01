@@ -1,7 +1,6 @@
 ﻿<?php
 require('fonctions.php');
 
-session_start();
 	echo '<nav>
 		<ul>
 			<li><input type="search" placeholder="Chercher un Touitos" id="searchBar" name="search"></li>';

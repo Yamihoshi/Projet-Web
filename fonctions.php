@@ -3,6 +3,7 @@
 	require("classes/touitos.class.php");
 	require("classes/TouitosHandler.class.php");
 	require("config/connexion.php");
+	session_start();
 
 	function show_profile($user)
 	{
@@ -15,8 +16,8 @@
 				echo '<div id="profile_statut">'.$user->getStatut().'</div>';
 				echo '<input type="hidden" id="touitos_pseudo" value='.$user->getPseudo().'>';
 			echo '</div>';
-		
-		if($_SESSION['user']==$_GET['user'])
+
+		if(isset($_SESSION['user']) AND $_SESSION['user']==$_GET['user'])
 		{
 
 			echo '<div id="editDiv"><input id="edit_profile" class="connectButton" type="button" value="Editer les informations"></div>';

@@ -7,8 +7,6 @@
 <body>
 <?php
 
-session_start();
-
 require('config/connexion.php');
 
 $unknow=false;
