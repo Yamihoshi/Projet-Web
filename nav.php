@@ -39,7 +39,7 @@ require('fonctions.php');
 				echo '</li>';
 				if(isset($_SESSION['user']))
 				{
-					echo '<li><button id="touite" type="button">Publier un touite</button></li>';
+					echo '<li><button id="touiter" type="button">Publier un touite</button></li>';
 				}
 
 		echo'

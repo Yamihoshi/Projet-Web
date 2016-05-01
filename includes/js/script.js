@@ -81,7 +81,6 @@ $(document).ready(function()
                 },
             dataType:'json',
             success: function(response, statut){
-                console.log(response.reussit);
                 if(response.reussit){
                     location.reload(true);
                     console.log("hey");
@@ -96,7 +95,18 @@ $(document).ready(function()
             }
         });
     });
-
+    $('#touite').on('submit', function(e){
+        e.preventDefault();
+        $.ajax({
+            type:"POST",
+            url:"ajax.php",
+            data:
+                {
+                    message:$('#touite-box textarea').val()
+                },
+            dataType:'json'
+        });
+    });
     $("#editDiv").on('click',"#edit_profile",function()
     {
 
@@ -131,8 +141,12 @@ $(document).ready(function()
         });
 
     });
-    
-
+    /*function calculerCaractere(){
+        $('compteurCaractere').html(140-$('#touite-box textarea').val().lenght());
+    }
+    $('#touite-box textarea').on('change', function(){
+        calculerCaractere();
+    });*/
 
     $("#ongletSelect>li").click(function()
     {   
@@ -156,7 +170,7 @@ $(document).ready(function()
         {
             
         }
-
+        
 
     });
 

@@ -21,7 +21,7 @@ CREATE TABLE Suivre
 	PRIMARY KEY(idDemandeur, idReceveur),
 	CHECK (demande='E' OR demande='V' OR demande='R'),
   	FOREIGN KEY (idDemandeur) REFERENCES Touitos (id),
-	FOREIGN KEY (idReceveur) REFERENCES Touitos (id)    
+	FOREIGN KEY (idReceveur) REFERENCES Touitos (id)
 );
 
 CREATE TABLE Touites
@@ -29,17 +29,17 @@ CREATE TABLE Touites
 	idMsg INT NOT NULL AUTO_INCREMENT,
 	laDate DATE NOT NULL,
 	texte VARCHAR(140) NOT NULL,
-	PRIMARY KEY (idMsg)
+	idAuteur INT NOT NULL,
+	PRIMARY KEY (idMsg),
+	FOREIGN KEY (idAuteur) REFERENCES Touitos (id)
 );
 
 CREATE TABLE TouitesPublics
 (
 	idMsg INT NOT NULL,
-	idAuteur INT NOT NULL,
 	PRIMARY KEY (idMsg),
 	FOREIGN KEY (idMsg) REFERENCES Touites (idMsg)
-	ON DELETE CASCADE,
-	FOREIGN KEY (idAuteur) REFERENCES Touitos (id)
+	ON DELETE CASCADE
 );
 
 CREATE TABLE Hashtags

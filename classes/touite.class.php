@@ -2,11 +2,10 @@
 
 	class Touite{
 
-		protected $id_auteur; //id
-        protected $id_message; // id
-		protected $date;
-		protected $texte;
-		protected $reponse;
+        protected $_id_message; // id
+		protected $_ladate;
+		protected $_texte;
+        protected $_idAuteur;
 	/**
 	 * Class Constructor
 	 * @param    $id_auteur   
@@ -28,126 +27,103 @@
           $this->$method($value);
         }
       }
+      print_r($donnees);
     }
     
     /**
-     * Gets the value of auteur.
-     *
-     * @return mixed
-     */
-    public function getIdAuteur()
-    {
-        return $this->id_auteur;
-    }
-
-    /**
-     * Sets the value of auteur.
-     *
-     * @param mixed $id_auteur the auteur
-     *
-     * @return self
-     */
-    private function _setIdAuteur($id_auteur)
-    {
-        $this->id_auteur = $id_auteur;
-
-        return $this;
-    }
-
-    /**
-     * Gets the value of date.
-     *
-     * @return mixed
-     */
-    public function getDate()
-    {
-        return $this->date;
-    }
-
-    /**
-     * Sets the value of date.
-     *
-     * @param mixed $date the date
-     *
-     * @return self
-     */
-    private function _setDate($date)
-    {
-        $this->date = $date;
-
-        return $this;
-    }
-
-    /**
-     * Gets the value of texte.
-     *
-     * @return mixed
-     */
-    public function getTexte()
-    {
-        return $this->texte;
-    }
-
-    /**
-     * Sets the value of texte.
-     *
-     * @param mixed $texte the texte
-     *
-     * @return self
-     */
-    private function _setTexte($texte)
-    {
-        $this->texte = $texte;
-
-        return $this;
-    }
-
-    /**
-     * Gets the value of reponse.
-     *
-     * @return mixed
-     */
-    public function getReponse()
-    {
-        return $this->reponse;
-    }
-
-    /**
-     * Sets the value of reponse.
-     *
-     * @param mixed $reponse the reponse
-     *
-     * @return self
-     */
-    private function _setReponse($reponse)
-    {
-        $this->reponse = $reponse;
-
-        return $this;
-    }
-
-    /**
-     * Gets the value of id_message.
+     * Gets the value of _id_message.
      *
      * @return mixed
      */
     public function getIdMessage()
     {
-        return $this->id_message;
+        return $this->_id_message;
     }
 
     /**
-     * Sets the value of id_message.
+     * Sets the value of _id_message.
      *
-     * @param mixed $id_message the id message
+     * @param mixed $_id_message the id message
      *
      * @return self
      */
     protected function setIdMessage($id_message)
     {
-        $this->id_message = $id_message;
+        $this->_id_message = $id_message;
 
         return $this;
     }
 
+    /**
+     * Gets the value of _ladate.
+     *
+     * @return mixed
+     */
+    public function getLadate()
+    {
+        return $this->_ladate;
+    }
+
+    /**
+     * Sets the value of _ladate.
+     *
+     * @param mixed $_ladate the ladate
+     *
+     * @return self
+     */
+    protected function setLadate($ladate)
+    {
+        $this->_ladate = $ladate;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of _texte.
+     *
+     * @return mixed
+     */
+    public function getTexte()
+    {
+        return $this->_texte;
+    }
+
+    /**
+     * Sets the value of _texte.
+     *
+     * @param mixed $_texte the texte
+     *
+     * @return self
+     */
+    protected function setTexte($texte)
+    {
+        $this->_texte = $texte;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of _idAuteur.
+     *
+     * @return mixed
+     */
+    public function getIdAuteur()
+    {
+        return $this->_idAuteur;
+    }
+
+    /**
+     * Sets the value of _idAuteur.
+     *
+     * @param mixed $_idAuteur the id auteur
+     *
+     * @return self
+     */
+    protected function setIdAuteur($idAuteur)
+    {
+        $this->_idAuteur = $idAuteur;
+
+        return $this;
+    }
 }
+    

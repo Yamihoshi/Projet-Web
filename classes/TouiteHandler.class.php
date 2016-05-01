@@ -1,5 +1,5 @@
 <?php
-class GestionSauvegardeTouite
+class TouiteHandler
 {
 
 
@@ -11,7 +11,7 @@ class GestionSauvegardeTouite
   }
   public function add(Touite $Touite)
   {
-    $q = $this->_db->prepare('INSERT INTO Touites VALUES(NULL, new DateTime(), :texte, :auteur)');
+    $q = $this->_db->prepare('INSERT INTO Touites VALUES(NULL, NOW(), :texte, :auteur)');
     $q->bindValue(':texte', $Touite->getTexte(), PDO::PARAM_STR);
     $q->bindValue(':auteur', $Touite->getIdAuteur(), PDO::PARAM_INT);
     $q->execute();
@@ -19,13 +19,13 @@ class GestionSauvegardeTouite
 
   public function delete(Touite $Touite)
   {
-    $this->_db->exec('DELETE FROM Touite WHERE id = '.$Touite->getIdMessage();
+    $this->_db->exec('DELETE FROM Touite WHERE id = '.$Touite->getIdMessage());
   }
 
-  public function get($id)
+  public function getByAuteur($id)
   {
     $id = (int) $id;
-    $q = $this->_db->prepare('SELECT Auteurid, messageId, texte, dateT FROM Touites WHERE auteurid = :id ORDER BY dateT');
+    $q = $this->_db->prepare('SELECT idAuteur, idMsg, texte, ladate FROM Touites WHERE auteurid = :id ORDER BY ladate');
     $q->bindValue(':id', $id, PDO::PARAM_INT);
     $q->execute();
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
@@ -35,7 +35,8 @@ class GestionSauvegardeTouite
   public function getList($id)
   {
     $Touites = [];
-    $q = $this->_db->prepare('SELECT Auteurid, messageId, texte, dateT FROM Touites WHERE auteurid = :id ORDER BY dateT');
+    $id = (int) $id;
+    $q = $this->_db->prepare('SELECT idAuteur, idMsg, texte, ladate FROM Touites WHERE auteurid = :id ORDER BY ladate');
     $q->bindValue(':id', $id, PDO::PARAM_INT);
     $q->execute();
     while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
@@ -47,12 +48,10 @@ class GestionSauvegardeTouite
 
   public function update(Touite $Touite)
   {
-    $q = $this->_db->prepare('UPDATE Touites SET mail = :mail, nom = :nom, statut = :statut, photo = :photo WHERE id = :id');
+    $q = $this->_db->prepare('UPDATE Touites SET texte = :texte, ladate=NOW() WHERE idMsg = :id');
 
-    $q->bindValue(':mail', $Touite->getMail(), PDO::PARAM_STR);
-    $q->bindValue(':nom', $Touite->getNom(), PDO::PARAM_STR);
-    $q->bindValue(':statut', $Touite->getStatut(), PDO::PARAM_STR);
-    $q->bindValue(':photo', $Touite->getPhoto(), PDO::PARAM_STR);
+    $q->bindValue(':ladate', $Touite->getLaDate);
+    $q->bindValue(':texte', $Touite->getTexte(), PDO::PARAM_STR);
     $q->bindValue(':id', $Touite->getId(), PDO::PARAM_INT);
 
     $q->execute();

@@ -17,6 +17,7 @@ class touitosHandler
     $q->bindValue(':statut', $perso->getStatut(), PDO::PARAM_STR);
     $q->bindValue(':photo', $perso->getPhoto(), PDO::PARAM_STR);
     $q->execute();
+    return $this->_db->lastInsertId();
   }
 
   public function delete(Touitos $perso)

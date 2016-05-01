@@ -10,24 +10,14 @@ header('content-type: application/json');
 
 	if(isset($_POST['pseudo']))
 	{
-		if(addTouitos($_POST,$bd)==-1)
+		$touitos = addTouitos($_POST,$bd);
+		if($touitos==-1)
 			$reussit=false;
 		else
 		{
-			$status = session_status();
-			if($status == PHP_SESSION_NONE){
-			    //There is no active session
-			    session_start();
-			}else
-			if($status == PHP_SESSION_DISABLED){
-			    //Sessions are not available
-			}else
-			if($status == PHP_SESSION_ACTIVE){
-			    //Destroy current and start new one
-			    session_destroy();
-			    session_start();
-			}
+				session_start();
 				$_SESSION['user']=$_POST['pseudo'];
+				$_SESSION['id'] = $touitos;
 				$reussit = true;
 		}
 	}

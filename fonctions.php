@@ -2,20 +2,9 @@
 	
 	require_once("classes/touitos.class.php");
 	require_once("classes/TouitosHandler.class.php");
+	require_once("classes/TouiteHandler.class.php");
 	require_once("config/connexion.php");
-	$status = session_status();
-	if($status == PHP_SESSION_NONE){
-	//There is no active session
 	session_start();
-	}else
-	if($status == PHP_SESSION_DISABLED){
-	//Sessions are not available
-	}else
-	if($status == PHP_SESSION_ACTIVE){
-	//Destroy current and start new one
-	session_destroy();
-	session_start();
-	}
 	function show_profile($user)
 	{
 		echo '<div id="touitos_profile_page">';
@@ -44,15 +33,15 @@
 			echo '</div>'; // Close profil_left
 			echo '<div id="timeline">
 						<div id="touite-box">
-								<form method="post">
-										<textarea name="touite"></textarea>
-										<input type="submit" value="Touiter">
+								<form id="touite">
+										<textarea name="touite" maxlength="140" required></textarea>
+										<button type="submit">Touiter</button>
 								</form>
-								<div id="compteurCaractere">140</div>
 						</div>
 				</div>';
 		echo '</div>';
 	}
+
 	function getPhoto($user)
 	{
 		if($user->getPhoto()=='O')
@@ -101,7 +90,7 @@
 		else
 		{
 			$touitos=new Touitos($data);
-			$th->add($touitos);
+			return $th->add($touitos);
 		}
 	}
 	function updateTouitos($bd,$touitos,$form)
@@ -111,5 +100,9 @@
 		$user->_setNom($form['nom']);
 		$user->_setStatut($form['statut']);
 		$th->update($user);
+	}
+	function addTouite($data, $bd){
+		$t= new TouiteHandler($bd);
+		$t->add($data);
 	}
 ?>

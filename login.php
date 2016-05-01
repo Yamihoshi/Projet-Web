@@ -19,6 +19,7 @@ $badLogin=false;
 			if(md5($_POST['password'])==$pass)
 			{
 				$_SESSION['user']=$pseudo;
+				$_SESSION['id']= $tab['id'];
 			}
 			else
 				$badLogin=true;
