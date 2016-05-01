@@ -1,14 +1,7 @@
-﻿<html>
-<head>
-	<title>Touiteur - Se Connecter</title>
-	<link rel="stylesheet" href="includes/css/style.css">
-	<script src="includes/js/jquery-1.11.3.min.js"></script>
-</head>
-<body>
+﻿
 <?php
 
 session_start();
-
 	if(!isset($_SESSION['user']))
 	{
 		header('Location: login.php');
@@ -22,5 +15,3 @@ session_start();
 			header('Location: index.php');
 	}
 ?>
-</body>
-</html>
