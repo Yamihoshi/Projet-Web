@@ -3,6 +3,7 @@ require('fonctions.php');
 
 	echo '<nav>
 		<ul>
+		<li><a href="index.php"><img src="includes/img/home.png"></a></li>
 			<li><input type="search" placeholder="Chercher un Touitos" id="searchBar" name="search"></li>';
 
 			if(isset($_SESSION['user']))
