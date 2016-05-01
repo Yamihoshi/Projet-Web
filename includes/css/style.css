@@ -2,6 +2,24 @@ body{
 	font-family:"Tahoma";
 }
 
+#k_left
+{
+	float:left;
+}
+
+#nyan_nyan
+{
+	margin: 0 auto;
+	width: 500px;
+	height:500px;
+}
+
+#k_right
+{
+	float:right;
+
+}
+
 .connectForm
 {
 	margin: 0 auto;
@@ -72,13 +90,7 @@ a
 	/*text-shadow: 1px 1px #000000;*/
 }
 
-#nyan_nyan
-{
-	margin: 0 auto;
-	width: 500px;
-	height:500px;
 
-}
 
 #pageDisplay
 {
