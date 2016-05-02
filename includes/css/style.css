@@ -20,9 +20,12 @@ nav
 }
 #pageDisplay
 {
-	padding-top:80px;
+	padding-top:150px;
 	width: 1500px;
 	margin:auto;
+}
+#touite-box{
+	padding-top:30px;
 }
 #ongletSelect{
 	margin:auto;
@@ -42,16 +45,14 @@ nav
 	resize:none;
 	width:50%;
 	margin: auto;
-	height: 30px;
-	transition: background-color 0.3s linear 0s;
-	background-color: #555555;
+	height: 80px;
 	border:none;
-	padding: none;
+	padding: 0;
+	text-align: left;
+	display: block;
+	padding: 9px;
 }
-#timeline textarea:focus{
-	height: 50px;
-	background-color: white;
-}
+
 #timeline form{
 	text-align: center;
 }
@@ -161,7 +162,7 @@ button, input[type="submit"]{
 	color: white;
 }
 
-input, button{
+input, button, textarea{
 	border-radius: 11px;
 	font-weight: 900;
 	border:1px solid black;
