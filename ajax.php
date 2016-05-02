@@ -13,6 +13,7 @@ session_start();
 		updateTouitos($bd,$_POST['touitos'],$_POST['editProfile']);
 	}
 
+<<<<<<< HEAD
 	else if(!empty($_POST['message'])){
 			$touite = array("texte" => $_POST['message'], "idAuteur" => $_SESSION['id']);
 
@@ -26,4 +27,16 @@ session_start();
 		}
 	}
 	
+=======
+	else if(isset($_POST['follow']))
+	{
+		follow($bd,$_POST['demandeur'],$_POST['suivi']);
+	}
+
+	else if(isset($_POST['unfollow']))
+	{
+		unfollow($bd,$_POST['demandeur'],$_POST['suivi']);
+	}
+
+>>>>>>> origin/master
 ?>

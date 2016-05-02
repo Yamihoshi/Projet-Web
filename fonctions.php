@@ -5,32 +5,82 @@
 	require_once("classes/TouiteHandler.class.php");
 	require_once("config/connexion.php");
 	session_start();
+<<<<<<< HEAD
 	function show_profile($user)
+=======
+	}else
+	if($status == PHP_SESSION_DISABLED){
+	//Sessions are not available
+	}else
+	if($status == PHP_SESSION_ACTIVE){
+	//Destroy current and start new one
+	session_destroy();
+	session_start();
+	}
+
+	function getFollowButton($handler,$user,$profile)
+>>>>>>> origin/master
 	{
+		$statut=$handler->getFollowStatut($user,$profile);
+		if ($statut==-1) // NON SUIVI
+			return '<button type="button" idTouitos='.$user->getId().' class="subscribe">Suivre</button>';
+		else if($statut=='V') //VALIDE
+			return '<button type="button" idTouitos='.$user->getId().' class="unsubscribe">Ne plus suivre</button>';
+		else if($statut=='R') //REFUSE
+			return '<button title="Cet utilisateur a refusé votre demande" type="button" disabled>Suivre</button>';
+		else if($statut=='E')
+			return '<button title="En attente d\'une réponse" type="button" disabled>Suivre</button>';
+	}
+
+	function show_profile($user,$bd)
+	{
+		$th = new TouitosHandler($bd);			
+
 		echo '<div id="touitos_profile_page">';
 				echo '<div id="profile_left_infos">';
+			
+		if(isset($_SESSION['user']))
+		{
+			$connected=$th->getByName($_SESSION['user']);
+
+			if($user->getId()!=$connected->getId())
+			{
+					echo '<div id="subscribeDiv">'.
+						getFollowButton($th,$connected,$user)
+					.'</div>';
+			}	
+		}					
+
 						echo '<div id="profile_photo">'.getPhoto($user).'</div>';
 						echo '<div id="profile_name">'.$user->getNom().'</div>';
 						echo '<div id="profile_pseudo">@'.$user->getPseudo().'</div>';
 						echo '<div id="profile_statut">'.$user->getStatut().'</div>';
 						echo '<input type="hidden" id="touitos_pseudo" value='.$user->getPseudo().'>';
-				if(isset($_SESSION['user']) AND $_SESSION['user']==$_GET['user'])
-				{
-					echo '<div id="editDiv">
-								<button type="button" id="edit_profile">Editer les informations</button>
+
+		if(isset($_SESSION['user']) AND $_SESSION['user']==$_GET['user'])
+		{
+			echo '<div id="editDiv">
+				<button type="button" id="edit_profile">Editer les informations</button>
 						</div>';
-					echo '<div id="ongletDiv">
-							<table id="ongletSelect">
-									<tr>
-											<td>Touites</td>
-											<td>Suivi</td>
-											<td>Suiveurs</td>
-									</tr>
-							</table>
-					</div>';
+
 					
-				}
+		}
 			echo '</div>'; // Close profil_left
+
+			if($_SESSION['user']==$_GET['user'])
+			{
+			echo 	'<div id="ongletDiv">
+						<table id="ongletSelect">
+							<tr>
+								<td>Touites</td>
+								<td>Suivi</td>
+								<td>Suiveurs</td>
+							</tr>
+						</table>
+					</div>';
+			}
+
+
 			echo '<div id="timeline">
 						<div id="touite-box">
 								<form id="touite">
@@ -55,6 +105,20 @@
 				echo getPhoto($user);
 		echo '</div>';
 	}
+
+	function getTouitosVignette($touitos)
+	{
+		echo '<div class="touitosDiv"><a href="profile.php?user='.$touitos->getPseudo().'">';
+			echo '<div class="result_photo">'.getPhoto($touitos).'</div>';
+			echo '<div class="result_details">';
+				echo '<div class="result_name">'.$touitos->getNom().'</div>';
+				echo '<div class="result_pseudo">@'.$touitos->getPseudo().'</div>';
+				echo '<div class="result_statut">'.$touitos->getStatut().'</div>';
+			echo '</div>';
+		echo '</a></div>';
+	}
+
+
 	function searchByName($str,$bd)
 	{
 		$th=new TouitosHandler($bd);
@@ -62,18 +126,8 @@
 		echo '<div id="searchResult">';
 			foreach($res as $key=>$touitos)
 				{
-					/*echo '<div class="resultLine">';
-							echo '<span class="result_photo">'.getPhoto($touitos).'</span>';
-							echo '<span class="result_name">'.$touitos->getPseudo().'</span>';
-					echo '</div>';*/
-					echo '<div class="touitosDiv"><a href="profile.php?user='.$touitos->getPseudo().'">';
-							echo '<div class="result_photo">'.getPhoto($touitos).'</div>';
-							echo '<div class="result_details">';
-									echo '<div class="result_name">'.$touitos->getNom().'</div>';
-									echo '<div class="result_pseudo">@'.$touitos->getPseudo().'</div>';
-									echo '<div class="result_statut">'.$touitos->getStatut().'</div>';
-							echo '</div>';
-					echo '</a></div>';
+
+					getTouitosVignette($touitos);
 				}
 		echo '</div>';
 	}
@@ -101,8 +155,45 @@
 		$user->_setStatut($form['statut']);
 		$th->update($user);
 	}
+<<<<<<< HEAD
 	function addTouite($data, $bd){
 		$t= new TouiteHandler($bd);
 		$t->add($data);
 	}
+=======
+
+	function follow($bd,$user,$suivi)
+	{
+		$th=new TouitosHandler($bd);
+		$demandeur=$th->getByName($user);
+		$receveur=$th->getByName($suivi);
+
+		$th->follow($demandeur,$receveur);
+	}
+
+	function unfollow($bd,$user,$suivi)
+	{
+		$th=new TouitosHandler($bd);
+		$demandeur=$th->getByName($user);
+		$receveur=$th->getByName($suivi);
+
+		$th->unfollow($demandeur,$receveur);
+	}
+
+	function show_followers($bd,$user)
+	{
+		$th=new TouitosHandler($bd);
+		$connectedUser=$th->getByName($user);
+
+		echo '<div id="followersDiv">';
+
+		echo '</div>';
+	}
+
+	function show_followedBy($bd,$user)
+	{
+
+	}
+
+>>>>>>> origin/master
 ?>

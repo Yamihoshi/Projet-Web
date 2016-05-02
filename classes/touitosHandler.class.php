@@ -89,6 +89,63 @@ class touitosHandler
     $q->execute();
   }
 
+  public function follow(Touitos $current,Touitos $suivi)
+  {
+    $q = $this->_db->prepare('INSERT INTO suivre(idDemandeur,idReceveur,demande) VALUES(:demandeur,:receveur,"E")');
+    $q->bindValue(':demandeur', $current->getId(), PDO::PARAM_INT);
+    $q->bindValue(':receveur', $suivi->getId(), PDO::PARAM_INT);
+    $q->execute();
+  }
+
+    public function unfollow(Touitos $current,Touitos $suivi)
+  {
+    $q = $this->_db->prepare('DELETE FROM suivre WHERE idDemandeur=:demandeur AND idReceveur=:receveur');
+    $q->bindValue(':demandeur', $current->getId(), PDO::PARAM_INT);
+    $q->bindValue(':receveur', $suivi->getId(), PDO::PARAM_INT);
+    $q->execute();
+  }
+
+  public function getFollowers(Touitos $current)
+  {
+      $followers = [];
+      $q = $this->_db->prepare('SELECT * FROM Touitos JOIN suivre ON suivre.idReceveur=touitos.id WHERE idDemandeur=:id');
+      $q->bindValue(':id', $current->getId(), PDO::PARAM_INT);
+      $q->execute();
+      while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+      {
+        $followers[] = new Touitos($donnees);
+      }
+      return $followers;
+  }
+
+    public function getFollowedBy(Touitos $current)
+  {
+      $followers = [];
+      $q = $this->_db->prepare('SELECT * FROM Touitos JOIN suivre ON suivre.idDemandeur=touitos.id WHERE idReceveur=:id');
+      $q->bindValue(':id', $current->getId(), PDO::PARAM_INT);
+      $q->execute();
+      while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+      {
+        $followers[] = new Touitos($donnees);
+      }
+      return $followers;
+  }
+
+  public function getFollowStatut($user,$profile)
+  {
+      $q = $this->_db->prepare('SELECT demande FROM suivre WHERE idDemandeur=:usr AND idReceveur=:suivi');
+     $q->bindValue(':usr', $user->getId(), PDO::PARAM_INT);
+     $q->bindValue(':suivi', $profile->getId(), PDO::PARAM_INT);
+     $q->execute();
+    $tab = $q->fetch(PDO::FETCH_ASSOC);
+
+    if(empty($tab))
+      return -1;
+
+    return $tab['demande'];
+
+  }
+
   public function setDb(PDO $db)
   {
     $this->_db = $db;

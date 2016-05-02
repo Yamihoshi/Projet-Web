@@ -15,6 +15,13 @@ nav
 	padding:10px;
 	background-color: #6C8299;
 }
+
+button:disabled
+{
+	background:lightgrey;
+	cursor:default;
+}
+
 #timeline, #profile_left_infos, .modal-header{
 	background-color: #A3C3E5;
 }
@@ -253,6 +260,12 @@ input[type="search"]
 {
 	width:100%;
 	word-wrap: break-word;
+}
+
+#subscribeDiv,#editDiv
+{
+	margin-bottom:10px;
+	text-align:center;
 }
 
 #searchResult
