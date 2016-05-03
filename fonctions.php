@@ -5,10 +5,10 @@
 	require_once("classes/TouiteHandler.class.php");
 	require_once("config/connexion.php");
 	session_start();
-<<<<<<< HEAD
-	function show_profile($user)
-=======
-	}else
+
+	/*
+	ça BUG mais pourquoi ???
+
 	if($status == PHP_SESSION_DISABLED){
 	//Sessions are not available
 	}else
@@ -16,10 +16,20 @@
 	//Destroy current and start new one
 	session_destroy();
 	session_start();
+	}*/
+
+	function isConnected()
+	{
+		return isset($_SESSION['user']);
+	}
+
+	function isOwnProfile($profile)
+	{
+		return (isConnected() && $_SESSION['user']==$profile);
 	}
 
 	function getFollowButton($handler,$user,$profile)
->>>>>>> origin/master
+
 	{
 		$statut=$handler->getFollowStatut($user,$profile);
 		if ($statut==-1) // NON SUIVI
@@ -32,32 +42,32 @@
 			return '<button title="En attente d\'une réponse" type="button" disabled>Suivre</button>';
 	}
 
-	function show_profile($user,$bd)
+	function show_profile($profile,$bd)
 	{
-		$th = new TouitosHandler($bd);			
+		$th = new TouitosHandler($bd);	
 
 		echo '<div id="touitos_profile_page">';
 				echo '<div id="profile_left_infos">';
 			
-		if(isset($_SESSION['user']))
+		if(isConnected())
 		{
-			$connected=$th->getByName($_SESSION['user']);
+			$connectedUser=$th->getByAttr("pseudo",$_SESSION['user'],PDO::PARAM_STR);
 
-			if($user->getId()!=$connected->getId())
+			if(!isOwnProfile($_SESSION['user']))
 			{
 					echo '<div id="subscribeDiv">'.
-						getFollowButton($th,$connected,$user)
+						getFollowButton($th,$connectedUser,$profile)
 					.'</div>';
 			}	
 		}					
 
-						echo '<div id="profile_photo">'.getPhoto($user).'</div>';
-						echo '<div id="profile_name">'.$user->getNom().'</div>';
-						echo '<div id="profile_pseudo">@'.$user->getPseudo().'</div>';
-						echo '<div id="profile_statut">'.$user->getStatut().'</div>';
-						echo '<input type="hidden" id="touitos_pseudo" value='.$user->getPseudo().'>';
+						echo '<div id="profile_photo">'.getPhoto($profile).'</div>';
+						echo '<div id="profile_name">'.$profile->getNom().'</div>';
+						echo '<div id="profile_pseudo">@'.$profile->getPseudo().'</div>';
+						echo '<div id="profile_statut">'.$profile->getStatut().'</div>';
+						echo '<input type="hidden" id="touitos_pseudo" value='.$profile->getPseudo().'>';
 
-		if(isset($_SESSION['user']) AND $_SESSION['user']==$_GET['user'])
+		if(isConnected() AND isOwnProfile($profile->getPseudo()))
 		{
 			echo '<div id="editDiv">
 				<button type="button" id="edit_profile">Editer les informations</button>
@@ -67,7 +77,7 @@
 		}
 			echo '</div>'; // Close profil_left
 
-			if($_SESSION['user']==$_GET['user'])
+		if(isConnected() AND isOwnProfile($profile->getPseudo()))
 			{
 			echo 	'<div id="ongletDiv">
 						<table id="ongletSelect">
@@ -94,7 +104,7 @@
 
 	function getPhoto($user)
 	{
-		if($user->getPhoto()=='O')
+		if(isConnected() AND $user->getPhoto()==1)
 			return '<img src="files/pictures/'.$user->getPseudo().'.jpg">';
 		else
 			return '<img src="includes/img/no_pic.png">';
@@ -118,7 +128,6 @@
 		echo '</a></div>';
 	}
 
-
 	function searchByName($str,$bd)
 	{
 		$th=new TouitosHandler($bd);
@@ -131,42 +140,46 @@
 				}
 		echo '</div>';
 	}
+
+	function attrExists($bd,$attrName,$val,$paramType)
+	{
+		$th=new TouitosHandler($bd);
+		$test=$th->getByAttr($attrName,$val,$paramType);
+
+		return $test!=null;
+	}
+
 	function addTouitos($data,$bd)
 	{
 		//test si user existe
 		$photo=array('photo' => 'N');
 		$data=$data+$photo;
 		$th=new TouitosHandler($bd);
-		//$test=$th->getByName($data['nom']);
-		$test=$th->getByName($data['pseudo']);
-		if($test!=null)
-			return -1;
-		else
-		{
-			$touitos=new Touitos($data);
-			return $th->add($touitos);
-		}
+
+		$touitos=new Touitos($data);
+
+		return $th->add($touitos);
 	}
 	function updateTouitos($bd,$touitos,$form)
 	{
 		$th=new TouitosHandler($bd);
-		$user=$th->getByName($touitos);
+		$user=$th->getByAttr("pseudo",$touitos,PDO::PARAM_STR);
 		$user->_setNom($form['nom']);
 		$user->_setStatut($form['statut']);
 		$th->update($user);
 	}
-<<<<<<< HEAD
+
 	function addTouite($data, $bd){
 		$t= new TouiteHandler($bd);
 		$t->add($data);
 	}
-=======
+
 
 	function follow($bd,$user,$suivi)
 	{
 		$th=new TouitosHandler($bd);
-		$demandeur=$th->getByName($user);
-		$receveur=$th->getByName($suivi);
+		$demandeur=$th->getByAttr("pseudo",$user,PDO::PARAM_STR);
+		$receveur=$th->getByAttr("pseudo",$suivi,PDO::PARAM_STR);
 
 		$th->follow($demandeur,$receveur);
 	}
@@ -174,8 +187,8 @@
 	function unfollow($bd,$user,$suivi)
 	{
 		$th=new TouitosHandler($bd);
-		$demandeur=$th->getByName($user);
-		$receveur=$th->getByName($suivi);
+		$demandeur=$th->getByAttr("pseudo",$user,PDO::PARAM_STR);
+		$receveur=$th->getByAttr("pseudo",$suivi,PDO::PARAM_STR);
 
 		$th->unfollow($demandeur,$receveur);
 	}
@@ -183,7 +196,7 @@
 	function show_followers($bd,$user)
 	{
 		$th=new TouitosHandler($bd);
-		$connectedUser=$th->getByName($user);
+		$connectedUser=$th->getByAttr("pseudo",$user,PDO::PARAM_STR);
 
 		echo '<div id="followersDiv">';
 
@@ -195,5 +208,5 @@
 
 	}
 
->>>>>>> origin/master
+
 ?>

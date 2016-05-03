@@ -2,7 +2,7 @@
 require_once("config/connexion.php");
 require_once('fonctions.php');
 require_once('classes/touite.class.php');
-session_start();
+
 	if(isset($_GET['search']))
 	{
 		searchByName($_GET['search'],$bd);
@@ -13,7 +13,6 @@ session_start();
 		updateTouitos($bd,$_POST['touitos'],$_POST['editProfile']);
 	}
 
-<<<<<<< HEAD
 	else if(!empty($_POST['message'])){
 			$touite = array("texte" => $_POST['message'], "idAuteur" => $_SESSION['id']);
 
@@ -27,7 +26,6 @@ session_start();
 		}
 	}
 	
-=======
 	else if(isset($_POST['follow']))
 	{
 		follow($bd,$_POST['demandeur'],$_POST['suivi']);
@@ -38,5 +36,5 @@ session_start();
 		unfollow($bd,$_POST['demandeur'],$_POST['suivi']);
 	}
 
->>>>>>> origin/master
+
 ?>

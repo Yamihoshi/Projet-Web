@@ -38,12 +38,27 @@ class touitosHandler
       return null;
   }
 
-  public function getbyName($name)
+  public function getbyPseudo($name)
   {
     $q = $this->_db->prepare('SELECT id, nom,pseudo, mail, PWD, photo, statut FROM Touitos WHERE pseudo = :usr');
     $q->bindValue(':usr', $name, PDO::PARAM_STR);
      $q->execute();
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
+
+    if(!empty($donnees))
+      return new Touitos($donnees);
+    else
+      return null;
+  }
+
+  //A TESTER
+  public function getbyAttr($attrName,$val,$paramType)
+  {
+    $q = $this->_db->prepare('SELECT id, nom,pseudo, mail, PWD, photo, statut FROM Touitos WHERE '.$attrName.' = :val');
+    $q->bindValue(':val', $val, $paramType);
+     $q->execute();
+    $donnees = $q->fetch(PDO::FETCH_ASSOC);
+
 
     if(!empty($donnees))
       return new Touitos($donnees);
