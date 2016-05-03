@@ -53,7 +53,7 @@
 		{
 			$connectedUser=$th->getByAttr("pseudo",$_SESSION['user'],PDO::PARAM_STR);
 
-			if(!isOwnProfile($_SESSION['user']))
+			if(!isOwnProfile($profile->getPseudo()))
 			{
 					echo '<div id="subscribeDiv">'.
 						getFollowButton($th,$connectedUser,$profile)
