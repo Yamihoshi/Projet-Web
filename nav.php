@@ -18,7 +18,7 @@ require('fonctions.php');
 			if(isset($_SESSION['user']))
 			{
 				$th=new TouitosHandler($bd);
-				$usr=$th->getbyName($_SESSION['user']);
+				$usr=$th->getByAttr("pseudo",$_SESSION['user'],PDO::PARAM_STR);;
 				echo '<li><a href="profile.php?user='.$_SESSION['user'].'">'.getPhoto($usr).'</a></li>';
 			}
 

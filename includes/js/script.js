@@ -40,7 +40,7 @@ $(document).ready(function()
         modalIni('Connexion', '<form id="loginForm"><input type="text" id="login" name="login" placeholder="Login" required><input type="password" id="password" name="password" placeholder="Mot de passe" required><button type="submit">Se Connecter</button></form>');
     });
     $('#inscription').click(function(){
-        modalIni('Inscription', '<form id="inscriptionForm"><input type="text" id="login" name="login" placeholder="Login" required><input type="password" id="password" name="password" placeholder="Mot de passe" required><input type="mail" name="mail" id="mail" placeholder="Adresse mail" required><button type="submit">Se Connecter</button></form>');
+        modalIni('Inscription', '<form id="inscriptionForm"><input type="text" id="login" name="login" placeholder="Login" required><input type="password" id="password" name="password" placeholder="Mot de passe" required><input type="mail" name="mail" id="mail" placeholder="Adresse mail" required><button type="submit">S\'inscrire</button></form>');
     });
     $('.close').click(function(){
         $('#myModal').toggle();
@@ -59,10 +59,10 @@ $(document).ready(function()
             dataType:'json',
             success: function(data){
                 if(data.reussit){
+                    console.log("TEST");
                     location.reload(true); 
                 }
                 else{
-                    $('.modal-footer').html('');
                     $('.modal-footer').html('<div class="loginError">Login ou mot de passe incorrect.</div>');
                 }
             }
@@ -81,13 +81,15 @@ $(document).ready(function()
                 },
             dataType:'json',
             success: function(response, statut){
-                if(response.reussit){
-                    location.reload(true);
-                    console.log("hey");
+                if(!response.validMail)
+                {
+                    $('.modal-footer').html('<div class="loginError">Un compte associé à ce mail existe déjà</div>');
+                }
+                else if(!response.validPseudo){
+                    $('.modal-footer').html('<div class="loginError">Ce nom d\'utilisateur est déjà utilisé.</div>');
                 }
                 else{
-                    $('.modal-footer').html('');
-                    $('.modal-footer').html('<div class="loginError">Ce nom d\'utilisateur est déjà utilisé.</div>');
+                    location.reload(true);
                 }
             },
              error : function(resultat, statut, erreur){
@@ -164,7 +166,9 @@ $(document).ready(function()
         }
         else if(index==1)
         {
-            
+            $.get("ajax.php",{getSuivi:true},function(rep){
+
+            });
         }
         else if(index==2)
         {
@@ -173,6 +177,38 @@ $(document).ready(function()
         
 
     });
+
+    $('#pageDisplay').on("click",".subscribe",function(){
+
+        $.post("ajax.php",{suivi:$(this).attr("idtouitos"),follow:true},function(rep){
+        });
+
+        $(this).removeClass("subscribe");
+        $(this).prop( "disabled", true );
+        $(this).html("En attente d\'une réponse");
+    });
+
+    $('#pageDisplay').on("click",".unsubscribe",function(){
+
+        $.post("ajax.php",{suivi:$(this).attr("idtouitos"),unfollow:true},function(rep){
+        });
+
+        $(this).addClass("subscribe");
+        $(this).removeClass("unsubscribe");
+        $(this).html("Suivre");
+    });
+
+    $('#pageDisplay').on("mouseover",".unsubscribe",function(){
+        $(this).removeClass("followed");
+        $(this).html("Ne plus suivre");
+    });
+
+    $('#pageDisplay').on("mouseleave",".unsubscribe",function(){
+        $(this).addClass("followed");
+        $(this).html("Abonné");
+    });
+
+
 
 
 var nyan=0;

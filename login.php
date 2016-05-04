@@ -9,7 +9,7 @@ $badLogin=false;
 	if(!empty($_POST['login']) && !empty($_POST['password']))
 	{
 		$pseudo=$_POST['login'];
-		$req=$bd->prepare("SELECT PWD FROM touitos WHERE pseudo=\"$pseudo\"");
+		$req=$bd->prepare("SELECT id,PWD FROM touitos WHERE pseudo=\"$pseudo\"");
 		$req->execute();
 		$tab=$req->fetch(PDO::FETCH_ASSOC);
 		if(!empty($tab))
@@ -27,6 +27,6 @@ $badLogin=false;
 		else
 			$unknow=true;
 	}
-	$resultat  = array('reussit' => !($unknow || $badLogin ));
+	$resultat  = array('reussit' => (!$unknow && !$badLogin ));
 	echo json_encode($resultat);
 ?>

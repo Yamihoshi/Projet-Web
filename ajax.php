@@ -2,6 +2,7 @@
 require_once("config/connexion.php");
 require_once('fonctions.php');
 require_once('classes/touite.class.php');
+
 	if(isset($_GET['search']))
 	{
 		searchByName($_GET['search'],$bd);
@@ -24,13 +25,15 @@ require_once('classes/touite.class.php');
 				addTouite($message, $bd);
 		}
 	}
+
 	else if(isset($_POST['follow']))
 	{
-		follow($bd,$_POST['demandeur'],$_POST['suivi']);
+		follow($bd,$_SESSION['user'],$_POST['suivi']);
 	}
 
 	else if(isset($_POST['unfollow']))
 	{
-		unfollow($bd,$_POST['demandeur'],$_POST['suivi']);
+		unfollow($bd,$_SESSION['user'],$_POST['suivi']);
 	}
+
 ?>

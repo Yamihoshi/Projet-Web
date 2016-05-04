@@ -22,6 +22,11 @@ button:disabled
 	cursor:default;
 }
 
+.followed{
+	/*background-color:#003366;*/
+		background-color:#12BDCD;
+}
+
 #timeline, #profile_left_infos, .modal-header{
 	background-color: #A3C3E5;
 }
@@ -262,7 +267,7 @@ input[type="search"]
 	word-wrap: break-word;
 }
 
-#subscribeDiv,#editDiv
+.subscribeDiv,#editDiv
 {
 	margin-bottom:10px;
 	text-align:center;
@@ -344,3 +349,8 @@ input[type="search"]
 	color:red;
 	font-weight:bold;
 }
+
+.touitosDiv button{
+	margin-top:0;
+}
+
