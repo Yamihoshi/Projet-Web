@@ -166,7 +166,9 @@ $(document).ready(function()
         }
         else if(index==1)
         {
-            
+            $.get("ajax.php",{getSuivi:true},function(rep){
+
+            });
         }
         else if(index==2)
         {
@@ -175,6 +177,38 @@ $(document).ready(function()
         
 
     });
+
+    $('#pageDisplay').on("click",".subscribe",function(){
+
+        $.post("ajax.php",{suivi:$(this).attr("idtouitos"),follow:true},function(rep){
+        });
+
+        $(this).removeClass("subscribe");
+        $(this).prop( "disabled", true );
+        $(this).html("En attente d\'une réponse");
+    });
+
+    $('#pageDisplay').on("click",".unsubscribe",function(){
+
+        $.post("ajax.php",{suivi:$(this).attr("idtouitos"),unfollow:true},function(rep){
+        });
+
+        $(this).addClass("subscribe");
+        $(this).removeClass("unsubscribe");
+        $(this).html("Suivre");
+    });
+
+    $('#pageDisplay').on("mouseover",".unsubscribe",function(){
+        $(this).removeClass("followed");
+        $(this).html("Ne plus suivre");
+    });
+
+    $('#pageDisplay').on("mouseleave",".unsubscribe",function(){
+        $(this).addClass("followed");
+        $(this).html("Abonné");
+    });
+
+
 
 
 var nyan=0;

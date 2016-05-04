@@ -28,12 +28,12 @@ require_once('classes/touite.class.php');
 	
 	else if(isset($_POST['follow']))
 	{
-		follow($bd,$_POST['demandeur'],$_POST['suivi']);
+		follow($bd,$_SESSION['user'],$_POST['suivi']);
 	}
 
 	else if(isset($_POST['unfollow']))
 	{
-		unfollow($bd,$_POST['demandeur'],$_POST['suivi']);
+		unfollow($bd,$_SESSION['user'],$_POST['suivi']);
 	}
 
 

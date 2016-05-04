@@ -120,7 +120,7 @@ class touitosHandler
     $q->execute();
   }
 
-  public function getFollowers(Touitos $current)
+  public function getWhoIFollow(Touitos $current)
   {
       $followers = [];
       $q = $this->_db->prepare('SELECT * FROM Touitos JOIN suivre ON suivre.idReceveur=touitos.id WHERE idDemandeur=:id');

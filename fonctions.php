@@ -33,9 +33,9 @@
 	{
 		$statut=$handler->getFollowStatut($user,$profile);
 		if ($statut==-1) // NON SUIVI
-			return '<button type="button" idTouitos='.$user->getId().' class="subscribe">Suivre</button>';
+			return '<button type="button" idTouitos='.$profile->getId().' class="subscribe">Suivre</button>';
 		else if($statut=='V') //VALIDE
-			return '<button type="button" idTouitos='.$user->getId().' class="unsubscribe">Ne plus suivre</button>';
+			return '<button type="button" idTouitos='.$profile->getId().' class="unsubscribe followed">Abonné</button>';
 		else if($statut=='R') //REFUSE
 			return '<button title="Cet utilisateur a refusé votre demande" type="button" disabled>Suivre</button>';
 		else if($statut=='E')
@@ -55,7 +55,7 @@
 
 			if(!isOwnProfile($profile->getPseudo()))
 			{
-					echo '<div id="subscribeDiv">'.
+					echo '<div class="subscribeDiv">'.
 						getFollowButton($th,$connectedUser,$profile)
 					.'</div>';
 			}	
@@ -116,7 +116,7 @@
 		echo '</div>';
 	}
 
-	function getTouitosVignette($touitos)
+	function getTouitosVignette($bd,$touitos)
 	{
 		echo '<div class="touitosDiv"><a href="profile.php?user='.$touitos->getPseudo().'">';
 			echo '<div class="result_photo">'.getPhoto($touitos).'</div>';
@@ -125,7 +125,14 @@
 				echo '<div class="result_pseudo">@'.$touitos->getPseudo().'</div>';
 				echo '<div class="result_statut">'.$touitos->getStatut().'</div>';
 			echo '</div>';
-		echo '</a></div>';
+			echo '</a>';
+			if(isset($_SESSION['user']))
+			{
+				$th=new touitosHandler($bd);
+				$connectedUSer=$th->getByAttr("pseudo",$_SESSION['user'],PDO::PARAM_STR);
+				echo '<div class="subscribeDiv">'.getFollowButton($th,$connectedUSer,$touitos).'</div>';
+			}
+		echo '</div>';
 	}
 
 	function searchByName($str,$bd)
@@ -136,7 +143,7 @@
 			foreach($res as $key=>$touitos)
 				{
 
-					getTouitosVignette($touitos);
+					getTouitosVignette($bd,$touitos);
 				}
 		echo '</div>';
 	}
@@ -179,8 +186,9 @@
 	{
 		$th=new TouitosHandler($bd);
 		$demandeur=$th->getByAttr("pseudo",$user,PDO::PARAM_STR);
-		$receveur=$th->getByAttr("pseudo",$suivi,PDO::PARAM_STR);
+		$receveur=$th->getByAttr("id",$suivi,PDO::PARAM_INT);
 
+		print_r($demandeur);
 		$th->follow($demandeur,$receveur);
 	}
 
@@ -188,12 +196,12 @@
 	{
 		$th=new TouitosHandler($bd);
 		$demandeur=$th->getByAttr("pseudo",$user,PDO::PARAM_STR);
-		$receveur=$th->getByAttr("pseudo",$suivi,PDO::PARAM_STR);
+		$receveur=$th->getByAttr("id",$suivi,PDO::PARAM_INT);
 
 		$th->unfollow($demandeur,$receveur);
 	}
 
-	function show_followers($bd,$user)
+	function show_whoIFollow($bd,$user)
 	{
 		$th=new TouitosHandler($bd);
 		$connectedUser=$th->getByAttr("pseudo",$user,PDO::PARAM_STR);
