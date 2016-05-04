@@ -121,7 +121,7 @@ class touitosHandler
   public function getWhoIFollow(Touitos $current)
   {
       $followers = [];
-      $q = $this->_db->prepare('SELECT * FROM Touitos JOIN suivre ON suivre.idReceveur=touitos.id WHERE idDemandeur=:id');
+      $q = $this->_db->prepare('SELECT * FROM Touitos JOIN suivre ON suivre.idReceveur=touitos.id WHERE idDemandeur=:id AND reponse="V"');
       $q->bindValue(':id', $current->getId(), PDO::PARAM_INT);
       $q->execute();
       while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
@@ -134,7 +134,7 @@ class touitosHandler
     public function getFollowers(Touitos $current)
   {
       $followers = [];
-      $q = $this->_db->prepare('SELECT * FROM Touitos JOIN suivre ON suivre.idDemandeur=touitos.id WHERE idReceveur=:id');
+      $q = $this->_db->prepare('SELECT * FROM Touitos JOIN suivre ON suivre.idDemandeur=touitos.id WHERE idReceveur=:id AND reponse="V"');
       $q->bindValue(':id', $current->getId(), PDO::PARAM_INT);
       $q->execute();
       while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
@@ -142,6 +142,32 @@ class touitosHandler
         $followers[] = new Touitos($donnees);
       }
       return $followers;
+  }
+
+  public function getFollowRequest(Touitos $current)
+  {
+      $request = [];
+      $q = $this->_db->prepare('SELECT * FROM Touitos JOIN suivre ON suivre.idDemandeur=touitos.id WHERE idReceveur=:id');
+      $q->bindValue(':id', $current->getId(), PDO::PARAM_INT);
+      $q->execute();
+      while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+      {
+        $request[] = $donnees;
+      }
+      return $request;
+  }
+
+  public function getFollowRequestSended(Touitos $current)
+  {
+      $request = [];
+      $q = $this->_db->prepare('SELECT * FROM Touitos JOIN suivre ON suivre.idDemandeur=touitos.id WHERE idReceveur=:id');
+      $q->bindValue(':id', $current->getId(), PDO::PARAM_INT);
+      $q->execute();
+      while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+      {
+        $request[] = $donnees;
+      }
+      return $request;
   }
 
   public function getFollowStatut($user,$profile)
