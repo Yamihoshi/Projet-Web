@@ -1,18 +1,21 @@
 <?php
+class TouiteRender
+{
 	 private $id;
+
+
 	 public function __construct($id){
-	 	$this->id = $id);
+	 	$this->id = $id;
 	 }
 
 	 function renderMessage($id){
 	 	$db_touite = new TouiteHandler($db);
-	 	$db_touitos = new TouiteHandler($db);
 	 	$auteur = $db_touitos->get($id);
 	 	$message = $db_touite->getMessagewithReponse($auteur->getId());
 	 	echo '<div class = "message">';
 	 		renderAuteur($auteur);
-	 		echo '<div class="date">'. $message->getLaDate(); . '</div>';
-	 		echo_message($message)
+	 		echo '<div class="date">'. $message->getLaDate() . '</div>';
+	 		echo_message($message);
 	 	echo '</div>';
 	 }
 	 function echo_message(Touite $message){
@@ -30,4 +33,5 @@
 				</picture>
 	 		</div>';
 	 }
+}
 ?>
