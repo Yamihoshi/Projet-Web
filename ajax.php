@@ -34,4 +34,19 @@ require_once('classes/touite.class.php');
 		unfollow($bd,$_SESSION['user'],$_POST['suivi']);
 	}
 
+	else if(isset($_GET['getFollowers']))
+	{
+		show_followers($bd);
+	}
+
+	else if(isset($_GET['getSuivi']))
+	{
+		show_whoIFollow($bd);
+	}
+
+	else if(isset($_GET['getTimeline']))
+	{
+		show_timeline($bd);
+	}
+
 ?>
