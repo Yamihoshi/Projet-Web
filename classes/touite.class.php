@@ -6,6 +6,7 @@
 		protected $_ladate;
 		protected $_texte;
         protected $_idAuteur;
+        protected $_reponse;
 	/**
 	 * Class Constructor
 	 * @param    $id_auteur   
@@ -122,6 +123,30 @@
     protected function setIdAuteur($idAuteur)
     {
         $this->_idAuteur = $idAuteur;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of _reponse.
+     *
+     * @return mixed
+     */
+    public function getReponse()
+    {
+        return $this->_reponse;
+    }
+
+    /**
+     * Sets the value of _reponse.
+     *
+     * @param mixed $_reponse the reponse
+     *
+     * @return self
+     */
+    public function setReponse($reponse)
+    {
+        $this->_reponse = $reponse;
 
         return $this;
     }
