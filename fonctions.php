@@ -20,7 +20,7 @@
 
 	function isConnected()
 	{
-		return isset($_SESSION['user']);
+		return !empty($_SESSION['user']);
 	}
 
 	function isOwnProfile($profile)
@@ -42,9 +42,10 @@
 			return '<button title="En attente d\'une réponse" type="button" disabled>Suivre</button>';
 	}
 
-	function show_profile($profile,$bd)
+	function show_profile(Touitos $profile,$bd)
 	{
-		$th = new TouitosHandler($bd);	
+		$th = new TouitosHandler($bd);
+		$tr = new TouiteRender($bd);
 
 		echo '<div id="touitos_profile_page">';
 				echo '<div id="profile_left_infos">';
@@ -59,13 +60,13 @@
 						getFollowButton($th,$connectedUser,$profile)
 					.'</div>';
 			}	
-		}					
+		}
 
-						echo '<div id="profile_photo">'.getPhoto($profile).'</div>';
-						echo '<div id="profile_name">'.$profile->getNom().'</div>';
-						echo '<div id="profile_pseudo">@'.$profile->getPseudo().'</div>';
-						echo '<div id="profile_statut">'.$profile->getStatut().'</div>';
-						echo '<input type="hidden" id="touitos_pseudo" value='.$profile->getPseudo().'>';
+		echo '<div id="profile_photo">'.getPhoto($profile).'</div>';
+		echo '<div id="profile_name">'.$profile->getNom().'</div>';
+		echo '<div id="profile_pseudo">@'.$profile->getPseudo().'</div>';
+		echo '<div id="profile_statut">'.$profile->getStatut().'</div>';
+		echo '<input type="hidden" id="touitos_pseudo" value='.$profile->getPseudo().'>';
 
 		if(isConnected() AND isOwnProfile($profile->getPseudo()))
 		{
@@ -75,10 +76,9 @@
 
 					
 		}
-			echo '</div>'; // Close profil_left
+		echo '</div>'; // Close profil_left
 
-		if(isConnected() AND isOwnProfile($profile->getPseudo()))
-			{
+		if(isConnected() AND isOwnProfile($profile->getPseudo())){
 			echo 	'<div id="ongletDiv">
 						<table id="ongletSelect">
 							<tr>
@@ -88,18 +88,19 @@
 							</tr>
 						</table>
 					</div>';
-			}
-
-
-			echo '<div id="timeline">
-						<div id="touite-box">
+		}
+		echo '<div id="timeline">';
+		if(isConnected() AND isOwnProfile($profile->getPseudo())){
+			echo '<div id="touite-box">
 								<form id="touite">
 										<textarea name="touite" maxlength="140" required></textarea>
 										<button type="submit">Touiter</button>
 								</form>
-						</div>
+					</div>';
+		}
+
+		echo '</div>
 				</div>';
-		echo '</div>';
 	}
 
 	function getPhoto($user)

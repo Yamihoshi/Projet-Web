@@ -7,13 +7,6 @@
 		protected $_texte;
         protected $_idAuteur;
         protected $_reponse;
-	/**
-	 * Class Constructor
-	 * @param    $id_auteur   
-	 * @param    $date   
-	 * @param    $texte   
-	 * @param    $reponse   
-	 */
 
     public function __construct(array $donnees)
     {

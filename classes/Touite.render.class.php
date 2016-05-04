@@ -6,21 +6,25 @@
 
 	 function renderMessage($id){
 	 	$db_touite = new TouiteHandler($db);
-	 	$message = $db_touite->getMessagewithReponse($id);
+	 	$db_touitos = new TouiteHandler($db);
+	 	$auteur = $db_touitos->get($id);
+	 	$message = $db_touite->getMessagewithReponse($auteur->getId());
+	 	echo '<div class = "message">';
+	 		renderAuteur($auteur);
+	 		echo '<div class="date">'. $message->getLaDate(); . '</div>';
+	 		echo_message($message)
+	 	echo '</div>';
 	 }
 	 function echo_message(Touite $message){
 	 	echo 
-	 	'<div class="contenu_message">';
-	 	echo $message->getTexte();
-	 	echo 
-	 	'</div>';
+	 		'<div class="contenu_message">' .
+	 			$message->getTexte() .
+	 		 '</div>';
 	 }
 
-	 function renderAuteur($id){
-	 	$db_touitos = new TouiteHandler($db);
-	 	$auteur = $db_touitos->get($id);
+	 function renderAuteur($auteur){
 	 	echo '<div class="auteur">
-	 			<div class="pseudo"></div>
+	 			<div class="pseudo">' . $auteur->getPseudo() .'</div>
 	 			<picture>
 					<source src="{{touitos.photo}}">
 				</picture>

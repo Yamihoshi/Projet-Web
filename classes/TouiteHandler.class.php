@@ -2,7 +2,6 @@
 class TouiteHandler
 {
 
-
   private $_db; // Instance de PDO
 
   public function __construct($db)

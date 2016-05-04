@@ -15,11 +15,9 @@ require_once('classes/touite.class.php');
 
 	else if(!empty($_POST['message'])){
 			$touite = array("texte" => $_POST['message'], "idAuteur" => $_SESSION['id']);
-
-			print_r($_SESSION);
 			if(!empty($_POST['id_message'])){
 				$touite['id_message'] = $_POST['id_message'];
-				$message = new Touite($touite);
+				$message = new Touite($touite); //réponse
 			}else{
 			$message = new Touite($touite);
 				addTouite($message, $bd);
