@@ -31,7 +31,6 @@ class touitosHandler
 
     $q = $this->_db->query('SELECT id, nom,pseudo, mail, PWD, photo, statut FROM Touitos WHERE id = '.$id);
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
-
     if(!empty($donnees))
       return new Touitos($donnees);
     else
@@ -85,7 +84,6 @@ class touitosHandler
     $q->bindValue(':photo', $perso->getPhoto(), PDO::PARAM_STR);
     $q->bindValue(':id', $perso->getId(), PDO::PARAM_INT);
     $q->bindValue(':pseudo', $perso->getPseudo(), PDO::PARAM_INT);
-
     $q->execute();
   }
 
