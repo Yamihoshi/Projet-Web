@@ -79,14 +79,14 @@
 					</div>';
 		}
 		echo '<div id="timeline">';
-			show_timeline($bd, $profile);
+			show_timeline($bd, $profile->getPseudo());
 		echo '</div>';
 		echo '</div>';
 	}
 
-	function show_timeline($bd, Touite $profile)
+	function show_timeline($bd, $profile)
 	{
-			if(isConnected() AND isOwnProfile($profile->getPseudo()))
+			if(isConnected() AND isOwnProfile($profile))
 			echo'
 				<div id="touite-box">
 								<form id="touite">
@@ -133,11 +133,11 @@
 		$th=new TouitosHandler($bd);
 		$res=$th->searchByName($str);
 		echo '<div id="searchResult">';
-			foreach($res as $key=>$touitos)
-				{
+		foreach($res as $key=>$touitos)
+			{
 
-					getTouitosVignette($bd,$touitos);
-				}
+				getTouitosVignette($bd,$touitos);
+			}
 		echo '</div>';
 	}
 
@@ -198,6 +198,7 @@
 	{
 		$th=new TouitosHandler($bd);
 		$connectedUser=$th->getByAttr("pseudo",$_SESSION['user'],PDO::PARAM_STR);
+		$requestList=$th->getFollowRequest($connectedUser);
 		$list=$th->getWhoIFollow($connectedUser);
 
 		echo '<div id="whoIFollowDiv">';
@@ -208,7 +209,12 @@
 			echo '<div> Vous ne suivez personne</div>';
 		}
 
-		else foreach($list as $key=>$touitos)
+		foreach($requestList as $key=>$data)
+		{
+			echo '<div>'.$data['reponse'].'</div>';
+		}
+
+		foreach($list as $key=>$touitos)
 		{
 			echo  getTouitosVignette($bd,$touitos);
 		}
@@ -236,9 +242,6 @@
 
 		echo '</div>';
 	}
-
-
-?>
 
 
 ?>
