@@ -3,6 +3,7 @@
 	require_once("classes/touitos.class.php");
 	require_once("classes/TouitosHandler.class.php");
 	require_once("classes/TouiteHandler.class.php");
+	require_once("classes/Touite.render.class.php");
 	require_once("config/connexion.php");
 	session_start();
 
