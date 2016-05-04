@@ -6,18 +6,6 @@
 	require_once("config/connexion.php");
 	session_start();
 
-	/*
-	ça BUG mais pourquoi ???
-
-	if($status == PHP_SESSION_DISABLED){
-	//Sessions are not available
-	}else
-	if($status == PHP_SESSION_ACTIVE){
-	//Destroy current and start new one
-	session_destroy();
-	session_start();
-	}*/
-
 	function isConnected()
 	{
 		return !empty($_SESSION['user']);
@@ -90,19 +78,22 @@
 					</div>';
 		}
 		echo '<div id="timeline">';
-		if(isConnected() AND isOwnProfile($profile->getPseudo())){
-			echo '<div id="touite-box">
+			show_timeline($bd, $profile);
+		echo '</div>';
+		echo '</div>';
+	}
+
+	function show_timeline($bd, Touite $profile)
+	{
+			if(isConnected() AND isOwnProfile($profile->getPseudo()))
+			echo'
+				<div id="touite-box">
 								<form id="touite">
 										<textarea name="touite" maxlength="140" required></textarea>
 										<button type="submit">Touiter</button>
 								</form>
-					</div>';
-		}
-
-		echo '</div>
-				</div>';
+						</div>';
 	}
-
 	function getPhoto($user)
 	{
 		if(isConnected() AND $user->getPhoto()==1)
@@ -202,20 +193,51 @@
 		$th->unfollow($demandeur,$receveur);
 	}
 
-	function show_whoIFollow($bd,$user)
+	function show_whoIFollow($bd)
 	{
 		$th=new TouitosHandler($bd);
-		$connectedUser=$th->getByAttr("pseudo",$user,PDO::PARAM_STR);
+		$connectedUser=$th->getByAttr("pseudo",$_SESSION['user'],PDO::PARAM_STR);
+		$list=$th->getWhoIFollow($connectedUser);
 
-		echo '<div id="followersDiv">';
+		echo '<div id="whoIFollowDiv">';
+			echo '<div>Classer les Demandes ???</div>';
+
+		if(empty($list))
+		{
+			echo '<div> Vous ne suivez personne</div>';
+		}
+
+		else foreach($list as $key=>$touitos)
+		{
+			echo  getTouitosVignette($bd,$touitos);
+		}
 
 		echo '</div>';
 	}
 
-	function show_followedBy($bd,$user)
+	function show_followers($bd)
 	{
+		$th=new TouitosHandler($bd);
+		$connectedUser=$th->getByAttr("pseudo",$_SESSION['user'],PDO::PARAM_STR);
+		$list=$th->getFollowers($connectedUser);
 
+		echo '<div id="followedByDiv">';
+
+		if(empty($list))
+		{
+			echo '<div> Vous n\'êtes suivi par personne</div>';
+		}
+
+		else foreach($list as $key=>$touitos)
+		{
+			echo  getTouitosVignette($bd,$touitos);
+		}
+
+		echo '</div>';
 	}
+
+
+?>
 
 
 ?>
