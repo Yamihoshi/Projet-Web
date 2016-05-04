@@ -150,7 +150,7 @@ $(document).ready(function()
         calculerCaractere();
     });*/
 
-    $("#ongletSelect>li").click(function()
+    $("#ongletSelect td").click(function()
     {   
         /*
             0 -> Touites
@@ -158,21 +158,26 @@ $(document).ready(function()
             2 -> Suiveurs
         */
 
-        var index = $('#ongletSelect').index(this);
+        var index = $('td').index(this);
+        console.log(index);
 
         if(index==0)
         {
-
+            $.get("ajax.php",{getTimeline:true},function(rep){
+                $("#timeline").html(rep);
+            });
         }
         else if(index==1)
         {
             $.get("ajax.php",{getSuivi:true},function(rep){
-
+                $("#timeline").html(rep);
             });
         }
         else if(index==2)
         {
-            
+            $.get("ajax.php",{getFollowers:true},function(rep){
+                $("#timeline").html(rep);
+            });
         }
         
 

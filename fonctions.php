@@ -42,6 +42,17 @@
 			return '<button title="En attente d\'une réponse" type="button" disabled>Suivre</button>';
 	}
 
+	function show_timeline($bd)
+	{
+			echo'
+				<div id="touite-box">
+								<form id="touite">
+										<textarea name="touite" maxlength="140" required></textarea>
+										<button type="submit">Touiter</button>
+								</form>
+						</div>';
+	}
+
 	function show_profile($profile,$bd)
 	{
 		$th = new TouitosHandler($bd);	
@@ -89,17 +100,14 @@
 						</table>
 					</div>';
 			}
+		
 
+			echo '<div id="timeline">';
+				show_timeline($bd);
+			echo '</div>';
 
-			echo '<div id="timeline">
-						<div id="touite-box">
-								<form id="touite">
-										<textarea name="touite" maxlength="140" required></textarea>
-										<button type="submit">Touiter</button>
-								</form>
-						</div>
-				</div>';
 		echo '</div>';
+
 	}
 
 	function getPhoto($user)
@@ -201,19 +209,47 @@
 		$th->unfollow($demandeur,$receveur);
 	}
 
-	function show_whoIFollow($bd,$user)
+	function show_whoIFollow($bd)
 	{
 		$th=new TouitosHandler($bd);
-		$connectedUser=$th->getByAttr("pseudo",$user,PDO::PARAM_STR);
+		$connectedUser=$th->getByAttr("pseudo",$_SESSION['user'],PDO::PARAM_STR);
+		$list=$th->getWhoIFollow($connectedUser);
 
-		echo '<div id="followersDiv">';
+		echo '<div id="whoIFollowDiv">';
+			echo '<div>Classer les Demandes ???</div>';
+
+		if(empty($list))
+		{
+			echo '<div> Vous ne suivez personne</div>';
+		}
+
+		else foreach($list as $key=>$touitos)
+		{
+			echo  getTouitosVignette($bd,$touitos);
+		}
 
 		echo '</div>';
 	}
 
-	function show_followedBy($bd,$user)
+	function show_followers($bd)
 	{
+		$th=new TouitosHandler($bd);
+		$connectedUser=$th->getByAttr("pseudo",$_SESSION['user'],PDO::PARAM_STR);
+		$list=$th->getFollowers($connectedUser);
 
+		echo '<div id="followedByDiv">';
+
+		if(empty($list))
+		{
+			echo '<div> Vous n\'êtes suivi par personne</div>';
+		}
+
+		else foreach($list as $key=>$touitos)
+		{
+			echo  getTouitosVignette($bd,$touitos);
+		}
+
+		echo '</div>';
 	}
 
 
