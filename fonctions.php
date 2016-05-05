@@ -20,15 +20,18 @@
 	function getFollowButton($handler,$user,$profile)
 
 	{
-		$statut=$handler->getFollowStatut($user,$profile);
-		if ($statut==-1) // NON SUIVI
-			return '<button type="button" idTouitos='.$profile->getId().' class="subscribe">Suivre</button>';
-		else if($statut=='V') //VALIDE
-			return '<button type="button" idTouitos='.$profile->getId().' class="unsubscribe followed">Abonné</button>';
-		else if($statut=='R') //REFUSE
-			return '<button title="Cet utilisateur a refusé votre demande" type="button" disabled>Suivre</button>';
-		else if($statut=='E')
-			return '<button title="En attente d\'une réponse" type="button" disabled>Suivre</button>';
+		if(isConnected() && !isOwnProfile($profile->getPseudo()))
+		{
+			$statut=$handler->getFollowStatut($user,$profile);
+			if ($statut==-1) // NON SUIVI
+				return '<button type="button" idTouitos='.$profile->getId().' class="subscribe">Suivre</button>';
+			else if($statut=='V') //VALIDE
+				return '<button type="button" idTouitos='.$profile->getId().' class="unsubscribe followed">Abonné</button>';
+			else if($statut=='R') //REFUSE
+				return '<button title="Cet utilisateur a refusé votre demande" type="button" disabled>Suivre</button>';
+			else if($statut=='E')
+				return '<button title="En attente d\'une réponse" type="button" disabled>Suivre</button>';
+		}
 	}
 
 	function show_profile(Touitos $profile,$bd)
