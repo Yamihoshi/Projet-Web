@@ -1,4 +1,5 @@
-﻿<html>
+﻿<!DOCTYPE html> 
+<html>
 <head>
 	<title>Touiteur </title>
 	<link rel="stylesheet" href="includes/css/style.css">

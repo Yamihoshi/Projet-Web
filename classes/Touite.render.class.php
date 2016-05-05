@@ -33,10 +33,11 @@
 
 		 public function renderAuteur($auteur){
 		 	echo '<div class="auteur">
-		 			<div class="pseudo">' . $auteur->getPseudo() .'</div>
 		 			<picture>
-						<source src="{{touitos.photo}}">
+						<source src="http://'. $_SERVER['SERVER_NAME']. '/projet-web/files/pictures/Megumin.jpg">
+						<img src="http://'. $_SERVER['SERVER_NAME']. '/projet-web/files/pictures/Megumin.jpg">
 					</picture>
+		 			<div class="pseudo">' . $auteur->getPseudo() .'</div>
 		 		</div>';
 		 }
 	

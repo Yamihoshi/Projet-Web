@@ -34,7 +34,7 @@
 		}
 	}
 
-	function show_profile(Touitos $profile,$bd)
+	function show_profile(Touitos $profile, $bd)
 	{
 		$th = new TouitosHandler($bd);
 
@@ -89,7 +89,7 @@
 	function show_timeline(Touitos $touitos, $bd)
 	{
 		$tr = new TouiteRender($touitos->getId(), $bd);
-		if(isConnected() AND isOwnProfile($_SESSION['user'])){
+		if(isConnected() AND isOwnProfile($touitos->getPseudo())){
 			echo'
 			<div id="touite-box">
 							<form id="touite">

@@ -1,10 +1,9 @@
 body{
 	font-family:"Tahoma";
-	background-color: #B4CAFF;
+	background-color: aliceblue;
 }
 nav
 {
-	border: 1px  solid black;
 	height:70px;
 	width:100%;
 	top:0;
@@ -13,21 +12,32 @@ nav
 	position:fixed;
 	z-index:100;
 	padding:10px;
-	background-color: #D1CAFF;
 }
-
+nav, #timeline, #profile_left_infos{
+	background-color: #fff;
+	box-shadow: 0 1px 2px rgba(0,0,0,.1);
+}
 button:disabled
 {
 	background:#C2D2DE;
 	cursor:default;
 }
-
+.message img{
+	width: 70px;
+	height: auto;
+}
+.auteur img, .auteur .pseudo, .message .date, .auteur{
+	display: inline-block;
+}
+.pseudo, .date{
+	vertical-align: top;
+}
 .followed{
 	/*background-color:#003366;*/
 		background-color:#12BDCD;
 }
 
-#timeline, #profile_left_infos, .modal-header{
+.modal-header{
 	background-color: #D1CAFF;
 }
 #pageDisplay
@@ -47,11 +57,6 @@ button:disabled
 	width: 50%;
 	margin:0 15px;
 }
-#timeline, #profile_left_infos{
-	border-radius: 8px;
-	border:1px solid aliceblue;
-}
-
 
 #timeline textarea{ 
 	resize:none;
