@@ -1,6 +1,6 @@
 body{
 	font-family:"Tahoma";
-	background-color: #7B9EFF;
+	background-color: #B4CAFF;
 }
 nav
 {
@@ -13,7 +13,7 @@ nav
 	position:fixed;
 	z-index:100;
 	padding:10px;
-	background-color: #3E4F7F;
+	background-color: #D1CAFF;
 }
 
 button:disabled
@@ -28,7 +28,7 @@ button:disabled
 }
 
 #timeline, #profile_left_infos, .modal-header{
-	background-color: #5C77BF;
+	background-color: #D1CAFF;
 }
 #pageDisplay
 {

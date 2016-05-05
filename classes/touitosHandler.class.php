@@ -28,8 +28,8 @@ class touitosHandler
   public function get($id)
   {
     $id = (int) $id;
-
-    $q = $this->_db->query('SELECT id, nom,pseudo, mail, PWD, photo, statut FROM Touitos WHERE id = '.$id);
+    $q = $this->_db->query('SELECT id, nom,pseudo, mail, PWD, photo, statut FROM Touitos WHERE id = '. $id);
+    //$q->bindValue(':id', $id, PDO::PARAM_INT);
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
     if(!empty($donnees))
       return new Touitos($donnees);

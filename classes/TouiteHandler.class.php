@@ -1,5 +1,7 @@
 <?php
-class TouiteHandler
+  require_once("classes/Touite.class.php");
+
+class touiteHandler
 {
 
   private $_db; // Instance de PDO
@@ -24,14 +26,25 @@ class TouiteHandler
   }
   public function getMessagewithReponse($id){
       $list = $this->getListMessage($id);
-      for($i = 0, $size = count($list); $i < $size; $i++){
-        $list[$i]->setReponse($this->getReponse($list[$i]->getIdMessage()));
+      foreach($list as $key=>$touite){
+        $touite->setReponse($this->getReponse($touite->getIdMessage()));
       }
+      return $list;
     }
   public function getByAuteur($id)
   {
     $id = (int) $id;
-    $q = $this->_db->prepare('SELECT idAuteur, idMsg, texte, ladate FROM Touites WHERE auteurid = :id ORDER BY ladate ASC');
+    $q = $this->_db->prepare('SELECT idAuteur, idMsg, texte, ladate FROM Touites WHERE idAuteur = :id ORDER BY ladate ASC');
+    $q->bindValue(':id', $id, PDO::PARAM_INT);
+    $q->execute();
+    $donnees = $q->fetch(PDO::FETCH_ASSOC);
+    return new Touite($donnees);
+  }
+
+   public function getByID($id)
+  {
+    $id = (int) $id;
+    $q = $this->_db->prepare('SELECT idAuteur, idMsg, texte, ladate FROM Touites WHERE idMsg = :id');
     $q->bindValue(':id', $id, PDO::PARAM_INT);
     $q->execute();
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
@@ -42,7 +55,7 @@ class TouiteHandler
   {
     $Touites = [];
     $id = (int) $id;
-    $q = $this->_db->prepare('SELECT idAuteur, idMsg, texte, ladate FROM Touites WHERE auteurid = :id ORDER BY ladate ASC');
+    $q = $this->_db->prepare('SELECT idAuteur, idMsg, texte, ladate FROM Touites WHERE idAuteur = :id ORDER BY ladate ASC');
     $q->bindValue(':id', $id, PDO::PARAM_INT);
     $q->execute();
     while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
@@ -55,14 +68,14 @@ class TouiteHandler
   public function getReponse($id_message){
     $id = (int)$id_message;
     $Touites = [];
-    $q = $this->$_db->prepare('SELECT idMsgRep FROM Touites WHERE idMsgSource = :id');
+    $q = $this->_db->prepare('SELECT idMsgRep FROM touitesreponses WHERE idMsgSource = :id');
     $q->bindValue(':id', $id, PDO::PARAM_INT);
     $q->execute();
     while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
     {
-      $Touites[] = new Touite($donnees);
+      $Touites[] = new Touite($this->getByID($donnees['id']));
       $lastElement = count($Touites) -1;
-      $Touites[$lastElement]->setReponse($this->getReponse($Touites[$lastElement].getId()));
+      $Touites[$lastElement]->setReponse($this->getReponse($Touites[$lastElement]->getId()));
     }
     return $Touites;
   }

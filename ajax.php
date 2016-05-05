@@ -46,7 +46,8 @@ require_once('classes/touite.class.php');
 
 	else if(isset($_GET['getTimeline']))
 	{
-		show_timeline($bd);
+		$touitos = getTouitos($bd, $_SESSION['id']);
+		show_timeline($touitos, $bd);
 	}
 
 ?>

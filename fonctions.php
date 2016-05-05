@@ -37,7 +37,6 @@
 	function show_profile(Touitos $profile,$bd)
 	{
 		$th = new TouitosHandler($bd);
-		$tr = new TouiteRender($bd);
 
 		echo '<div id="touitos_profile_page">';
 				echo '<div id="profile_left_infos">';
@@ -82,21 +81,24 @@
 					</div>';
 		}
 		echo '<div id="timeline">';
-			show_timeline($bd);
+			show_timeline($profile, $bd);
 		echo '</div>';
 		echo '</div>';
 	}
 
-	function show_timeline($bd)
+	function show_timeline(Touitos $touitos, $bd)
 	{
-			if(isConnected() AND isOwnProfile($_SESSION['user']))
+		$tr = new TouiteRender($touitos->getId(), $bd);
+		if(isConnected() AND isOwnProfile($_SESSION['user'])){
 			echo'
-				<div id="touite-box">
-								<form id="touite">
-										<textarea name="touite" maxlength="140" required></textarea>
-										<button type="submit">Touiter</button>
-								</form>
-						</div>';
+			<div id="touite-box">
+							<form id="touite">
+									<textarea name="touite" maxlength="140" required></textarea>
+									<button type="submit">Touiter</button>
+							</form>
+			</div>';
+		}
+		$tr->renderMessage();
 	}
 	function getPhoto($user)
 	{
@@ -111,8 +113,11 @@
 				echo getPhoto($user);
 		echo '</div>';
 	}
-
-	function getTouitosVignette($bd,$touitos)
+	function getTouitos($bd, $id){
+		$th = new TouitosHandler($bd);
+		return $th->get($id);
+	}
+	function getTouitosVignette($bd,Touitos $touitos)
 	{
 		echo '<div class="touitosDiv"><a href="profile.php?user='.$touitos->getPseudo().'">';
 			echo '<div class="result_photo">'.getPhoto($touitos).'</div>';
@@ -137,10 +142,9 @@
 		$res=$th->searchByName($str);
 		echo '<div id="searchResult">';
 		foreach($res as $key=>$touitos)
-			{
-
+		{
 				getTouitosVignette($bd,$touitos);
-			}
+		}
 		echo '</div>';
 	}
 
@@ -148,7 +152,6 @@
 	{
 		$th=new TouitosHandler($bd);
 		$test=$th->getByAttr($attrName,$val,$paramType);
-
 		return $test!=null;
 	}
 
@@ -158,7 +161,6 @@
 		$photo=array('photo' => 'N');
 		$data=$data+$photo;
 		$th=new TouitosHandler($bd);
-
 		$touitos=new Touitos($data);
 
 		return $th->add($touitos);
