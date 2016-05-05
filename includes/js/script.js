@@ -97,8 +97,8 @@ $(document).ready(function()
             }
         });
     });
-    $('#touite').on('submit', function(e){
-        e.preventDefault();
+    $('#touite').on('submit', function(event){
+        event.preventDefault();
         $.ajax({
             type:"POST",
             url:"ajax.php",
