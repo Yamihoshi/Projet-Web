@@ -144,6 +144,19 @@ class touitosHandler
       return $followers;
   }
 
+  public function getWhoIRequest(Touitos $current)
+  {
+      $request = [];
+      $q = $this->_db->prepare('SELECT * FROM Touitos JOIN suivre ON suivre.idReceveur=touitos.id WHERE idDemandeur=:id');
+      $q->bindValue(':id', $current->getId(), PDO::PARAM_INT);
+      $q->execute();
+      while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+      {
+        $request[] = $donnees;
+      }
+      return $request;
+  }
+
   public function getFollowRequest(Touitos $current)
   {
       $request = [];
@@ -152,26 +165,7 @@ class touitosHandler
       $q->execute();
       while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
       {
-        $data = [];
-        $data[] = new Touitos($donnees);
-        $data[] = $donnees;
-        $request[] = $data;
-      }
-      return $request;
-  }
-
-  public function getFollowRequestSended(Touitos $current)
-  {
-      $request = [];
-      $q = $this->_db->prepare('SELECT * FROM Touitos JOIN suivre ON suivre.idDemandeur=touitos.id WHERE idReceveur=:id');
-      $q->bindValue(':id', $current->getId(), PDO::PARAM_INT);
-      $q->execute();
-      while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
-      {
-        $data = [];
-        $data["touitos"] = new Touitos($donnees);
-        $data["reponse"] = $donnees;
-        $request[] = $data;
+        $request[] = $donnees;
       }
       return $request;
   }

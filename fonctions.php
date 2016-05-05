@@ -79,14 +79,14 @@
 					</div>';
 		}
 		echo '<div id="timeline">';
-			show_timeline($bd, $profile->getPseudo());
+			show_timeline($bd);
 		echo '</div>';
 		echo '</div>';
 	}
 
-	function show_timeline($bd, $profile)
+	function show_timeline($bd)
 	{
-			if(isConnected() AND isOwnProfile($profile))
+			if(isConnected() AND isOwnProfile($_SESSION['user']))
 			echo'
 				<div id="touite-box">
 								<form id="touite">
@@ -198,20 +198,20 @@
 	{
 		$th=new TouitosHandler($bd);
 		$connectedUser=$th->getByAttr("pseudo",$_SESSION['user'],PDO::PARAM_STR);
-		$requestList=$th->getFollowRequest($connectedUser);
+		$requestList=$th->getWhoIRequest($connectedUser);
 		$list=$th->getWhoIFollow($connectedUser);
 
 		echo '<div id="whoIFollowDiv">';
 			echo '<div>Classer les Demandes ???</div>';
 
-		if(empty($list))
+		if(empty($list) && empty($requestList))
 		{
 			echo '<div> Vous ne suivez personne</div>';
 		}
 
 		foreach($requestList as $key=>$data)
 		{
-			echo '<div>'.$data['reponse'].'</div>';
+			echo '<div>'.$data['pseudo'].' '.$data['demande'].'</div>';
 		}
 
 		foreach($list as $key=>$touitos)
@@ -226,16 +226,22 @@
 	{
 		$th=new TouitosHandler($bd);
 		$connectedUser=$th->getByAttr("pseudo",$_SESSION['user'],PDO::PARAM_STR);
-		$list=$th->getFollowers($connectedUser);
+		$requestList=$th->getFollowRequest($connectedUser);
+		$list=$th->getFollowRequest($connectedUser);
 
 		echo '<div id="followedByDiv">';
 
-		if(empty($list))
+		if(empty($list) && empty($requestList))
 		{
 			echo '<div> Vous n\'êtes suivi par personne</div>';
 		}
 
-		else foreach($list as $key=>$touitos)
+		foreach($requestList as $key=>$data)
+		{
+			echo '<div>'.$data["pseudo"].' '.$data['demande'].'</div>';
+		}
+
+		foreach($list as $key=>$touitos)
 		{
 			echo  getTouitosVignette($bd,$touitos);
 		}
