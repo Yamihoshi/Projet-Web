@@ -18,7 +18,7 @@ nav
 
 button:disabled
 {
-	background:lightgrey;
+	background:#C2D2DE;
 	cursor:default;
 }
 
