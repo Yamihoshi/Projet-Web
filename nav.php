@@ -20,7 +20,7 @@ require('fonctions.php');
 			{
 				$th=new TouitosHandler($bd);
 				$usr=$th->getByAttr("pseudo",$_SESSION['user'],PDO::PARAM_STR);;
-				echo '<li><a href="profile.php?user='.$_SESSION['user'].'">'.getPhoto($usr).'</a></li>';
+				echo '<li><a href="profile.php?user='.$_SESSION['user'].'">'.getPhoto($usr,"profile_picture_nav").'</a></li>';
 			}
 
 			echo '<li id="connectLink">';

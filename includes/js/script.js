@@ -17,6 +17,17 @@ function updateInfos()
     $("#profile_statut").html($("#editStatut").val());
 }
 
+function loadNewProfilePic(input)
+{
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#profile_picture_IMG').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+}
+
 $(document).ready(function()
 {
 	//Appui de la touche Entrer -> activer recherche
@@ -109,12 +120,17 @@ $(document).ready(function()
             dataType:'json'
         });
     });
+
     $("#editDiv").on('click',"#edit_profile",function()
     {
 
         $("#profile_name").html('<input id="editName" type="text" name="editName" previous="'+$("#profile_name").text()+'" value="'+$("#profile_name").text()+'">');
         $("#profile_statut").html('<textarea id="editStatut" previous="'+$("#profile_statut").text()+'" >'+$("#profile_statut").text()+'</textarea>');
 
+        var fileUploadDiv='<label for="profile_pic_upload">'+$("#profile_photo").html();
+        fileUploadDiv+='</label>';
+        fileUploadDiv+='<input  type="file" onchange="loadNewProfilePic(this)" style="display:none;" name="profile_pic_upload" id="profile_pic_upload" accept="image/x-png, image/gif, image/jpeg">';
+        $('#profile_photo').html(fileUploadDiv);
 
         var balise ='<button id="cancelEdit" type="button"> Annuler</button>';
         balise+='<button type="button" id="saveEdit">Enregistrer les modifications</button>';
@@ -137,6 +153,18 @@ $(document).ready(function()
         var form = new Object();
         form['nom']=$("#profile_name").text();
         form['statut']=$("#profile_statut").text();
+        form['file']=0;
+        console.log(typeof(document.getElementById("profile_pic_upload").files[0]));
+        if(typeof(document.getElementById("profile_pic_upload").files[0])!="undefined")
+        {
+            form['file']=1;
+        }
+
+        var data = new FormData();
+        $.each(files, function(key, value)
+        {
+            data.append(key, value);
+        });
 
         $.post("ajax.php",{editProfile:form,touitos:$("#touitos_pseudo").val()},function(rep){
                 $("body").append(rep);

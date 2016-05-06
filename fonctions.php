@@ -53,7 +53,7 @@
 			}	
 		}
 
-		echo '<div id="profile_photo">'.getPhoto($profile).'</div>';
+		echo '<div id="profile_photo">'.getPhoto($profile,"profile_picture_IMG").'</div>';
 		echo '<div id="profile_name">'.$profile->getNom().'</div>';
 		echo '<div id="profile_pseudo">@'.$profile->getPseudo().'</div>';
 		echo '<div id="profile_statut">'.$profile->getStatut().'</div>';
@@ -100,27 +100,23 @@
 		}
 		$tr->renderMessage();
 	}
-	function getPhoto($user)
+	function getPhoto($user,$id)
 	{
 		if(isConnected() AND $user->getPhoto()==1)
-			return '<img src="files/pictures/'.$user->getPseudo().'.jpg">';
+			return '<img id='.$id.' src="files/pictures/'.$user->getPseudo().'.jpg">';
 		else
-			return '<img src="includes/img/no_pic.png">';
+			return '<img id='.$id.' src="includes/img/no_pic.png">';
 	}
-	function show_Photos($user)
-	{
-		echo '<div id="details_photo">';
-				echo getPhoto($user);
-		echo '</div>';
-	}
+
 	function getTouitos($bd, $id){
 		$th = new TouitosHandler($bd);
 		return $th->get($id);
 	}
+
 	function getTouitosVignette($bd,Touitos $touitos)
 	{
 		echo '<div class="touitosDiv"><a href="profile.php?user='.$touitos->getPseudo().'">';
-			echo '<div class="result_photo">'.getPhoto($touitos).'</div>';
+			echo '<div class="result_photo">'.getPhoto($touitos,"search_result_profile_pic").'</div>';
 			echo '<div class="result_details">';
 				echo '<div class="result_name">'.$touitos->getNom().'</div>';
 				echo '<div class="result_pseudo">@'.$touitos->getPseudo().'</div>';
@@ -171,6 +167,8 @@
 		$user=$th->getByAttr("pseudo",$touitos,PDO::PARAM_STR);
 		$user->_setNom($form['nom']);
 		$user->_setStatut($form['statut']);
+		if($form['file']==1)
+			$user->_setPhoto($form['file']);
 		$th->update($user);
 	}
 
