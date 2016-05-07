@@ -13,7 +13,8 @@ class touiteHandler
   public function add(Touite $Touite)
   {
     if(strlen($Touite->gettexte()) <= 140){
-      $q = $this->_db->prepare('INSERT INTO Touites VALUES(NULL, NOW(), :texte, :auteur)');
+      $date = date("Y-m-d H:i:s");
+      $q = $this->_db->prepare('INSERT INTO Touites VALUES(NULL,"'. $date. '", :texte, :auteur)');
       $q->bindValue(':texte', $Touite->getTexte(), PDO::PARAM_STR);
       $q->bindValue(':auteur', $Touite->getIdAuteur(), PDO::PARAM_INT);
       $q->execute();
@@ -34,7 +35,7 @@ class touiteHandler
   public function getByAuteur($id)
   {
     $id = (int) $id;
-    $q = $this->_db->prepare('SELECT idAuteur, idMsg, texte, ladate FROM Touites WHERE idAuteur = :id ORDER BY ladate ASC');
+    $q = $this->_db->prepare('SELECT idAuteur, idMsg, texte, ladate FROM Touites WHERE idAuteur = :id ORDER BY ladate DESC');
     $q->bindValue(':id', $id, PDO::PARAM_INT);
     $q->execute();
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
@@ -55,7 +56,7 @@ class touiteHandler
   {
     $Touites = [];
     $id = (int) $id;
-    $q = $this->_db->prepare('SELECT idAuteur, idMsg, texte, ladate FROM Touites WHERE idAuteur = :id ORDER BY ladate ASC');
+    $q = $this->_db->prepare('SELECT idAuteur, idMsg, texte, ladate FROM Touites WHERE idAuteur = :id ORDER BY ladate DESC');
     $q->bindValue(':id', $id, PDO::PARAM_INT);
     $q->execute();
     while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
