@@ -20,10 +20,15 @@
 		 	if(!empty($message)){
 				foreach($message as $key=>$touite){
 				 	echo '<div class = "message">';
-				 		$this->renderAuteur($auteur);
+				 		$this->renderPic($auteur);
+                        echo '<div class="containeur">';
+                        echo '<div class= "info">';
+                        echo '<div class="pseudo">' . $auteur->getPseudo() .'</div>';
 				 		echo '<div class="date">'. $touite->getLaDate() . '</div>';
+                        echo '</div>'; //end info
 				 		$this->echo_message($touite);
 				 	echo '</div>';
+                    echo '</div>';
 		 	}
 		 }
 		 }
@@ -31,14 +36,13 @@
 		 	echo '<div class="contenu_message">' . $message->getTexte() .'</div>';
 		 }
 
-		 public function renderAuteur($auteur){
-		 	echo '<div class="auteur">
+		 public function renderPic($auteur){
+		 	echo '
 		 			<picture>
 						<source src="http://'. $_SERVER['SERVER_NAME']. '/projet-web/files/pictures/Megumin.jpg">
 						<img src="http://'. $_SERVER['SERVER_NAME']. '/projet-web/files/pictures/Megumin.jpg">
 					</picture>
-		 			<div class="pseudo">' . $auteur->getPseudo() .'</div>
-		 		</div>';
+            ';
 		 }
 	
     /**

@@ -184,7 +184,6 @@
 		$demandeur=$th->getByAttr("pseudo",$user,PDO::PARAM_STR);
 		$receveur=$th->getByAttr("id",$suivi,PDO::PARAM_INT);
 
-		print_r($demandeur);
 		$th->follow($demandeur,$receveur);
 	}
 

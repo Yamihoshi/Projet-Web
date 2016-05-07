@@ -21,7 +21,6 @@
           $this->$method($value);
         }
       }
-      print_r($donnees);
     }
     
     /**

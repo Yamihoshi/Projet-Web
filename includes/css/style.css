@@ -1,5 +1,5 @@
 body{
-	font-family:"Tahoma";
+	font-family:"Verdana";
 	background-color: aliceblue;
 }
 nav
@@ -13,9 +13,30 @@ nav
 	z-index:100;
 	padding:10px;
 }
-nav, #timeline, #profile_left_infos{
+nav, .message, #profile_left_infos, #timeline #touite-box, #ongletDiv{
 	background-color: #fff;
 	box-shadow: 0 1px 2px rgba(0,0,0,.1);
+}
+.message{
+	margin-top: 20px;
+	word-break: break-all;
+	display: flex;
+    flex-flow: row wrap;
+}
+.container, .info{
+	display: inline-flex;
+}
+.container{
+	flex-wrap: column wrap;
+}
+
+.contenu_message, .pseudo, .date{
+	padding-left: 10px;
+}
+
+.message > div:last-child {
+    flex: 1;
+    order:3;
 }
 button:disabled
 {
@@ -26,12 +47,10 @@ button:disabled
 	width: 70px;
 	height: auto;
 }
-.auteur img, .auteur .pseudo, .message .date, .auteur{
-	display: inline-block;
-}
-.pseudo, .date{
-	vertical-align: top;
-}
+.message .contenu_message
+   {
+      flex: 0 1 auto;
+ }
 .followed{
 	/*background-color:#003366;*/
 		background-color:#12BDCD;
@@ -50,14 +69,20 @@ button:disabled
 	padding-top:30px;
 }
 #ongletSelect{
-	margin:auto;
+	float: right;
 }
-#timeline{
+#timeline, #ongletDiv{
 	float: left;
 	width: 50%;
 	margin:0 15px;
 }
-
+#ongletDiv td{
+	cursor: pointer;
+	border: 2px solid white;
+}
+#ongletDiv td:hover{
+	border-bottom:2px solid #dc5656;
+}
 #timeline textarea{ 
 	resize:none;
 	width:50%;
@@ -68,6 +93,9 @@ button:disabled
 	text-align: left;
 	display: block;
 	padding: 9px;
+	background-color: #f8f8f8;
+	border: 1px solid black;
+	border-radius: 12px;
 }
 
 #timeline form{
