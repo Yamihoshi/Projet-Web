@@ -17,6 +17,14 @@ nav, .message, #profile_left_infos, #timeline #touite-box, #ongletDiv{
 	background-color: #fff;
 	box-shadow: 0 1px 2px rgba(0,0,0,.1);
 }
+nav ul{
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-around;
+	align-items:center;
+}
+nav li{
+}
 .message{
 	margin-top: 20px;
 	word-break: break-all;
@@ -30,8 +38,9 @@ nav, .message, #profile_left_infos, #timeline #touite-box, #ongletDiv{
 	flex-wrap: column wrap;
 }
 
+
 .contenu_message, .pseudo, .date{
-	padding-left: 10px;
+	padding: 0 10px;
 }
 
 .message > div:last-child {
@@ -94,8 +103,8 @@ button:disabled
 	display: block;
 	padding: 9px;
 	background-color: #f8f8f8;
-	border: 1px solid black;
 	border-radius: 12px;
+	box-shadow: 0 1px 2px rgba(0,0,0,.1);
 }
 
 #timeline form{
@@ -390,5 +399,50 @@ input[type="search"]
 
 .touitosDiv button{
 	margin-top:0;
+}
+
+@font-face {
+    font-family: 'icomoon';
+    src:    url('../fonts/icomoon.eot?9laz2p');
+    src:    url('../fonts/icomoon.eot?9laz2p#iefix') format('embedded-opentype'),
+        url('../fonts/icomoon.ttf?9laz2p') format('truetype'),
+        url('../fonts/icomoon.woff?9laz2p') format('woff'),
+        url('../fonts/icomoon.svg?9laz2p#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-home:before {
+    content: "\e900";
+}
+.icon-undo2:before {
+    content: "\e901";
+}
+.icon-bubbles2:before {
+    content: "\e902";
+}
+.icon-search:before {
+    content: "\e903";
+}
+.icon-wrench:before {
+    content: "\e904";
+}
+.icon-star-full:before {
+    content: "\e905";
 }
 

@@ -93,7 +93,7 @@
 			echo'
 			<div id="touite-box">
 							<form id="touite">
-									<textarea name="touite" maxlength="140" required></textarea>
+									<textarea placeholder="Entrez votre message..." name="touite" maxlength="140" required></textarea>
 									<button type="submit">Touiter</button>
 							</form>
 			</div>';

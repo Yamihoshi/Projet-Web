@@ -19,16 +19,17 @@
 		 	$message = $db_touite->getMessagewithReponse($this->id);
 		 	if(!empty($message)){
 				foreach($message as $key=>$touite){
-				 	echo '<div class = "message">';
+				 	echo '<article class = "message">';
 				 		$this->renderPic($auteur);
                         echo '<div class="containeur">';
-                        echo '<div class= "info">';
-                        echo '<div class="pseudo">' . $auteur->getPseudo() .'</div>';
-				 		echo '<div class="date">'. $touite->getLaDate() . '</div>';
-                        echo '</div>'; //end info
+                            echo '<header class= "info">';
+                                echo '<div class="pseudo">' . $auteur->getPseudo() .'</div>';
+        				 		echo '<div class="date">'. $touite->getLaDate() . '</div>';
+                        echo '</header>';
 				 		$this->echo_message($touite);
-				 	echo '</div>';
-                    echo '</div>';
+                         $this->renderFooter($touite);
+				 	  echo '</div>';
+                    echo '</article>';
 		 	}
 		 }
 		 }
@@ -44,6 +45,11 @@
 					</picture>
             ';
 		 }
+         public function renderFooter($message){
+            echo '<footer>';
+                echo '<div class="btn-retouite"></div>';
+            echo '</footer';
+         }
 	
     /**
      * Gets the value of id.

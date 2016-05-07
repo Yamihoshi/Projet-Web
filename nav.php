@@ -13,8 +13,7 @@ require('fonctions.php');
 
 	echo '<nav>
 		<ul>
-		<li><a href="index.php"><img src="includes/img/home.png"></a></li>
-			<li><input type="search" placeholder="Chercher un Touitos" id="searchBar" name="search"></li>';
+		<li><a href="index.php"><span class="icon-home"></span> Accueil</a></li>';
 
 			if(isset($_SESSION['user']))
 			{
@@ -22,14 +21,17 @@ require('fonctions.php');
 				$usr=$th->getByAttr("pseudo",$_SESSION['user'],PDO::PARAM_STR);;
 				echo '<li><a href="profile.php?user='.$_SESSION['user'].'">'.getPhoto($usr,"profile_picture_nav").'</a></li>';
 			}
-
+			if(isset($_SESSION['user']))
+			{
+				echo '<li><button id="touiter" type="button">Publier un touite</button></li>';
+			}
 			echo '<li id="connectLink">';
 
 
 				if(!isset($_SESSION['user']))
 				{
-					echo '<button id="inscription" type="button">S\'inscrire</button>
-					<button id="connexion" type="button">Se connecter</button>';
+					echo '<li><button id="inscription" type="button">S\'inscrire</button>
+					<button id="connexion" type="button">Se connecter</button></li>';
 				}
 				else
 				{
@@ -38,12 +40,9 @@ require('fonctions.php');
 						</form>';
 				}
 				echo '</li>';
-				if(isset($_SESSION['user']))
-				{
-					echo '<li><button id="touiter" type="button">Publier un touite</button></li>';
-				}
 
 		echo'
+					<li><input type="search" placeholder="Chercher un Touitos" id="searchBar" name="search"></li>
 		</ul>
 	</nav>';
 ?>
