@@ -38,7 +38,7 @@ button:disabled
 }
 
 .modal-header{
-	background-color: #D1CAFF;
+	background-color: #dc5656;
 }
 #pageDisplay
 {
@@ -174,13 +174,18 @@ nav img
 }
 
 button, input[type="submit"]{
-	background-color: #ff5252;
+	background-color: #dc5656;
 	cursor: pointer;
 	color: white;
 }
-
+button{
+	moz-transition: all 200ms linear;
+}
+button:hover, input[type="submit"]:hover{
+	-webkit-filter: grayscale(25%); /* Chrome, Safari, Opera */
+    filter: grayscale(25%);
+}
 input, button, textarea{
-	border-radius: 11px;
 	font-weight: 900;
 	border:1px solid black;
 	height: 35px;
