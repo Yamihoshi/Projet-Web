@@ -16,10 +16,10 @@
 		 	$db_touite = new TouiteHandler($this->getBd());
 		 	$db_touitos = new TouitosHandler($this->getBd());
 		 	$auteur = $db_touitos->get($this->id);
-		 	$message = $db_touite->getMessagewithReponse($this->id);
+		 	$message = $db_touite->getListMessage($this->id);
 		 	if(!empty($message)){
 				foreach($message as $key=>$touite){
-				 	echo '<article class = "message">';
+				 	echo '<article class = "message" id="'. $touite->getIdMessage() .'">';
 				 		$this->renderPic($auteur);
                         echo '<div class="containeur">';
                             echo '<header class= "info">';
@@ -47,7 +47,13 @@
 		 }
          public function renderFooter($message){
             echo '<footer>';
-                echo '<div class="btn-retouite"></div>';
+                echo '<span class="icon-undo2" title="Voir les réponses"></span>';
+                echo '<span class="icon--star-full"></span>';
+                if($_SESSION['id'] == $message->getIdAuteur())
+                    echo '<span class="icon-bin2" title="Supprimer le message"></span>';
+                if($_SESSION['id'] != $message->getIdAuteur()){
+                    echo '<span class="icon-star-empty" title="Retouite"></span>';
+                }
             echo '</footer';
          }
 	

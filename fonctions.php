@@ -251,5 +251,14 @@
 		echo '</div>';
 	}
 
+	function delete_message($id, $idAuteur, $bd){
+		$th=new TouiteHandler($bd);
+		$idBDD = $th->getByID($id)->getIdAuteur();
+		if($idBDD = $id){
+			$th->delete($id);
+		}
+
+	}
+
 
 ?>

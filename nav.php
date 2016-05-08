@@ -23,14 +23,14 @@ require('fonctions.php');
 			}
 			if(isset($_SESSION['user']))
 			{
-				echo '<li><button id="touiter" type="button">Publier un touite</button></li>';
+				echo '<li><button id="touiter" type="button"><span class="icon-bubbles2"></span> Publier un touite</button></li>';
 			}
 			echo '<li id="connectLink">';
 
 
 				if(!isset($_SESSION['user']))
 				{
-					echo '<li><button id="inscription" type="button">S\'inscrire</button>
+					echo '<li><button id="inscription" type="button"><span class="icon-user-plus"></span> S\'inscrire</button>
 					<button id="connexion" type="button">Se connecter</button></li>';
 				}
 				else

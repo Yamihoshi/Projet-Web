@@ -21,9 +21,12 @@ class touiteHandler
     }
   }
 
-  public function delete(Touite $Touite)
+  public function delete($id)
   {
-    $this->_db->exec('DELETE FROM Touite WHERE id = '.$Touite->getIdMessage());
+    $q = $this->_db->prepare('DELETE FROM Touites WHERE idMsg = :id');
+    $q->bindValue(':id', $id, PDO::PARAM_INT);
+    $q->execute();
+
   }
   public function getMessagewithReponse($id){
       $list = $this->getListMessage($id);
@@ -35,7 +38,7 @@ class touiteHandler
   public function getByAuteur($id)
   {
     $id = (int) $id;
-    $q = $this->_db->prepare('SELECT idAuteur, idMsg, texte, ladate FROM Touites WHERE idAuteur = :id ORDER BY ladate DESC');
+    $q = $this->_db->prepare('SELECT idAuteur, idMsg as idMessage, texte, ladate FROM Touites WHERE idAuteur = :id ORDER BY ladate DESC');
     $q->bindValue(':id', $id, PDO::PARAM_INT);
     $q->execute();
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
@@ -45,7 +48,7 @@ class touiteHandler
    public function getByID($id)
   {
     $id = (int) $id;
-    $q = $this->_db->prepare('SELECT idAuteur, idMsg, texte, ladate FROM Touites WHERE idMsg = :id');
+    $q = $this->_db->prepare('SELECT idAuteur, idMsg as IdMessage, texte, ladate FROM Touites WHERE idMsg = :id');
     $q->bindValue(':id', $id, PDO::PARAM_INT);
     $q->execute();
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
@@ -56,7 +59,7 @@ class touiteHandler
   {
     $Touites = [];
     $id = (int) $id;
-    $q = $this->_db->prepare('SELECT idAuteur, idMsg, texte, ladate FROM Touites WHERE idAuteur = :id ORDER BY ladate DESC');
+    $q = $this->_db->prepare('SELECT idAuteur, idMsg as idMessage, texte, ladate FROM Touites WHERE idAuteur = :id ORDER BY ladate DESC');
     $q->bindValue(':id', $id, PDO::PARAM_INT);
     $q->execute();
     while ($donnees = $q->fetch(PDO::FETCH_ASSOC))

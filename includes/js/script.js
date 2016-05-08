@@ -79,6 +79,22 @@ $(document).ready(function()
             }
         });
     });
+
+    //suppression message
+    $('.icon-bin2').on('click', function(event){
+        var message =$(this).parents('article');
+        $.ajax({
+            type:"GET",
+            url:"ajax.php",
+            data:
+                {
+                    id:$(message).attr('id')
+                },
+            dataType:'json'
+         });
+        $(message).remove();
+    });
+
     $('.modal').on('submit' , '#inscriptionForm', function(event){
         event.preventDefault();
         $.ajax({

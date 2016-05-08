@@ -2,10 +2,16 @@
 require_once("config/connexion.php");
 require_once('fonctions.php');
 require_once('classes/touite.class.php');
-
+	print_r($_SESSION);
+	print_r($_GET);
 	if(isset($_GET['search']))
 	{
 		searchByName($_GET['search'],$bd);
+	}
+
+	else if(!empty($_SESSION['id']) AND !empty($_GET['id'])){
+		echo "hey";
+		delete_message($_GET['id'], $_SESSION['id'], $bd);
 	}
 
 	else if(isset($_POST['editProfile']))
