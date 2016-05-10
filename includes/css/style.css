@@ -1,6 +1,7 @@
 body{
 	font-family:"Verdana";
 	background-color: aliceblue;
+	text-align: start;
 }
 nav
 {
@@ -39,6 +40,15 @@ nav li input, nav li button{
 	flex-wrap: column wrap;
 }
 
+input:not([type='submit'])  {
+  padding: 10px;
+  border: none;
+  border-bottom: solid 2px #c9c9c9;
+  transition: border 0.3s;
+}
+input:not([type='submit']):focus {
+  border-bottom: solid 2px #dc5656;
+}
 
 .contenu_message, .pseudo, .date{
 	padding: 0 10px;
@@ -93,7 +103,7 @@ button:disabled
 #ongletDiv td:hover{
 	border-bottom:2px solid #dc5656;
 }
-#timeline textarea{ 
+#timeline textarea, #profile_statut textarea, .modal textarea{ 
 	resize:none;
 	width:50%;
 	margin: auto;
@@ -107,7 +117,13 @@ button:disabled
 	border-radius: 12px;
 	box-shadow: 0 1px 2px rgba(0,0,0,.1);
 }
-
+.modal textarea{
+	width: 90%;
+	height: auto;
+}
+#touiterModalForm{
+	margin:30px;
+}
 #timeline form{
 	text-align: center;
 }
@@ -399,6 +415,7 @@ input[type="search"]
 .touitosDiv button{
 	margin-top:0;
 }
+
 
 @font-face {
     font-family: 'icomoon';

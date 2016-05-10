@@ -76,6 +76,7 @@
 								<td>Touites</td>
 								<td>Suivi</td>
 								<td>Suiveurs</td>
+								<td><span class="icon-wrench"></span></td>
 							</tr>
 						</table>
 					</div>';
@@ -94,7 +95,7 @@
 			<div id="touite-box">
 							<form id="touite">
 									<textarea placeholder="Entrez votre message..." name="touite" maxlength="140" required></textarea>
-									<button type="submit">Touiter</button>
+									<input type="submit"></input>
 							</form>
 			</div>';
 		}
@@ -260,5 +261,13 @@
 
 	}
 
-
+	function voir_message($id, $bd){
+		$th=new TouiteRender($id, $bd);
+		$th->renderReponse($id, $bd);
+	}
+	function envoyer_reponse($id, Touite $message, $bd){
+		$th=new TouiteHandler($bd);
+		print_r($message);
+		$th->addReponse($message, $id);
+	}
 ?>

@@ -19,20 +19,37 @@
 		 	$message = $db_touite->getListMessage($this->id);
 		 	if(!empty($message)){
 				foreach($message as $key=>$touite){
-				 	echo '<article class = "message" id="'. $touite->getIdMessage() .'">';
-				 		$this->renderPic($auteur);
+				 	$this->render($touite, $auteur);
+		 	    }
+		      }
+		 }
+         public function renderReponse(){
+            $db_touite = new TouiteHandler($this->getBd());
+            $db_touitos = new TouitosHandler($this->getBd());
+            //$auteur = $db_touitos->get($this->id);
+            $message = $db_touite->getReponse($this->id);
+            if(!empty($message)){
+                foreach($message as $key=>$touite){
+                    $auteur = $db_touitos->get($touite->getIdAuteur());
+                    $this->render($touite, $auteur);
+                }
+              }
+         }
+
+         public function render($touite, $auteur){
+            echo '<article class = "message" id="'. $touite->getIdMessage() .'">';
+                        $this->renderPic($auteur);
                         echo '<div class="containeur">';
                             echo '<header class= "info">';
                                 echo '<div class="pseudo">' . $auteur->getPseudo() .'</div>';
-        				 		echo '<div class="date">'. $touite->getLaDate() . '</div>';
+                                echo '<div class="date">'. $touite->getLaDate() . '</div>';
                         echo '</header>';
-				 		$this->echo_message($touite);
+                        $this->echo_message($touite);
                          $this->renderFooter($touite);
-				 	  echo '</div>';
-                    echo '</article>';
-		 	}
-		 }
-		 }
+                      echo '</div>';
+            echo '</article>';
+         }
+
 		 public function echo_message(Touite $message){
 		 	echo '<div class="contenu_message">' . $message->getTexte() .'</div>';
 		 }
@@ -48,11 +65,14 @@
          public function renderFooter($message){
             echo '<footer>';
                 echo '<span class="icon-undo2" title="Voir les réponses"></span>';
-                echo '<span class="icon--star-full"></span>';
-                if($_SESSION['id'] == $message->getIdAuteur())
-                    echo '<span class="icon-bin2" title="Supprimer le message"></span>';
-                if($_SESSION['id'] != $message->getIdAuteur()){
-                    echo '<span class="icon-star-empty" title="Retouite"></span>';
+                //echo '<span class="icon-star-full"></span>';
+                if(!empty($_SESSION['id'])){
+                    if($_SESSION['id'] == $message->getIdAuteur())
+                        echo '<span class="icon-bin2" title="Supprimer le message"></span>';
+                    else{
+                        echo '<span class="icon-star-empty" title="Retouite"></span>';
+                        echo '<span class="icon-bubble" title="Répondre"></span>';
+                    }
                 }
             echo '</footer';
          }

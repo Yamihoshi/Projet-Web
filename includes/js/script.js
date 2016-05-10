@@ -53,6 +53,9 @@ $(document).ready(function()
     $('#inscription').click(function(){
         modalIni('Inscription', '<form id="inscriptionForm"><input type="text" id="login" name="login" placeholder="Login" required><input type="password" id="password" name="password" placeholder="Mot de passe" required><input type="mail" name="mail" id="mail" placeholder="Adresse mail" required><button type="submit">S\'inscrire</button></form>');
     });
+    $('#touiter').click(function(){
+        modalIni('Touiter', '<form id="touiterModalForm"><textarea placeholder="Entrez votre message..." name="touite" maxlength="140" required=""></textarea><input type="submit"></form>');
+    });
     $('.close').click(function(){
         $('#myModal').toggle();
     });
@@ -70,7 +73,6 @@ $(document).ready(function()
             dataType:'json',
             success: function(data){
                 if(data.reussit){
-                    console.log("TEST");
                     location.reload(true); 
                 }
                 else{
@@ -80,7 +82,58 @@ $(document).ready(function()
         });
     });
 
+    $('.modal').on('submit' , '#touiterModalForm', function(event){
+        event.preventDefault();
+        $.ajax({
+            type:"POST",
+            url:"ajax.php",
+            data:
+                {
+                    message:$('#touiterModalForm textarea').val()
+                },
+            dataType:'json',
+            success:function(response, status){
+
+            }
+        });
+
+    });
+
     //suppression message
+    $('.icon-undo2').on('click', function(event){
+        var message =$(this).parents('article');
+        $.ajax({
+            type:"GET",
+            url:"ajax.php",
+            data:
+                {
+                    id:$(message).attr('id'),
+                    voirMessage:true
+                },
+            dataType:'json'
+         });
+    });
+    //voir réponse
+    $('.icon-bubble').on('click', function(event){
+        var id =$(this).parents('article').attr('id');
+        modalIni('Répondre', '<form id="RetouiterModalForm"><textarea placeholder="Entrez votre message..." name="touite" maxlength="140" required=""></textarea><input type="submit"></form>');
+        $('#touiterModalForm').submit(function(event){
+            event.preventDefault();
+            $.ajax({
+                type:"POST",
+                url:"ajax.php",
+                data:
+                    {
+                        id:id,
+                        message:$('#RetouiterModalForm > textarea').val(),
+                        discution:true
+                    },
+                dataType:'json'
+             });
+         });
+    });
+
+     //Voir réponse message
     $('.icon-bin2').on('click', function(event){
         var message =$(this).parents('article');
         $.ajax({
@@ -88,7 +141,8 @@ $(document).ready(function()
             url:"ajax.php",
             data:
                 {
-                    id:$(message).attr('id')
+                    id:$(message).attr('id'),
+                    remove:true
                 },
             dataType:'json'
          });
@@ -133,8 +187,12 @@ $(document).ready(function()
                 {
                     message:$('#touite-box textarea').val()
                 },
-            dataType:'json'
+            dataType:'json',
+            success:function(response, status){
+                $('#ongletSelect td:nth-child(1)').click();
+            }
         });
+        $('#ongletSelect td:nth-child(1)').click();
     });
 
     $("#editDiv").on('click',"#edit_profile",function()
@@ -209,6 +267,7 @@ $(document).ready(function()
         {
             $.get("ajax.php",{getTimeline:true},function(rep){
                 $("#timeline").html(rep);
+                console.log("hollez");
             });
         }
         else if(index==1)

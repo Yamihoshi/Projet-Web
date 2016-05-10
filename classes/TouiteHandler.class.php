@@ -18,6 +18,9 @@ class touiteHandler
       $q->bindValue(':texte', $Touite->getTexte(), PDO::PARAM_STR);
       $q->bindValue(':auteur', $Touite->getIdAuteur(), PDO::PARAM_INT);
       $q->execute();
+      $id = $this->_db->lastInsertId();
+      $this->_db->query('INSERT INTO TouitesPublics VALUES('.$id.')');
+      return $id;
     }
   }
 
@@ -72,14 +75,12 @@ class touiteHandler
   public function getReponse($id_message){
     $id = (int)$id_message;
     $Touites = [];
-    $q = $this->_db->prepare('SELECT idMsgRep FROM touitesreponses WHERE idMsgSource = :id');
+    $q = $this->_db->prepare('SELECT idMsgRep as idMessage FROM touitesreponses WHERE idMsgSource = :id');
     $q->bindValue(':id', $id, PDO::PARAM_INT);
     $q->execute();
     while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
     {
-      $Touites[] = new Touite($this->getByID($donnees['id']));
-      $lastElement = count($Touites) -1;
-      $Touites[$lastElement]->setReponse($this->getReponse($Touites[$lastElement]->getId()));
+      $Touites[] = $this->getByID($donnees['idMessage']);
     }
     return $Touites;
   }
@@ -90,6 +91,16 @@ class touiteHandler
     $q->bindValue(':ladate', $Touite->getLaDate);
     $q->bindValue(':texte', $Touite->getTexte(), PDO::PARAM_STR);
     $q->bindValue(':id', $Touite->getId(), PDO::PARAM_INT);
+    $q->execute();
+  }
+  public function addReponse(Touite $touite, $idSource){
+    $idMessage = $this->add($touite);
+    print_r("hihi " . $idMessage. "heyou");
+    print_r("hoho" . $idSource);
+    $q = $this->_db->prepare('INSERT INTO TouitesReponses VALUES(:idR, :idS)');
+    $q->bindValue(':idR', $idMessage, PDO::PARAM_INT);
+    $q->bindValue(':idS', $idSource, PDO::PARAM_INT);
+    print("\n" . $idMessage);
     $q->execute();
   }
 
