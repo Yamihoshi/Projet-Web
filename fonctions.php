@@ -103,7 +103,7 @@
 	}
 	function getPhoto($user,$id)
 	{
-		if(isConnected() AND $user->getPhoto()==1)
+		if($user->getPhoto()==1)
 			return '<img id='.$id.' src="files/pictures/'.$user->getPseudo().'.jpg">';
 		else
 			return '<img id='.$id.' src="includes/img/no_pic.png">';
@@ -214,7 +214,18 @@
 
 		foreach($requestList as $key=>$data)
 		{
-			echo '<div>'.$data['pseudo'].' '.$data['demande'].'</div>';
+			echo '<div>'.$data['pseudo'];
+
+			if($data['demande']=='E')
+			{
+				echo '<span>En Attente</span>';
+			}
+			else
+			{
+				echo '<span>Refusée</span>';
+			}
+
+			echo '</div>';
 		}
 
 		foreach($list as $key=>$touitos)
@@ -230,7 +241,7 @@
 		$th=new TouitosHandler($bd);
 		$connectedUser=$th->getByAttr("pseudo",$_SESSION['user'],PDO::PARAM_STR);
 		$requestList=$th->getFollowRequest($connectedUser);
-		$list=$th->getFollowRequest($connectedUser);
+		$list=$th->getFollowers($connectedUser);
 
 		echo '<div id="followedByDiv">';
 
@@ -241,15 +252,37 @@
 
 		foreach($requestList as $key=>$data)
 		{
-			echo '<div>'.$data["pseudo"].' '.$data['demande'].'</div>';
+			echo 'Une demande vous a été envoyé par :';
+			echo '<div>'.$data["pseudo"];
+
+			echo '<span>';
+
+			if($data['demande']!='R')
+				echo'<button>Refuser</button>';
+
+			if($data['demande']!='V')
+				echo '<button>Accepter</button>';
+
+			echo '</span>';
+
+
+			echo '</div>';
 		}
 
 		foreach($list as $key=>$touitos)
 		{
-			echo  getTouitosVignette($bd,$touitos);
+			$t=new Touitos($touitos);
+			echo  getTouitosVignette($bd,$t);
 		}
 
 		echo '</div>';
+	}
+
+	function anwserRequest($bd,$user,$accept)
+	{
+		$th=new TouitosHandler($bd);
+		$connectedUser=$th->getByAttr("pseudo",$_SESSION['user'],PDO::PARAM_STR);
+		$th->answerRequest($connectedUser,$user,$accept);
 	}
 
 	function delete_message($id, $idAuteur, $bd){

@@ -147,7 +147,7 @@ class touitosHandler
   public function getWhoIRequest(Touitos $current)
   {
       $request = [];
-      $q = $this->_db->prepare('SELECT * FROM Touitos JOIN suivre ON suivre.idReceveur=touitos.id WHERE idDemandeur=:id');
+      $q = $this->_db->prepare('SELECT * FROM Touitos JOIN suivre ON suivre.idReceveur=touitos.id WHERE idDemandeur=:id AND demande!="V"');
       $q->bindValue(':id', $current->getId(), PDO::PARAM_INT);
       $q->execute();
       while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
@@ -160,7 +160,7 @@ class touitosHandler
   public function getFollowRequest(Touitos $current)
   {
       $request = [];
-      $q = $this->_db->prepare('SELECT * FROM Touitos JOIN suivre ON suivre.idDemandeur=touitos.id WHERE idReceveur=:id');
+      $q = $this->_db->prepare('SELECT * FROM Touitos JOIN suivre ON suivre.idDemandeur=touitos.id WHERE idReceveur=:id AND demande!="V"');
       $q->bindValue(':id', $current->getId(), PDO::PARAM_INT);
       $q->execute();
       while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
@@ -183,6 +183,14 @@ class touitosHandler
 
     return $tab['demande'];
 
+  }
+
+  function answerRequest($current,$suiveur,$rep)
+  {
+    $q = $this->_db->prepare('UPDATE suivre SET demande=:rep WHERE idDemandeur=:demandeur AND idReceveur=:receveur');
+    $q->bindValue(':rep',$rep, PDO::PARAM_STR);
+    $q->bindValue(':demandeur', $suiveur->getId(), PDO::PARAM_INT);
+    $q->bindValue(':receveur', $current->getId(), PDO::PARAM_INT);
   }
 
   public function setDb(PDO $db)
