@@ -191,6 +191,7 @@ class touitosHandler
     $q->bindValue(':rep',$rep, PDO::PARAM_STR);
     $q->bindValue(':demandeur', $suiveur->getId(), PDO::PARAM_INT);
     $q->bindValue(':receveur', $current->getId(), PDO::PARAM_INT);
+    $q->execute();
   }
 
   public function setDb(PDO $db)

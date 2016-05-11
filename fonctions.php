@@ -255,13 +255,13 @@
 			echo 'Une demande vous a été envoyé par :';
 			echo '<div>'.$data["pseudo"];
 
-			echo '<span>';
+			echo '<span id="requestButton">';
 
 			if($data['demande']!='R')
-				echo'<button>Refuser</button>';
+				echo'<button id="refuseRequest" touitosId="'.$data['id'].'">Refuser</button>';
 
 			if($data['demande']!='V')
-				echo '<button>Accepter</button>';
+				echo '<button id="acceptRequest" touitosId="'.$data['id'].'">Accepter</button>';
 
 			echo '</span>';
 
@@ -271,8 +271,7 @@
 
 		foreach($list as $key=>$touitos)
 		{
-			$t=new Touitos($touitos);
-			echo  getTouitosVignette($bd,$t);
+			echo  getTouitosVignette($bd,$touitos);
 		}
 
 		echo '</div>';
@@ -282,7 +281,11 @@
 	{
 		$th=new TouitosHandler($bd);
 		$connectedUser=$th->getByAttr("pseudo",$_SESSION['user'],PDO::PARAM_STR);
-		$th->answerRequest($connectedUser,$user,$accept);
+
+		if($accept==true)
+			$th->answerRequest($connectedUser,$user,"V");
+		else
+			$th->answerRequest($connectedUser,$user,"R");
 	}
 
 	function delete_message($id, $idAuteur, $bd){

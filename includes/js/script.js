@@ -316,6 +316,20 @@ $(document).ready(function()
         $(this).html("Abonné");
     });
 
+    $('#pageDisplay').on("click","#acceptRequest",function(){
+        $.post("ajax.php",{suiveur:$(this).attr("touitosid"),acceptRequest:true},function(rep){
+        });
+
+        $("#requestButton").html("Accepté");
+    });
+
+    $('#pageDisplay').on("click","#refuseRequest",function(){
+        $.post("ajax.php",{suiveur:$(this).attr("touitosid"),acceptRequest:false},function(rep){
+        });
+
+        $("#requestButton").html("Refusé");
+    });
+
 
 
 
