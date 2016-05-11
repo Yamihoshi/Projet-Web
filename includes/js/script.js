@@ -99,7 +99,6 @@ $(document).ready(function()
 
     });
 
-    //suppression message
     $('.icon-undo2').on('click', function(event){
         var message =$(this).parents('article');
         $.ajax({
@@ -133,7 +132,7 @@ $(document).ready(function()
          });
     });
 
-     //Voir réponse message
+    //suppression message
     $('.icon-bin2').on('click', function(event){
         var message =$(this).parents('article');
         $.ajax({

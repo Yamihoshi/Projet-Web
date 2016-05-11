@@ -290,8 +290,10 @@
 
 	function delete_message($id, $idAuteur, $bd){
 		$th=new TouiteHandler($bd);
-		$idBDD = $th->getByID($id)->getIdAuteur();
-		if($idBDD = $id){
+		$id = (int)$id;
+		$idBDD = $th->getByID($id);
+		$idBDD = $idBDD->getIdAuteur();
+		if((int)$idBDD == $idAuteur){
 			$th->delete($id);
 		}
 
@@ -303,7 +305,6 @@
 	}
 	function envoyer_reponse($id, Touite $message, $bd){
 		$th=new TouiteHandler($bd);
-		print_r($message);
 		$th->addReponse($message, $id);
 	}
 ?>

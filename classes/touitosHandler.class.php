@@ -22,7 +22,7 @@ class touitosHandler
 
   public function delete(Touitos $perso)
   {
-    $this->_db->exec('DELETE FROM touitos WHERE id = '.$perso->getId());
+    $this->_db->exec('DELETE FROM touitos CASCADE WHERE id = '.$perso->getId());
   }
 
   public function get($id)
