@@ -5,17 +5,20 @@ include('nav.php');
 
 ?>
 	<div id="pageDisplay">
-		<div id="k_left">
-			<video controls loop autoplay src="k.mp4">K</video>
+
+		<div style="width:70%;margin:auto;">
+			<img style="width:100%" src="saikyou.jpg">
 		</div>
 
-		<div id="k_right">
-			<video controls loop autoplay src="k.mp4">K</video>
-		</div>
+		<?php
+		require('foçnctions.php');
 
-		<div id="nyan_nyan">
-			<img src="nyan.jpg">
-		</div>
+		if(isConnected())
+		{
+			displayNews();
+		}
+
+		?>
 	</div>
 
 </body>

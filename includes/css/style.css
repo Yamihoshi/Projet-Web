@@ -197,29 +197,7 @@ button:disabled
 	color:red;
 	text-align: center;
 }
-#k_left
-{
-	float:left;
-}
 
-#nyan_nyan
-{
-	margin: 0 auto;
-	width:480px;
-	height:720px;
-}
-
-#nyan_nyan img
-{
-	width:100%;
-	height:100%;
-}
-
-#k_right
-{
-	float:right;
-
-}
 
 nav img
 {
