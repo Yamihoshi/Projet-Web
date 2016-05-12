@@ -190,12 +190,12 @@ $(document).ready(function()
                 {
                     message:$('#touite-box textarea').val()
                 },
-            dataType:'json',
-            success:function(response, status){
-                $('#ongletSelect td:nth-child(1)').click();
+            success:function(response){
+                //$('#ongletSelect td:nth-child(1)').click();
+                $("#touiteList").html(response+$("#touiteList").html());
             }
         });
-        $('#ongletSelect td:nth-child(1)').click();
+        //$('#ongletSelect td:nth-child(1)').click();
     });
 
     $("#editDiv").on('click',"#edit_profile",function()

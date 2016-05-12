@@ -35,8 +35,16 @@ require_once('classes/touite.class.php');
 				//réponse
 			}else{
 			$message = new Touite($touite);
-				addTouite($message, $bd);
+			addTouite($message, $bd);
+
+			$th=new touitosHandler($bd);
+			$user=$th->getByAttr("pseudo",$_SESSION['user'],PDO::PARAM_STR);
+			$tr=new TouiteRender($touite,$user);
+
+			$tr->render($message,$user);
 		}
+
+
 	}
 
 	else if(isset($_POST['follow']))

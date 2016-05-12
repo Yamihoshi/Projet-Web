@@ -120,7 +120,9 @@ if(isset($_POST["editName"]))
 							</form>
 			</div>';
 		}
+		echo '<div id="touiteList">';
 		$tr->renderMessage();
+		echo '</div>';
 	}
 	function getPhoto($user,$id)
 	{
