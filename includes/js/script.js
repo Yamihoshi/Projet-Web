@@ -193,6 +193,7 @@ $(document).ready(function()
             success:function(response){
                 //$('#ongletSelect td:nth-child(1)').click();
                 $("#touiteList").html(response+$("#touiteList").html());
+                $("#touiteArea").val("");
             }
         });
         //$('#ongletSelect td:nth-child(1)').click();

@@ -115,7 +115,7 @@ if(isset($_POST["editName"]))
 			echo'
 			<div id="touite-box">
 							<form id="touite">
-									<textarea placeholder="Entrez votre message..." name="touite" maxlength="140" required></textarea>
+									<textarea id="touiteArea" placeholder="Entrez votre message..." name="touite" maxlength="140" required></textarea>
 									<input type="submit"></input>
 							</form>
 			</div>';
