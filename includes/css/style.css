@@ -226,6 +226,10 @@ button, textarea, input[type="submit"]{
 	margin-top: 20px;
 }
 
+nav ul input[type="submit"]{
+	margin-top: 0px;
+}
+
 .spacer
 {
 	clear:both;
