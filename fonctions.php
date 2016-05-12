@@ -307,4 +307,23 @@
 		$th=new TouiteHandler($bd);
 		$th->addReponse($message, $id);
 	}
+
+
+	function displayNews($bd)
+	{
+		$tth=new TouiteHandler($bd);
+		$th=new TouitosHandler($bd);
+		$connectedUser=$th->getByAttr("pseudo",$_SESSION['user'],PDO::PARAM_STR);
+		$touiteList=$tth->getTouitesOfWhoIFollow($connectedUser->getId());
+
+		foreach($touiteList as $key=>$touite)
+		{
+			$tr=new TouiteRender($connectedUser->getId(),$bd);
+			$auteur=$th->getByAttr("id",$touite->getIdAuteur(),PDO::PARAM_STR);
+			$tr->render($touite,$auteur);
+		}
+
+	}
+
+
 ?>

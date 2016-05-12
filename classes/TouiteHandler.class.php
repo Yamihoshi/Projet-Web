@@ -108,4 +108,17 @@ class touiteHandler
   {
     $this->_db = $db;
   }
+
+  public function getTouitesOfWhoIFollow($id)
+  {
+    $q = $this->_db->prepare('SELECT * FROM Touites,touitos,suivre WHERE idAuteur=id AND idDemandeur=:id AND idReceveur=idAuteur AND suivre.demande="V" ORDER BY ladate DESC');
+    $q->bindValue(':id', $id, PDO::PARAM_INT);
+    $q->execute();
+    
+    while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+    {
+      $Touites[] = $this->getByID($donnees['idMsg']);
+    }
+    return $Touites;
+  }
 }

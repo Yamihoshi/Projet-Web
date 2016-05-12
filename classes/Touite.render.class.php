@@ -55,6 +55,7 @@
 		 }
 
 		 public function renderPic($auteur){
+
 		 	echo '
 		 			<picture>
 						<source src="http://'. $_SERVER['SERVER_NAME']. '/projet-web/files/pictures/Megumin.jpg">

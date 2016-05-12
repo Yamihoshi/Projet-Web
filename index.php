@@ -11,11 +11,10 @@ include('nav.php');
 		</div>
 
 		<?php
-		require('foçnctions.php');
 
 		if(isConnected())
 		{
-			displayNews();
+			displayNews($bd);
 		}
 
 		?>
