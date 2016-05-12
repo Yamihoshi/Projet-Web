@@ -1,6 +1,6 @@
 <?php
   require_once("classes/Touite.class.php");
-  date_default_timezone_set("Europe/Paris");
+  
 
 class touiteHandler
 {
@@ -14,6 +14,7 @@ class touiteHandler
   public function add(Touite $Touite)
   {
     if(strlen($Touite->gettexte()) <= 140){
+      date_default_timezone_set("Europe/Paris");
       $date = date("Y-m-d H:i:s");
       $q = $this->_db->prepare('INSERT INTO Touites VALUES(NULL,"'. $date. '", :texte, :auteur)');
       $q->bindValue(':texte', $Touite->getTexte(), PDO::PARAM_STR);
