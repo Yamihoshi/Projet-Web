@@ -9,6 +9,10 @@ function resetInfos()
 {
     $("#profile_name").html($("#editName").attr('previous'));
     $("#profile_statut").html($("#editStatut").attr('previous'));
+    $("#profile_statut").html($("#editStatut").attr('previous'));
+
+    var before=$("#profile_picture_IMG");
+    $("#profile_photo").html(before);
 }
 
 function updateInfos()
