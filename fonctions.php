@@ -223,7 +223,6 @@ if(isset($_POST["editName"]))
 		$list=$th->getWhoIFollow($connectedUser);
 
 		echo '<div id="whoIFollowDiv">';
-			echo '<div>Classer les Demandes ???</div>';
 
 		if(empty($list) && empty($requestList))
 		{
@@ -232,15 +231,17 @@ if(isset($_POST["editName"]))
 
 		foreach($requestList as $key=>$data)
 		{
-			echo '<div>'.$data['pseudo'];
+			echo '<div id="requestLine">';
+
+			echo '<div id="requestPseudo" class="requestInfo"><a href="profile.php?user='.$data['pseudo'].'">@'.$data['pseudo'].'</a></div>';
 
 			if($data['demande']=='E')
 			{
-				echo '<span>En Attente</span>';
+				echo '<div class="requestInfo">En Attente</div>';
 			}
 			else
 			{
-				echo '<span>Refusée</span>';
+				echo '<div class="requestInfo">Refusée</div>';
 			}
 
 			echo '</div>';

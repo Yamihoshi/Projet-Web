@@ -461,3 +461,14 @@ input[type="search"]
 .icon-star-full:before {
     content: "\e905";
 }
+
+.requestInfo
+{
+	width:100px;
+	display:inline-block;
+}
+
+#requestPseudo
+{
+	font-style:italic;
+}
