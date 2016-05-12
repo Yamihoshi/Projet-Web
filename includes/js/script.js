@@ -198,7 +198,7 @@ $(document).ready(function()
     {
 
         $("#profile_name").html('<input id="editName" type="text" name="editName" previous="'+$("#profile_name").text()+'" value="'+$("#profile_name").text()+'">');
-        $("#profile_statut").html('<textarea id="editStatut" previous="'+$("#profile_statut").text()+'" >'+$("#profile_statut").text()+'</textarea>');
+        $("#profile_statut").html('<textarea name="editStatut" form="editForm" id="editStatut" previous="'+$("#profile_statut").text()+'" >'+$("#profile_statut").text()+'</textarea>');
 
         var fileUploadDiv='<label for="profile_pic_upload">'+$("#profile_photo").html();
         fileUploadDiv+='</label>';
@@ -206,7 +206,7 @@ $(document).ready(function()
         $('#profile_photo').html(fileUploadDiv);
 
         var balise ='<button id="cancelEdit" type="button"> Annuler</button>';
-        balise+='<button type="button" id="saveEdit">Enregistrer les modifications</button>';
+        balise+='<input type="submit" id="saveEdit" value="Enregistrer les modifications">';
 
         $("#editDiv").html(balise);
 
@@ -218,12 +218,14 @@ $(document).ready(function()
         resetInfos();
     });
 
-    $("#editDiv").on('click',"#saveEdit",function()
+    $("#editDiv").on('click',"#saveEdit",function(event)
     {
+      /* event.preventDefault();
         resetEditButton();
         updateInfos();
+        $( "#editForm" ).submit();*/
 
-        var form = new Object();
+       /* var form = new Object();
         form['nom']=$("#profile_name").text();
         form['statut']=$("#profile_statut").text();
         form['file']=0;
@@ -241,7 +243,7 @@ $(document).ready(function()
 
         $.post("ajax.php",{editProfile:form,touitos:$("#touitos_pseudo").val()},function(rep){
                 $("body").append(rep);
-        });
+        });*/
 
     });
     /*function calculerCaractere(){

@@ -15,10 +15,14 @@ require_once('classes/touite.class.php');
 	else if(!empty($_SESSION['id']) AND !empty($_GET['voirMessage'])){
 		voir_message($_GET['id'], $bd);
 	}
-	else if(isset($_POST['editProfile']))
+
+
+	/*else if(isset($_POST['editProfile']))
 	{
 		updateTouitos($bd,$_POST['touitos'],$_POST['editProfile']);
-	}
+	}*/
+
+
 	else if(!empty($_SESSION['id']) && !empty($_POST['discution'])){
 		$touite = array("texte" => $_POST['message'], "idAuteur" => $_SESSION['id']);
 		envoyer_reponse($_POST['id'], new Touite($touite), $bd);

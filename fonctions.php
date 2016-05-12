@@ -7,6 +7,25 @@
 	require_once("config/connexion.php");
 	session_start();
 
+if(isset($_POST["editName"]))
+{
+	$th = new TouitosHandler($bd);
+	$connectedUser=$th->getByAttr("pseudo",$_SESSION['user'],PDO::PARAM_STR);
+	$connectedUser->_setNom($_POST['editName']);
+	$connectedUser->_setStatut($_POST['editStatut']);
+
+	$FileDir = 'files/pictures/'.$connectedUser->getPseudo().'.jpg';
+
+	print_r($_FILES);
+
+	if (!empty($_FILES['profile_pic_upload']['tmp_name']) AND move_uploaded_file($_FILES['profile_pic_upload']['tmp_name'], $FileDir)) {
+		$connectedUser->_setPhoto(true);
+	}
+
+	updateTouitos($bd,$connectedUser);
+}
+
+
 	function isConnected()
 	{
 		return !empty($_SESSION['user']);
@@ -53,6 +72,7 @@
 			}	
 		}
 
+		echo '<form id="editForm" action="'.$_SERVER['REQUEST_URI'].'" method="POST" enctype="multipart/form-data">';
 		echo '<div id="profile_photo">'.getPhoto($profile,"profile_picture_IMG").'</div>';
 		echo '<div id="profile_name">'.$profile->getNom().'</div>';
 		echo '<div id="profile_pseudo">@'.$profile->getPseudo().'</div>';
@@ -68,6 +88,7 @@
 					
 		}
 		echo '</div>'; // Close profil_left
+		echo '</form>';
 
 		if(isConnected() AND isOwnProfile($profile->getPseudo())){
 			echo 	'<div id="ongletDiv">
@@ -162,15 +183,10 @@
 
 		return $th->add($touitos);
 	}
-	function updateTouitos($bd,$touitos,$form)
+	function updateTouitos($bd,$touitos)
 	{
 		$th=new TouitosHandler($bd);
-		$user=$th->getByAttr("pseudo",$touitos,PDO::PARAM_STR);
-		$user->_setNom($form['nom']);
-		$user->_setStatut($form['statut']);
-		if($form['file']==1)
-			$user->_setPhoto($form['file']);
-		$th->update($user);
+		$th->update($touitos);
 	}
 
 	function addTouite($data, $bd){
@@ -271,6 +287,7 @@
 
 		foreach($list as $key=>$touitos)
 		{
+			echo '<div style="position:absolute"><button id="unAcceptRequest">X</button></div>';
 			echo  getTouitosVignette($bd,$touitos);
 		}
 
