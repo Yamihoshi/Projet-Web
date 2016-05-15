@@ -199,23 +199,6 @@ $(document).ready(function()
         //$('#ongletSelect td:nth-child(1)').click();
     });
 
-    $("#editDiv").on('click',"#edit_profile",function()
-    {
-
-        $("#profile_name").html('<input id="editName" type="text" name="editName" previous="'+$("#profile_name").text()+'" value="'+$("#profile_name").text()+'">');
-        $("#profile_statut").html('<textarea name="editStatut" form="editForm" id="editStatut" previous="'+$("#profile_statut").text()+'" >'+$("#profile_statut").text()+'</textarea>');
-
-        var fileUploadDiv='<label for="profile_pic_upload">'+$("#profile_photo").html();
-        fileUploadDiv+='</label>';
-        fileUploadDiv+='<input  type="file" onchange="loadNewProfilePic(this)" style="display:none;" name="profile_pic_upload" id="profile_pic_upload" accept="image/x-png, image/gif, image/jpeg">';
-        $('#profile_photo').html(fileUploadDiv);
-
-        var balise ='<button id="cancelEdit" type="button"> Annuler</button>';
-        balise+='<input type="submit" id="saveEdit" value="Enregistrer les modifications">';
-
-        $("#editDiv").html(balise);
-
-    });
 
     $("#editDiv").on('click',"#cancelEdit",function()
     {
@@ -288,8 +271,32 @@ $(document).ready(function()
                 $("#timeline").html(rep);
             });
         }
-        
+        else if(index == 3){
 
+            var balise = '<div id="edit">';
+            balise += '<form><fieldset><legend>Modification</legend>';
+            balise +='<label for="editName">Pseudonyme</label><input id="editName" type="text" name="editName" previous="'+$("#profile_name").text()+'" value="'+$("#profile_name").text()+'">';
+            balise += '<label for="editStatut">Description</label><textarea name="editStatut" form="editForm" placeholder = "Description..." id="editStatut" previous="'+$("#profile_statut").text()+'" >'+$("#profile_statut").text()+'</textarea>';
+            
+
+            var fileUploadDiv='<label for="profile_pic_upload">'+$("#profile_photo").html();
+            fileUploadDiv+='</label>';
+            fileUploadDiv+='<input  type="file" onchange="loadNewProfilePic(this)" style="display:none;" name="profile_pic_upload" id="profile_pic_upload" accept="image/x-png, image/gif, image/jpeg">';
+            $('#profile_photo').html(fileUploadDiv);
+
+            var select = '<select><option style="background-color:white">white</option>';
+            select += '<option style="background-color:blue">blue</option>';
+            select += '<option style="background-color:aliceblue">aliceblue</option>';
+            select += '</select>';
+            balise += select;
+            
+            balise +='<button id="cancelEdit" type="button"> Annuler</button>';
+            balise+='<input type="submit" id="saveEdit" value="Enregistrer les modifications">';
+            balise += '</fieldset></form>';
+
+            balise +='</div>';
+            $("#timeline").html(balise);
+        }
     });
 
     $('#pageDisplay').on("click",".subscribe",function(){

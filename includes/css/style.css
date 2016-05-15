@@ -3,6 +3,9 @@ body{
 	background-color: aliceblue;
 	text-align: start;
 }
+::-moz-selection{
+	background: pink;
+}
 nav
 {
 	height:60px;
@@ -14,7 +17,7 @@ nav
 	z-index:100;
 	padding:10px;
 }
-nav, .message, #profile_left_infos, #timeline #touite-box, #ongletDiv{
+nav, .message, #profile_left_infos, #timeline #touite-box, #ongletDiv, #edit{
 	background-color: #fff;
 	box-shadow: 0 1px 2px rgba(0,0,0,.1);
 }
@@ -49,7 +52,9 @@ input:not([type='submit'])  {
 input:not([type='submit']):focus {
   border-bottom: solid 2px #dc5656;
 }
-
+fieldset{
+	border:none;
+}
 .contenu_message, .pseudo, .date{
 	padding: 0 10px;
 }
@@ -126,6 +131,12 @@ button:disabled
 }
 #timeline form{
 	text-align: center;
+}
+#edit form{
+	text-align: left;
+}
+#edit > form:nth-child(1) > fieldset:nth-child(1) > label:nth-child(4){
+	display: block
 }
 .modal {
     display: none; /* Hidden by default */
