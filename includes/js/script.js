@@ -1,20 +1,3 @@
-function resetEditButton()
-{
-    var balise ='<button type="button" id="edit_profile">Editer les informations</button>';
-
-    $("#editDiv").html(balise);
-}
-
-function resetInfos()
-{
-    $("#profile_name").html($("#editName").attr('previous'));
-    $("#profile_statut").html($("#editStatut").attr('previous'));
-    $("#profile_statut").html($("#editStatut").attr('previous'));
-
-    var before=$("#profile_picture_IMG");
-    $("#profile_photo").html(before);
-}
-
 function updateInfos()
 {
     $("#profile_name").html($("#editName").val());
@@ -26,7 +9,7 @@ function loadNewProfilePic(input)
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            $('#profile_picture_IMG').attr('src', e.target.result);
+            $('#profile_picture_forUpload').attr('src', e.target.result);
         }
 
         reader.readAsDataURL(input.files[0]);
@@ -250,13 +233,14 @@ $(document).ready(function()
         */
 
         var index = $('td').index(this);
-        console.log(index);
+
+        if(index!=3)
+            $("#profile_left_infos").show();
 
         if(index==0)
         {
             $.get("ajax.php",{getTimeline:true},function(rep){
                 $("#timeline").html(rep);
-                console.log("hollez");
             });
         }
         else if(index==1)
@@ -273,16 +257,19 @@ $(document).ready(function()
         }
         else if(index == 3){
 
+            $("#profile_left_infos").hide();
+
             var balise = '<div id="edit">';
-            balise += '<form><fieldset><legend>Modification</legend>';
-            balise +='<label for="editName">Pseudonyme</label><input id="editName" type="text" name="editName" previous="'+$("#profile_name").text()+'" value="'+$("#profile_name").text()+'">';
-            balise += '<label for="editStatut">Description</label><textarea name="editStatut" form="editForm" placeholder = "Description..." id="editStatut" previous="'+$("#profile_statut").text()+'" >'+$("#profile_statut").text()+'</textarea>';
+            balise+='<form id="editForm" action="'+window.location.href+'" method="POST" enctype="multipart/form-data" >';
+            balise += '<fieldset><legend>Modification</legend>';
+            balise +='<label for="editName">Nom</label><input id="editName" type="text" name="editName" value="'+$("#profile_name").text()+'">';
+            balise += '<label for="editStatut">Description</label><textarea name="editStatut" form="editForm" placeholder = "Description..." id="editStatut" >'+$("#profile_statut").text()+'</textarea>';
             
 
-            var fileUploadDiv='<label for="profile_pic_upload">'+$("#profile_photo").html();
-            fileUploadDiv+='</label>';
+            var fileUploadDiv='<label for="profile_pic_upload">';
+            fileUploadDiv+='<div id="profile_photo_uploadDiv"></div></label>';
             fileUploadDiv+='<input  type="file" onchange="loadNewProfilePic(this)" style="display:none;" name="profile_pic_upload" id="profile_pic_upload" accept="image/x-png, image/gif, image/jpeg">';
-            $('#profile_photo').html(fileUploadDiv);
+            balise+=fileUploadDiv;
 
             var select = '<select><option style="background-color:white">white</option>';
             select += '<option style="background-color:blue">blue</option>';
@@ -290,12 +277,16 @@ $(document).ready(function()
             select += '</select>';
             balise += select;
             
-            balise +='<button id="cancelEdit" type="button"> Annuler</button>';
             balise+='<input type="submit" id="saveEdit" value="Enregistrer les modifications">';
-            balise += '</fieldset></form>';
+            balise += '</fieldset>';
 
-            balise +='</div>';
+            balise +='</form></div>';
             $("#timeline").html(balise);
+
+            var $img = $("#profile_photo").children("img").clone();
+            $img.attr("id","profile_picture_forUpload");
+
+            $("#profile_photo_uploadDiv").append($img);
         }
     });
 

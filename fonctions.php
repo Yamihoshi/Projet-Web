@@ -7,25 +7,6 @@
 	require_once("config/connexion.php");
 	session_start();
 
-if(isset($_POST["editName"]))
-{
-	$th = new TouitosHandler($bd);
-	$connectedUser=$th->getByAttr("pseudo",$_SESSION['user'],PDO::PARAM_STR);
-	$connectedUser->_setNom($_POST['editName']);
-	$connectedUser->_setStatut($_POST['editStatut']);
-
-	$FileDir = 'files/pictures/'.$connectedUser->getPseudo().'.jpg';
-
-	print_r($_FILES);
-
-	if (!empty($_FILES['profile_pic_upload']['tmp_name']) AND move_uploaded_file($_FILES['profile_pic_upload']['tmp_name'], $FileDir)) {
-		$connectedUser->_setPhoto(true);
-	}
-
-	updateTouitos($bd,$connectedUser);
-}
-
-
 	function isConnected()
 	{
 		return !empty($_SESSION['user']);
@@ -72,23 +53,13 @@ if(isset($_POST["editName"]))
 			}	
 		}
 
-		echo '<form id="editForm" action="'.$_SERVER['REQUEST_URI'].'" method="POST" enctype="multipart/form-data">';
 		echo '<div id="profile_photo">'.getPhoto($profile,"profile_picture_IMG").'</div>';
 		echo '<div id="profile_name">'.$profile->getNom().'</div>';
 		echo '<div id="profile_pseudo">@'.$profile->getPseudo().'</div>';
 		echo '<div id="profile_statut">'.$profile->getStatut().'</div>';
 		echo '<input type="hidden" id="touitos_pseudo" value='.$profile->getPseudo().'>';
 
-		if(isConnected() AND isOwnProfile($profile->getPseudo()))
-		{
-			echo '<div id="editDiv">
-				<button type="button" id="edit_profile">Editer les informations</button>
-						</div>';
-
-					
-		}
 		echo '</div>'; // Close profil_left
-		echo '</form>';
 
 		if(isConnected() AND isOwnProfile($profile->getPseudo())){
 			echo 	'<div id="ongletDiv">
