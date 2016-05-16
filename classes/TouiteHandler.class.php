@@ -111,10 +111,11 @@ class touiteHandler
     $this->_db = $db;
   }
 
-  public function getTouitesOfWhoIFollow($id)
+  public function getTouitesOfWhoIFollow($id,$offset)
   {
-    $q = $this->_db->prepare('SELECT * FROM Touites,touitos,suivre WHERE idAuteur=id AND idDemandeur=:id AND idReceveur=idAuteur AND suivre.demande="V" ORDER BY ladate DESC');
+    $q = $this->_db->prepare('SELECT * FROM Touites,touitos,suivre WHERE idAuteur=id AND idDemandeur=:id AND idReceveur=idAuteur AND suivre.demande="V" ORDER BY ladate DESC LIMIT 2 OFFSET :offset');
     $q->bindValue(':id', $id, PDO::PARAM_INT);
+    $q->bindValue(':offset', $offset, PDO::PARAM_INT);
     $q->execute();
     $Touites=[];
 

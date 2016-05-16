@@ -1,5 +1,7 @@
 <?php
 
+date_default_timezone_set("Europe/Paris");
+
 	require_once("config/connexion.php");
 
 	class TouiteRender
@@ -42,7 +44,7 @@
                         echo '<div class="containeur">';
                             echo '<header class= "info">';
                                 echo '<div class="pseudo">' . $auteur->getPseudo() .'</div>';
-                                echo '<div class="date">'. $touite->getLaDate() . '</div>';
+                                echo '<div class="date">'. $newDate = date("d/m/Y", strtotime($touite->getLaDate())) . '</div>';
                         echo '</header>';
                         $this->echo_message($touite);
                          $this->renderFooter($touite);

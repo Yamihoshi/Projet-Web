@@ -14,7 +14,7 @@ include('nav.php');
 
 		if(isConnected())
 		{
-			displayNews($bd);
+			displayNews($bd,0);
 		}
 
 		?>

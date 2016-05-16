@@ -300,12 +300,12 @@
 	}
 
 
-	function displayNews($bd)
+	function displayNews($bd,$offset)
 	{
 		$tth=new TouiteHandler($bd);
 		$th=new TouitosHandler($bd);
 		$connectedUser=$th->getByAttr("pseudo",$_SESSION['user'],PDO::PARAM_STR);
-		$touiteList=$tth->getTouitesOfWhoIFollow($connectedUser->getId());
+		$touiteList=$tth->getTouitesOfWhoIFollow($connectedUser->getId(),$offset);
 
 		foreach($touiteList as $key=>$touite)
 		{
