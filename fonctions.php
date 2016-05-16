@@ -98,13 +98,16 @@
 			</div>';
 		}
 		echo '<div id="touiteList">';
-		$tr->renderMessage(0);
+		$touiteAffiche=$tr->renderMessage(0);
 		echo '</div>';
 
-		echo '<div id="loadMoreTouiteDiv">
-				<button id="loadMoreProfileTouite" next="1" idTouitos="'.$touitos->getId().'">+ de Touites</button>
+		if($touiteAffiche)
+		{
+			echo '<div id="loadMoreTouiteDiv">
+					<button id="loadMoreProfileTouite" next="1" idTouitos="'.$touitos->getId().'">+ de Touites</button>
 
-			</div>';
+				</div>';
+		}
 	}
 	function getPhoto($user,$id)
 	{
@@ -325,6 +328,11 @@
 			$auteur=$th->getByAttr("id",$touite->getIdAuteur(),PDO::PARAM_STR);
 			$tr->render($touite,$auteur);
 		}
+
+		if(empty($touiteList))
+			return false;
+
+		return true;
 	}
 
 

@@ -14,14 +14,19 @@ include('nav.php');
 
 		if(isConnected())
 		{
+			$newsAffiche=false;
+
 			echo '<div id="news">';
-			displayNews($bd,0);
+			$newsAffiche=displayNews($bd,0);
 			echo '</div>';
 
-			echo '<div id="loadMoreTouiteDiv">
-				<button id="loadMoreNewsTouite" next="1">+ de Touites</button>
+			if($newsAffiche)
+			{
+				echo '<div id="loadMoreTouiteDiv">
+					<button id="loadMoreNewsTouite" next="1">+ de Touites</button>
 
-			</div>';
+				</div>';
+			}
 		}
 
 		?>

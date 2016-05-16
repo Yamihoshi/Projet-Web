@@ -23,7 +23,11 @@ date_default_timezone_set("Europe/Paris");
 				foreach($message as $key=>$touite){
 				 	$this->render($touite, $auteur);
 		 	    }
+
+                return true;
 		      }
+
+            return false;
 		 }
          public function renderReponse(){
             $db_touite = new TouiteHandler($this->getBd());
