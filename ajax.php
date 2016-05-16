@@ -3,9 +3,14 @@ require_once("config/connexion.php");
 require_once('fonctions.php');
 require_once('classes/touite.class.php');
 
-	if(isset($_GET['search']))
+	if(isset($_GET['search']) && ! isset($_GET['moreSearch']))
 	{
 		searchByName($_GET['search'],$bd);
+	}
+
+	else if(isset($_GET['moreSearch']))
+	{
+		moreSearchResult($_GET['search'],$bd,$_GET['offset']);
 	}
 
 	else if(!empty($_SESSION['id']) AND !empty($_GET['remove'])){

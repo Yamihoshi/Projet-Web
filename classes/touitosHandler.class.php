@@ -76,11 +76,12 @@ class touitosHandler
     return $persos;
   }
 
-  public function searchByName($name)
+  public function searchByName($name,$offset)
   {
     $persos = [];
-    $q = $this->_db->prepare('SELECT id, nom, mail,pseudo, statut, photo, statut FROM Touitos WHERE nom LIKE :nom OR pseudo LIKE :nom ORDER BY nom');
+    $q = $this->_db->prepare('SELECT id, nom, mail,pseudo, statut, photo, statut FROM Touitos WHERE nom LIKE :nom OR pseudo LIKE :nom ORDER BY nom LIMIT 16 OFFSET :offset');
     $q->bindValue(':nom',"%$name%", PDO::PARAM_STR);
+    $q->bindValue(':offset',$offset, PDO::PARAM_INT);
     $q->execute();
     while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
     {

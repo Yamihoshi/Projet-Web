@@ -144,13 +144,31 @@
 	function searchByName($str,$bd)
 	{
 		$th=new TouitosHandler($bd);
-		$res=$th->searchByName($str);
+		$res=$th->searchByName($str,0);
 		echo '<div id="searchResult">';
 		foreach($res as $key=>$touitos)
 		{
 				getTouitosVignette($bd,$touitos);
 		}
 		echo '</div>';
+
+		if(!empty($res))
+		{
+			echo '<div id="moreSearchResultDiv">
+				<button id="moreSearchResult" next="1">Afficher + de touitos</button>
+			</div>';
+		}
+	}
+
+	function moreSearchResult($str,$bd,$offset)
+	{	
+
+		$th=new TouitosHandler($bd);
+		$res=$th->searchByName($str,intval($offset)*16);
+		foreach($res as $key=>$touitos)
+		{
+				getTouitosVignette($bd,$touitos);
+		}
 	}
 
 	function attrExists($bd,$attrName,$val,$paramType)

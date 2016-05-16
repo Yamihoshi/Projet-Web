@@ -361,5 +361,18 @@ $(document).ready(function()
         });
     });
 
+    $("#pageDisplay").on("click",$("#moreSearchResult"),function(){
+        
+        var nextPage=parseInt($("#moreSearchResult").attr("next"));
+        var search=$("#searchBar").val();
+
+        $.get("ajax.php",{moreSearch:true,offset:nextPage,search:search},function(rep){
+            nextPage++;
+            $("#moreSearchResult").attr("next",nextPage);
+             $("#searchResult").hide();
+            $("#searchResult").append(rep);
+            $("#searchResult").fadeIn();
+        });
+    });
 
 });
