@@ -79,6 +79,12 @@
 		echo '</div>';
 	}
 
+	function getMoreProfileTouite($bd,$offset,$idTouitos)
+	{
+		$tr = new TouiteRender($idTouitos, $bd);
+		$tr->renderMessage($offset*10);
+	}
+
 	function show_timeline(Touitos $touitos, $bd)
 	{
 		$tr = new TouiteRender($touitos->getId(), $bd);
@@ -92,8 +98,13 @@
 			</div>';
 		}
 		echo '<div id="touiteList">';
-		$tr->renderMessage();
+		$tr->renderMessage(0);
 		echo '</div>';
+
+		echo '<div id="loadMoreTouiteDiv">
+				<button id="loadMoreProfileTouite" next="1" idTouitos="'.$touitos->getId().'">+ de Touites</button>
+
+			</div>';
 	}
 	function getPhoto($user,$id)
 	{

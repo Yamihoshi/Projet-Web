@@ -14,11 +14,11 @@ date_default_timezone_set("Europe/Paris");
 		 	$this->_setBd($bd);
 		 }
 
-		public function renderMessage(){
+		public function renderMessage($offset){
 		 	$db_touite = new TouiteHandler($this->getBd());
 		 	$db_touitos = new TouitosHandler($this->getBd());
 		 	$auteur = $db_touitos->get($this->id);
-		 	$message = $db_touite->getListMessage($this->id);
+		 	$message = $db_touite->getListMessage($this->id,$offset);
 		 	if(!empty($message)){
 				foreach($message as $key=>$touite){
 				 	$this->render($touite, $auteur);

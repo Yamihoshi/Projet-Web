@@ -35,11 +35,12 @@ require_once('classes/touite.class.php');
 				//réponse
 			}else{
 			$message = new Touite($touite);
+			$message->setLadate (date("Y-m-d H:i:s"));
 			addTouite($message, $bd);
 
 			$th=new touitosHandler($bd);
 			$user=$th->getByAttr("pseudo",$_SESSION['user'],PDO::PARAM_STR);
-			$tr=new TouiteRender($touite,$user);
+			$tr=new TouiteRender($user,$bd);
 
 			$tr->render($message,$user);
 		}
@@ -79,9 +80,14 @@ require_once('classes/touite.class.php');
 		anwserRequest($bd,$touitos,$_POST['acceptRequest']);
 	}
 
-	else if(isset($_GET['moreTouite']))
+	else if(isset($_GET['moreNewsTouite']))
 	{
 		displayNews($bd,intval($_GET['offset']));
+	}
+
+	else if(isset($_GET['moreProfileTouite']))
+	{
+		getMoreProfileTouite($bd,intval($_GET['offset']),$_GET['id']);
 	}
 
 ?>

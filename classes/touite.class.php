@@ -64,7 +64,7 @@
      *
      * @return self
      */
-    protected function setLadate($ladate)
+    public function setLadate($ladate)
     {
         $this->_ladate = $ladate;
 

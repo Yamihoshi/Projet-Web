@@ -334,16 +334,30 @@ $(document).ready(function()
         $("#requestButton").html("Refusé");
     });
 
-    $("#loadMoreTouite").click(function(){
+    $("#loadMoreNewsTouite").click(function(){
         
         var nextPage=parseInt($(this).attr("next"));
 
-        $.get("ajax.php",{moreTouite:true,offset:nextPage},function(rep){
+        $.get("ajax.php",{moreNewsTouite:true,offset:nextPage},function(rep){
             nextPage++;
-            $("#loadMoreTouite").attr("next",nextPage);
+            $("#loadMoreNewsTouite").attr("next",nextPage);
              $("#news").hide();
             $("#news").append(rep);
             $("#news").fadeIn();
+        });
+    });
+
+    $("#loadMoreProfileTouite").click(function(){
+        
+        var nextPage=parseInt($(this).attr("next"));
+        var id=parseInt($(this).attr("idtouitos"));
+
+        $.get("ajax.php",{moreProfileTouite:true,offset:nextPage,id:id},function(rep){
+            nextPage++;
+            $("#loadMoreProfileTouite").attr("next",nextPage);
+             $("#touiteList").hide();
+            $("#touiteList").append(rep);
+            $("#touiteList").fadeIn();
         });
     });
 

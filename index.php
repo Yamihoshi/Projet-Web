@@ -19,7 +19,7 @@ include('nav.php');
 			echo '</div>';
 
 			echo '<div id="loadMoreTouiteDiv">
-				<button id="loadMoreTouite" next="1">+ de Touites</button>
+				<button id="loadMoreNewsTouite" next="1">+ de Touites</button>
 
 			</div>';
 		}

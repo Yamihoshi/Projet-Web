@@ -15,8 +15,8 @@ class touiteHandler
   {
     if(strlen($Touite->gettexte()) <= 140){
       date_default_timezone_set("Europe/Paris");
-      $date = date("Y-m-d H:i:s");
-      $q = $this->_db->prepare('INSERT INTO Touites VALUES(NULL,"'. $date. '", :texte, :auteur)');
+      $q = $this->_db->prepare('INSERT INTO Touites VALUES(NULL,:dateT, :texte, :auteur)');
+      $q->bindValue(':dateT', $Touite->getLaDate(), PDO::PARAM_STR);
       $q->bindValue(':texte', $Touite->getTexte(), PDO::PARAM_STR);
       $q->bindValue(':auteur', $Touite->getIdAuteur(), PDO::PARAM_INT);
       $q->execute();
@@ -60,12 +60,13 @@ class touiteHandler
     return new Touite($donnees);
   }
 
-  public function getListMessage($id)
+  public function getListMessage($id,$offset)
   {
     $Touites = [];
     $id = (int) $id;
-    $q = $this->_db->prepare('SELECT idAuteur, idMsg as idMessage, texte, ladate FROM Touites WHERE idAuteur = :id ORDER BY ladate DESC');
+    $q = $this->_db->prepare('SELECT idAuteur, idMsg as idMessage, texte, ladate FROM Touites WHERE idAuteur = :id ORDER BY ladate DESC LIMIT 10 OFFSET :offset');
     $q->bindValue(':id', $id, PDO::PARAM_INT);
+    $q->bindValue(':offset', $offset, PDO::PARAM_INT);
     $q->execute();
     while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
     {
