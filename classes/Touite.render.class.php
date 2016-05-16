@@ -43,7 +43,7 @@ date_default_timezone_set("Europe/Paris");
                         $this->renderPic($auteur);
                         echo '<div class="containeur">';
                             echo '<header class= "info">';
-                                echo '<div class="pseudo">' . $auteur->getPseudo() .'</div>';
+                                echo '<div class="pseudo">@' . $auteur->getPseudo() .'</div>';
                                 echo '<div class="date">'. $newDate = date("d/m/Y", strtotime($touite->getLaDate())) . '</div>';
                         echo '</header>';
                         $this->echo_message($touite);
