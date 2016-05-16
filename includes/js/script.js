@@ -334,5 +334,18 @@ $(document).ready(function()
         $("#requestButton").html("Refusé");
     });
 
+    $("#loadMoreTouite").click(function(){
+        
+        var nextPage=parseInt($(this).attr("next"));
+
+        $.get("ajax.php",{moreTouite:true,offset:nextPage},function(rep){
+            nextPage++;
+            $("#loadMoreTouite").attr("next",nextPage);
+             $("#news").hide();
+            $("#news").append(rep);
+            $("#news").fadeIn();
+        });
+    });
+
 
 });

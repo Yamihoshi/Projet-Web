@@ -79,4 +79,9 @@ require_once('classes/touite.class.php');
 		anwserRequest($bd,$touitos,$_POST['acceptRequest']);
 	}
 
+	else if(isset($_GET['moreTouite']))
+	{
+		displayNews($bd,intval($_GET['offset']));
+	}
+
 ?>

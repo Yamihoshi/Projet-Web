@@ -305,15 +305,15 @@
 		$tth=new TouiteHandler($bd);
 		$th=new TouitosHandler($bd);
 		$connectedUser=$th->getByAttr("pseudo",$_SESSION['user'],PDO::PARAM_STR);
-		$touiteList=$tth->getTouitesOfWhoIFollow($connectedUser->getId(),$offset);
+		$touiteList=$tth->getTouitesOfWhoIFollow($connectedUser->getId(),$offset*10);
 
+		
 		foreach($touiteList as $key=>$touite)
 		{
 			$tr=new TouiteRender($connectedUser->getId(),$bd);
 			$auteur=$th->getByAttr("id",$touite->getIdAuteur(),PDO::PARAM_STR);
 			$tr->render($touite,$auteur);
 		}
-
 	}
 
 
