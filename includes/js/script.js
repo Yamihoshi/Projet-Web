@@ -375,4 +375,12 @@ $(document).ready(function()
         });
     });
 
+    $("#pageDisplay").on("click",".unAcceptRequest",function(){
+
+        var id=parseInt($(this).attr("idtouitos"));
+        $.post("ajax.php",{unAcceptRequest:true,suiveur:id},function(rep){
+            
+        });
+    });
+
 });

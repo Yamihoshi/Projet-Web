@@ -55,12 +55,17 @@ require_once('classes/touite.class.php');
 
 	else if(isset($_POST['follow']))
 	{
-		follow($bd,$_SESSION['user'],$_POST['suivi']);
+		follow($bd,$_POST['suivi']);
 	}
 
 	else if(isset($_POST['unfollow']))
 	{
-		unfollow($bd,$_SESSION['user'],$_POST['suivi']);
+		unfollow($bd,$_POST['suivi']);
+	}
+
+	else if(isset($_POST['unAcceptRequest']))
+	{
+		unAcceptRequest($bd,$_POST['suiveur']);
 	}
 
 	else if(isset($_GET['getFollowers']))

@@ -103,19 +103,27 @@ class touitosHandler
     $q->execute();
   }
 
-  public function follow(Touitos $current,Touitos $suivi)
+  public function follow($current,$suivi)
   {
     $q = $this->_db->prepare('INSERT INTO suivre(idDemandeur,idReceveur,demande) VALUES(:demandeur,:receveur,"E")');
-    $q->bindValue(':demandeur', $current->getId(), PDO::PARAM_INT);
-    $q->bindValue(':receveur', $suivi->getId(), PDO::PARAM_INT);
+    $q->bindValue(':demandeur', $current, PDO::PARAM_INT);
+    $q->bindValue(':receveur', $suivi, PDO::PARAM_INT);
     $q->execute();
   }
 
-    public function unfollow(Touitos $current,Touitos $suivi)
+    public function unfollow($current,$suivi)
   {
     $q = $this->_db->prepare('DELETE FROM suivre WHERE idDemandeur=:demandeur AND idReceveur=:receveur');
-    $q->bindValue(':demandeur', $current->getId(), PDO::PARAM_INT);
-    $q->bindValue(':receveur', $suivi->getId(), PDO::PARAM_INT);
+    $q->bindValue(':demandeur', $current, PDO::PARAM_INT);
+    $q->bindValue(':receveur', $suivi, PDO::PARAM_INT);
+    $q->execute();
+  }
+
+  public function unAcceptRequest($current,$suiveur)
+  {
+    $q = $this->_db->prepare('DELETE FROM suivre WHERE idDemandeur=:demandeur AND idReceveur=:receveur');
+    $q->bindValue(':demandeur', $suiveur, PDO::PARAM_INT);
+    $q->bindValue(':receveur',$current, PDO::PARAM_INT);
     $q->execute();
   }
 

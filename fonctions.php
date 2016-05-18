@@ -200,22 +200,22 @@
 	}
 
 
-	function follow($bd,$user,$suivi)
+	function follow($bd,$suivi)
 	{
 		$th=new TouitosHandler($bd);
-		$demandeur=$th->getByAttr("pseudo",$user,PDO::PARAM_STR);
-		$receveur=$th->getByAttr("id",$suivi,PDO::PARAM_INT);
-
-		$th->follow($demandeur,$receveur);
+		$th->follow($_SESSION['id'],$suivi);
 	}
 
-	function unfollow($bd,$user,$suivi)
+	function unfollow($bd,$suivi)
 	{
 		$th=new TouitosHandler($bd);
-		$demandeur=$th->getByAttr("pseudo",$user,PDO::PARAM_STR);
-		$receveur=$th->getByAttr("id",$suivi,PDO::PARAM_INT);
+		$th->unfollow($_SESSION['id'],$suivi);
+	}
 
-		$th->unfollow($demandeur,$receveur);
+	function unAcceptRequest($bd,$suiveur)
+	{
+		$th=new TouitosHandler($bd);
+		$th->unAcceptRequest($_SESSION['id'],$suiveur);
 	}
 
 	function show_whoIFollow($bd)
@@ -293,8 +293,9 @@
 
 		foreach($list as $key=>$touitos)
 		{
-			echo '<div style="position:absolute"><button id="unAcceptRequest">X</button></div>';
+			echo '<div><button title="Annuler le suivi" class="unAcceptRequest" idtouitos="'.$touitos->getId().'">X</button>';
 			echo  getTouitosVignette($bd,$touitos);
+			echo '</div>';
 		}
 
 		echo '</div>';
