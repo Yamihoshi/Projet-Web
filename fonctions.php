@@ -112,7 +112,7 @@
 	function getPhoto($user,$id)
 	{
 		if($user->getPhoto()==1)
-			return '<img id='.$id.' src="files/pictures/'.$user->getPseudo().'.jpg">';
+			return '<img id='.$id.' src="files/pictures/'.$user->getId().'.jpg">';
 		else
 			return '<img id='.$id.' src="includes/img/no_pic.png">';
 	}

@@ -1,4 +1,21 @@
 ﻿<?php
+require_once('fonctions.php');
+
+if(isset($_POST["editName"]))
+{
+		$th = new TouitosHandler($bd);
+		$connectedUser=$th->getByAttr("pseudo",$_SESSION['user'],PDO::PARAM_STR);
+		$connectedUser->_setNom($_POST['editName']);
+		$connectedUser->_setStatut($_POST['editStatut']);
+
+		$FileDir = 'files/pictures/'.$_SESSION['id'].'.jpg';
+
+		if (!empty($_FILES['profile_pic_upload']['tmp_name']) AND move_uploaded_file($_FILES['profile_pic_upload']['tmp_name'], $FileDir)) {
+			$connectedUser->_setPhoto(true);
+		}
+
+		updateTouitos($bd,$connectedUser);
+}
 
 include('nav.php');
 ?>
@@ -7,21 +24,7 @@ include('nav.php');
 
 	<?php		
 	
-	if(isset($_POST["editName"]))
-	{
-		$th = new TouitosHandler($bd);
-		$connectedUser=$th->getByAttr("pseudo",$_SESSION['user'],PDO::PARAM_STR);
-		$connectedUser->_setNom($_POST['editName']);
-		$connectedUser->_setStatut($_POST['editStatut']);
 
-		$FileDir = 'files/pictures/'.$connectedUser->getPseudo().'.jpg';
-
-		if (!empty($_FILES['profile_pic_upload']['tmp_name']) AND move_uploaded_file($_FILES['profile_pic_upload']['tmp_name'], $FileDir)) {
-			$connectedUser->_setPhoto(true);
-		}
-
-		updateTouitos($bd,$connectedUser);
-	}
 
 
 			if(isset($_GET['user']))

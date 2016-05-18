@@ -9,7 +9,7 @@
 <body>
 
 <?php
-require('fonctions.php');
+require_once('fonctions.php');
 
 	echo '<nav>
 		<ul>
