@@ -1,3 +1,12 @@
+function htmlEncode(str) {
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+}
+
 function loadNewProfilePic(input)
 {
         var reader = new FileReader();
@@ -223,7 +232,7 @@ $(document).ready(function()
             var balise = '<div id="edit">';
             balise+='<form id="editForm" action="'+window.location.href+'" method="POST" enctype="multipart/form-data" >';
             balise += '<fieldset><legend>Modification</legend>';
-            balise +='<label for="editName">Nom</label><input id="editName" type="text" name="editName" value="'+$("#profile_name").text()+'">';
+            balise +='<label for="editName">Nom</label><input id="editName" type="text" name="editName" value="'+htmlEncode($("#profile_name").text())+'">';
             balise += '<label for="editStatut">Description</label><textarea name="editStatut" form="editForm" placeholder = "Description..." id="editStatut" >'+$("#profile_statut").text()+'</textarea>';
             
 
