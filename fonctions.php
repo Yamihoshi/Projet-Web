@@ -148,7 +148,7 @@
 		echo '<div id="searchResult">';
 		foreach($res as $key=>$touitos)
 		{
-			if(isset($_SESSION['user']) && !isOwnProfile($touitos->getPseudo()))
+			if(!isset($_SESSION['user']) || !isOwnProfile($touitos->getPseudo()))
 				getTouitosVignette($bd,$touitos);
 		}
 		echo '</div>';
