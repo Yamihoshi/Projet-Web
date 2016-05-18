@@ -123,7 +123,7 @@ $(document).ready(function()
     });
 
     //suppression message
-    $('.icon-bin2').on('click', function(event){
+    $("#pageDisplay").on("click",".icon-bin2",function(event){
         var message =$(this).parents('article');
         $.ajax({
             type:"GET",
