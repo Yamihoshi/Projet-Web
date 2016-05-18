@@ -361,7 +361,7 @@ $(document).ready(function()
         });
     });
 
-    $("#pageDisplay").on("click",$("#moreSearchResult"),function(){
+    $("#pageDisplay").on("click","#moreSearchResult",function(){
         
         var nextPage=parseInt($("#moreSearchResult").attr("next"));
         var search=$("#searchBar").val();

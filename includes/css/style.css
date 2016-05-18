@@ -71,6 +71,7 @@ fieldset{
 button:disabled
 {
 	background:#C2D2DE;
+	border : 1px solid #C2D2DE;
 	cursor:default;
 }
 .message img{
@@ -82,13 +83,13 @@ button:disabled
       flex: 0 1 auto;
  }
 .followed{
-	/*background-color:#003366;*/
 		background-color:#12BDCD;
+	border : 1px solid #12BDCD;
 }
 
 .modal-header{
 	/*background-color: #dc5656;*/
-	background-color:#4173c9;
+	background-color:#0084B4;
 }
 #pageDisplay
 {
@@ -223,8 +224,7 @@ nav img
 }
 
 button, input[type="submit"]{
-	/*background-color: #dc5656;*/
-	background-color: #4173c9;
+	background-color: #dc5656;
 	cursor: pointer;
 	color: white;
 }
@@ -238,7 +238,7 @@ button:hover, input[type="submit"]:hover{
 button, textarea, input[type="submit"]{
 	font-family:"Verdana";
 	font-weight: 900;
-	border:1px solid black;
+	border:1px solid #dc5656;;
 	height: 35px;
 	text-align: center;
 	margin-top: 20px;
