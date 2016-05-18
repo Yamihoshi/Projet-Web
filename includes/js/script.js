@@ -1,9 +1,3 @@
-function updateInfos()
-{
-    $("#profile_name").html($("#editName").val());
-    $("#profile_statut").html($("#editStatut").val());
-}
-
 function loadNewProfilePic(input)
 {
         var reader = new FileReader();
@@ -164,59 +158,26 @@ $(document).ready(function()
             }
         });
     });
-    $('#touite').on('submit', function(event){
-        event.preventDefault();
-        $.ajax({
-            type:"POST",
-            url:"ajax.php",
-            data:
-                {
-                    message:$('#touite-box textarea').val()
-                },
-            success:function(response){
-                //$('#ongletSelect td:nth-child(1)').click();
-                $("#touiteList").html(response+$("#touiteList").html());
-                $("#touiteArea").val("");
-            }
-        });
-        //$('#ongletSelect td:nth-child(1)').click();
-    });
-
-
-    $("#editDiv").on('click',"#cancelEdit",function()
-    {
-        resetEditButton();
-        resetInfos();
-    });
-
-    $("#editDiv").on('click',"#saveEdit",function(event)
-    {
-      /* event.preventDefault();
-        resetEditButton();
-        updateInfos();
-        $( "#editForm" ).submit();*/
-
-       /* var form = new Object();
-        form['nom']=$("#profile_name").text();
-        form['statut']=$("#profile_statut").text();
-        form['file']=0;
-        console.log(typeof(document.getElementById("profile_pic_upload").files[0]));
-        if(typeof(document.getElementById("profile_pic_upload").files[0])!="undefined")
+    $("#pageDisplay").on("click",'#touite', function(event){
+        if(event.target.type=='submit')
         {
-            form['file']=1;
+            event.preventDefault();
+            $.ajax({
+                type:"POST",
+                url:"ajax.php",
+                data:
+                    {
+                        message:$('#touite-box textarea').val()
+                    },
+                success:function(response){
+                    //$('#ongletSelect td:nth-child(1)').click();
+                    $("#touiteList").html(response+$("#touiteList").html());
+                    $("#touiteArea").val("");
+                }
+            });
         }
-
-        var data = new FormData();
-        $.each(files, function(key, value)
-        {
-            data.append(key, value);
-        });
-
-        $.post("ajax.php",{editProfile:form,touitos:$("#touitos_pseudo").val()},function(rep){
-                $("body").append(rep);
-        });*/
-
     });
+
     /*function calculerCaractere(){
         $('compteurCaractere').html(140-$('#touite-box textarea').val().lenght());
     }
