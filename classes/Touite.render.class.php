@@ -47,7 +47,7 @@ date_default_timezone_set("Europe/Paris");
                         $this->renderPic($auteur);
                         echo '<div class="containeur">';
                             echo '<header class= "info">';
-                                echo '<div class="pseudo">@' . $auteur->getPseudo() .'</div>';
+                                echo '<div class="pseudo">@' . htmlentities($auteur->getPseudo()) .'</div>';
                                 echo '<div class="date">'. $newDate = date("d/m/Y", strtotime($touite->getLaDate())) . '</div>';
                         echo '</header>';
                         $this->echo_message($touite);
@@ -57,7 +57,7 @@ date_default_timezone_set("Europe/Paris");
          }
 
 		 public function echo_message(Touite $message){
-		 	echo '<div class="contenu_message">' . $message->getTexte() .'</div>';
+		 	echo '<div class="contenu_message">' . htmlentities($message->getTexte()) .'</div>';
 		 }
 
 		 public function renderPic($auteur){

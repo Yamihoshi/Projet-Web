@@ -54,10 +54,10 @@
 		}
 
 		echo '<div id="profile_photo">'.getPhoto($profile,"profile_picture_IMG").'</div>';
-		echo '<div id="profile_name">'.$profile->getNom().'</div>';
-		echo '<div id="profile_pseudo">@'.$profile->getPseudo().'</div>';
-		echo '<div id="profile_statut">'.$profile->getStatut().'</div>';
-		echo '<input type="hidden" id="touitos_pseudo" value='.$profile->getPseudo().'>';
+		echo '<div id="profile_name">'.htmlentities($profile->getNom()).'</div>';
+		echo '<div id="profile_pseudo">@'.htmlentities($profile->getPseudo()).'</div>';
+		echo '<div id="profile_statut">'.htmlentities($profile->getStatut()).'</div>';
+		echo '<input type="hidden" id="touitos_pseudo" value='.htmlentities($profile->getPseudo()).'>';
 
 		echo '</div>'; // Close profil_left
 
@@ -124,12 +124,12 @@
 
 	function getTouitosVignette($bd,Touitos $touitos)
 	{
-		echo '<div class="touitosDiv"><a href="profile.php?user='.$touitos->getPseudo().'">';
+		echo '<div class="touitosDiv"><a href="profile.php?user='.htmlentities($touitos->getPseudo()).'">';
 			echo '<div class="result_photo">'.getPhoto($touitos,"search_result_profile_pic").'</div>';
 			echo '<div class="result_details">';
-				echo '<div class="result_name">'.$touitos->getNom().'</div>';
-				echo '<div class="result_pseudo">@'.$touitos->getPseudo().'</div>';
-				echo '<div class="result_statut">'.$touitos->getStatut().'</div>';
+				echo '<div class="result_name">'.htmlentities($touitos->getNom()).'</div>';
+				echo '<div class="result_pseudo">@'.htmlentities($touitos->getPseudo()).'</div>';
+				echo '<div class="result_statut">'.htmlentities($touitos->getStatut()).'</div>';
 			echo '</div>';
 			echo '</a>';
 			if(isset($_SESSION['user']))
@@ -243,7 +243,7 @@
 			{
 				echo '<div id="requestLine">';
 
-				echo '<div id="requestPseudo" class="requestInfo"><a href="profile.php?user='.$data['pseudo'].'">@'.$data['pseudo'].'</a></div>';
+				echo '<div id="requestPseudo" class="requestInfo"><a href="profile.php?user='.htmlentities($data['pseudo']).'">@'.htmlentities($data['pseudo']).'</a></div>';
 
 				if($data['demande']=='E')
 				{
@@ -286,15 +286,15 @@
 		foreach($requestList as $key=>$data)
 		{
 			echo 'Une demande vous a été envoyé par :';
-			echo '<div>'.$data["pseudo"];
+			echo '<div>'.htmlentities($data["pseudo"]);
 
 			echo '<span id="requestButton">';
 
 			if($data['demande']!='R')
-				echo'<button id="refuseRequest" touitosId="'.$data['id'].'">Refuser</button>';
+				echo'<button id="refuseRequest" touitosId="'.htmlentities($data['id']).'">Refuser</button>';
 
 			if($data['demande']!='V')
-				echo '<button id="acceptRequest" touitosId="'.$data['id'].'">Accepter</button>';
+				echo '<button id="acceptRequest" touitosId="'.htmlentities($data['id']).'">Accepter</button>';
 
 			echo '</span>';
 
