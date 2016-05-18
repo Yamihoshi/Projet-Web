@@ -347,9 +347,9 @@ $(document).ready(function()
         });
     });
 
-    $("#loadMoreProfileTouite").click(function(){
+    $("#pageDisplay").on("click","#loadMoreProfileTouite",function(){
         
-        var nextPage=parseInt($(this).attr("next"));
+        var nextPage=parseInt($("#loadMoreProfileTouite").attr("next"));
         var id=parseInt($(this).attr("idtouitos"));
 
         $.get("ajax.php",{moreProfileTouite:true,offset:nextPage,id:id},function(rep){

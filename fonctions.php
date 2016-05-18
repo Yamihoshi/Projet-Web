@@ -148,7 +148,8 @@
 		echo '<div id="searchResult">';
 		foreach($res as $key=>$touitos)
 		{
-			getTouitosVignette($bd,$touitos);
+			if(isset($_SESSION['user']) && !isOwnProfile($touitos->getPseudo()))
+				getTouitosVignette($bd,$touitos);
 		}
 		echo '</div>';
 
@@ -232,27 +233,37 @@
 			echo '<div> Vous ne suivez personne</div>';
 		}
 
-		foreach($requestList as $key=>$data)
+		else
 		{
-			echo '<div id="requestLine">';
+			echo '<div id="whoIFollowRequest"><div class="boxHeader">Demandes en attente</div>';
+			if(empty($requestList))
+				echo '<div>Aucune demande en attente</div>';
 
-			echo '<div id="requestPseudo" class="requestInfo"><a href="profile.php?user='.$data['pseudo'].'">@'.$data['pseudo'].'</a></div>';
-
-			if($data['demande']=='E')
+			foreach($requestList as $key=>$data)
 			{
-				echo '<div class="requestInfo">En Attente</div>';
-			}
-			else
-			{
-				echo '<div class="requestInfo">Refusée</div>';
-			}
+				echo '<div id="requestLine">';
 
+				echo '<div id="requestPseudo" class="requestInfo"><a href="profile.php?user='.$data['pseudo'].'">@'.$data['pseudo'].'</a></div>';
+
+				if($data['demande']=='E')
+				{
+					echo '<div class="requestInfo">En Attente</div>';
+				}
+				else
+				{
+					echo '<div class="requestInfo">Refusée</div>';
+				}
+
+				echo '</div>';
+			}
 			echo '</div>';
-		}
 
-		foreach($list as $key=>$touitos)
-		{
-			echo  getTouitosVignette($bd,$touitos);
+			echo '<div id="whoIFollow"><div class="boxHeader">Touitos que vous suivez</div>';
+			foreach($list as $key=>$touitos)
+			{
+				echo  getTouitosVignette($bd,$touitos);
+			}
+			echo '</div>';
 		}
 
 		echo '</div>';
