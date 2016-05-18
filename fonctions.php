@@ -148,7 +148,7 @@
 		echo '<div id="searchResult">';
 		foreach($res as $key=>$touitos)
 		{
-				getTouitosVignette($bd,$touitos);
+			getTouitosVignette($bd,$touitos);
 		}
 		echo '</div>';
 
@@ -167,7 +167,7 @@
 		$res=$th->searchByName($str,intval($offset)*16);
 		foreach($res as $key=>$touitos)
 		{
-				getTouitosVignette($bd,$touitos);
+			getTouitosVignette($bd,$touitos);
 		}
 	}
 

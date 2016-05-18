@@ -87,7 +87,8 @@ button:disabled
 }
 
 .modal-header{
-	background-color: #dc5656;
+	/*background-color: #dc5656;*/
+	background-color:#4173c9;
 }
 #pageDisplay
 {
@@ -222,7 +223,8 @@ nav img
 }
 
 button, input[type="submit"]{
-	background-color: #dc5656;
+	/*background-color: #dc5656;*/
+	background-color: #4173c9;
 	cursor: pointer;
 	color: white;
 }
