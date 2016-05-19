@@ -114,7 +114,7 @@ class touiteHandler
 
   public function getTouitesOfWhoIFollow($id,$offset)
   {
-    $q = $this->_db->prepare('SELECT * FROM Touites,touitos,suivre WHERE idAuteur=id AND idDemandeur=:id AND idReceveur=idAuteur AND suivre.demande="V" ORDER BY ladate DESC LIMIT 10 OFFSET :offset');
+    $q = $this->_db->prepare('(SELECT idMsg,laDate,texte,idAuteur,1 as type FROM Touites NATURAL JOIN TouitesPublics,touitos,suivre WHERE idAuteur=id AND idDemandeur=:id AND idReceveur=idAuteur AND suivre.demande="V") UNION (SELECT idMsg,laDate,texte,idAuteur,2 as type FROM Touites NATURAL JOIN retouites,touitos,suivre WHERE idAuteur=id AND idDemandeur=:id AND idReceveur=idAuteur AND suivre.demande="V") ORDER BY ladate DESC LIMIT 10 OFFSET :offset');
     $q->bindValue(':id', $id, PDO::PARAM_INT);
     $q->bindValue(':offset', $offset, PDO::PARAM_INT);
     $q->execute();

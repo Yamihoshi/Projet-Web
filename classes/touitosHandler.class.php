@@ -153,11 +153,12 @@ class touitosHandler
       return $followers;
   }
 
-  public function getWhoIRequest(Touitos $current)
+  public function getWhoIRequest(Touitos $current,$demande)
   {
       $request = [];
-      $q = $this->_db->prepare('SELECT * FROM Touitos JOIN suivre ON suivre.idReceveur=touitos.id WHERE idDemandeur=:id AND demande!="V"');
+      $q = $this->_db->prepare('SELECT * FROM Touitos JOIN suivre ON suivre.idReceveur=touitos.id WHERE idDemandeur=:id AND demande=:demande');
       $q->bindValue(':id', $current->getId(), PDO::PARAM_INT);
+      $q->bindValue(':demande', $demande, PDO::PARAM_STR);
       $q->execute();
       while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
       {

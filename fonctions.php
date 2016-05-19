@@ -223,39 +223,49 @@
 	{
 		$th=new TouitosHandler($bd);
 		$connectedUser=$th->getByAttr("pseudo",$_SESSION['user'],PDO::PARAM_STR);
-		$requestList=$th->getWhoIRequest($connectedUser);
+		$refusedRequestList=$th->getWhoIRequest($connectedUser,"R");
+		$sendedRequestList=$th->getWhoIRequest($connectedUser,"E");
 		$list=$th->getWhoIFollow($connectedUser);
 
 		echo '<div id="whoIFollowDiv">';
 
-		if(empty($list) && empty($requestList))
+		if(empty($list) && empty($refusedRequestList) && empty($sendedRequestList))
 		{
 			echo '<div> Vous ne suivez personne</div>';
 		}
 
 		else
 		{
-			echo '<div id="whoIFollowRequest"><div class="boxHeader">Demandes en attente</div>';
-			if(empty($requestList))
-				echo '<div>Aucune demande en attente</div>';
+			echo '<div id="whoIFollowRequest">';
+			if(empty($refusedRequestList) && empty($sendedRequestList))
+				echo '<div class="boxHeader">Demandes en attente</div><div>Aucune demande en attente</div>';
 
-			foreach($requestList as $key=>$data)
+
+			echo '<div id="refusedRequestList" class="requestDiv"><div class="boxHeader">Demandes refusées</div>';
+			foreach($refusedRequestList as $key=>$data)
 			{
 				echo '<div id="requestLine">';
 
-				echo '<div id="requestPseudo" class="requestInfo"><a href="profile.php?user='.htmlentities($data['pseudo']).'">@'.htmlentities($data['pseudo']).'</a></div>';
-
-				if($data['demande']=='E')
-				{
-					echo '<div class="requestInfo">En Attente</div>';
-				}
-				else
-				{
-					echo '<div class="requestInfo">Refusée</div>';
-				}
+					echo '<div id="requestPseudo" class="requestInfo"><a href="profile.php?user='.htmlentities($data['pseudo']).'">@'.htmlentities($data['pseudo']).'</a></div>';
 
 				echo '</div>';
 			}
+			echo '</div>';
+
+			echo '<div id="sendedRequestList" class="requestDiv"><div class="boxHeader">Demandes en attente</div>';
+			foreach($sendedRequestList as $key=>$data)
+			{
+				echo '<div id="requestLine">';
+
+					echo '<div id="requestPseudo" class="requestInfo"><a href="profile.php?user='.htmlentities($data['pseudo']).'">@'.htmlentities($data['pseudo']).'</a></div>';
+
+				echo '</div>';
+			}
+			echo '</div>';
+
+
+
+
 			echo '</div>';
 
 			echo '<div id="whoIFollow"><div class="boxHeader">Touitos que vous suivez</div>';
@@ -338,6 +348,7 @@
 		$th=new TouiteRender($id, $bd);
 		$th->renderReponse($id, $bd);
 	}
+
 	function envoyer_reponse($id, Touite $message, $bd){
 		$th=new TouiteHandler($bd);
 		$th->addReponse($message, $id);

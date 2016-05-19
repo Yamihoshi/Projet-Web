@@ -476,12 +476,6 @@ input[type="search"]
     content: "\e905";
 }
 
-.requestInfo
-{
-	width:100px;
-	display:inline-block;
-}
-
 #requestPseudo
 {
 	font-style:italic;
@@ -511,6 +505,12 @@ input[type="search"]
 	margin-top:40px;
 	background-color: #fff;
 	box-shadow: 0 1px 2px rgba(0,0,0,.1);
+}
+
+.requestDiv
+{
+	display:inline-block;
+	margin-right:20px;
 }
 
 .boxHeader
