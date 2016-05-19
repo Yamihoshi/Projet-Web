@@ -206,8 +206,6 @@ $(document).ready(function()
 
         var index = $('td').index(this);
 
-        if(index!=3)
-            $("#profile_left_infos").show();
 
         if(index==0)
         {
@@ -229,28 +227,30 @@ $(document).ready(function()
         }
         else if(index == 3){
 
-            $("#profile_left_infos").hide();
-
             var balise = '<div id="edit">';
             balise+='<form id="editForm" action="'+window.location.href+'" method="POST" enctype="multipart/form-data" >';
             balise += '<fieldset><legend>Modification</legend>';
-            balise +='<label for="editName">Nom</label><input id="editName" type="text" name="editName" value="'+htmlEncode($("#profile_name").text())+'">';
-            balise += '<label for="editStatut">Description</label><textarea name="editStatut" form="editForm" placeholder = "Description..." id="editStatut" >'+$("#profile_statut").text()+'</textarea>';
+            balise +='<p><label class="modif" for="editName">Nom</label><input id="editName" type="text" name="editName" value="'+htmlEncode($("#profile_name").text())+'"></p>';
+            balise += '<p><label class="modif" for="editStatut">Description</label><textarea name="editStatut" form="editForm" placeholder = "Description..." id="editStatut" >'+$("#profile_statut").text()+'</textarea></p>';
             
-
-            var fileUploadDiv='<label for="profile_pic_upload">';
-            fileUploadDiv+='<div id="profile_photo_uploadDiv"></div></label>';
-            fileUploadDiv+='<input  type="file" onchange="loadNewProfilePic(this)" style="display:none;" name="profile_pic_upload" id="profile_pic_upload" accept="image/x-png, image/gif, image/jpeg">';
+            var fileUploadDiv='<p><label for="profile_pic_upload">Photo';
+            fileUploadDiv+='<div id="profile_photo_uploadDiv" class="modif modif_left"></div></label></p>';
+            fileUploadDiv+='<p><input  class="modif_left" type="file" onchange="loadNewProfilePic(this)" style="display:none" name="profile_pic_upload" id="profile_pic_upload" accept="image/x-png, image/gif, image/jpeg"></p>';
             balise+=fileUploadDiv;
 
-            var select = '<select><option style="background-color:white">white</option>';
+            var select = '<p><label class="modif" for="editColor">Couleur Fond</label><select id="editColor"><option style="background-color:white">white</option>';
             select += '<option style="background-color:blue">blue</option>';
             select += '<option style="background-color:aliceblue">aliceblue</option>';
-            select += '</select>';
+            select += '</select></p>';
             balise += select;
-            
+            select = '<p><label class="modif" for="editPolice">Police</label><select id="editPolice"><option>Arial</option>';
+            select += '<option>Verdana</option>';
+            select += '<option>Georgia</option>';
+            select += '<option>Impact</option>';
+            select += '</select></p>';
+            balise += select;
             balise+='<input type="submit" id="saveEdit" value="Enregistrer les modifications">';
-            balise+='<div><button id="deleteAccount" type="button">Supprimer le compte</button></div>';
+            balise+='<span><button id="deleteAccount" type="button">Supprimer le compte</button></span>';
             balise += '</fieldset>';
 
             balise +='</form></div>';

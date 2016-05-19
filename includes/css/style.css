@@ -42,8 +42,14 @@ nav li input, nav li button{
 .container{
 	flex-wrap: column wrap;
 }
-
-input:not([type='submit'])  {
+#editForm select{
+	padding: 10px;
+  border: none;
+}
+#edit span{
+	float:right;
+}
+input:not([type='submit']){
   padding: 10px;
   border: none;
   border-bottom: solid 2px #c9c9c9;
@@ -58,12 +64,20 @@ fieldset{
 .contenu_message, .pseudo, .date{
 	padding: 0 10px;
 }
-
+form#editForm label { display:inline-block; width:120px;float: left; }
+form#editForm textarea, form#editForm input { display:inline-block; }
 .pseudo
 {
 	font-weight:bold;
 }
 
+.modif{
+	width: 30%;
+	padding-top: 15px;
+}
+.modif_left{
+	margin-left: 100px;
+}
 .pseudo:hover
 {
 	text-decoration: underline;
@@ -148,7 +162,7 @@ button:disabled
 	text-align: left;
 }
 #edit > form:nth-child(1) > fieldset:nth-child(1) > label:nth-child(4){
-	display: block
+	display: inline-block;
 }
 .modal {
     display: none; /* Hidden by default */
