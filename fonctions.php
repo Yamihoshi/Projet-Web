@@ -451,5 +451,13 @@
 		}
 	}
 
+	function getNumberOfNotRead($bd)
+	{
+		$th=new touitePriveHandler($bd);
+		$nb=$th->getNumberOfNotRead($_SESSION['id']);
+
+		return $nb;
+	}
+
 
 ?>

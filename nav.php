@@ -41,7 +41,7 @@ require_once('fonctions.php');
 
 			if(isset($_SESSION['user']))
 			{
-				echo '<li><a href="discussion.php">MAIL</a></li>';
+				echo '<li><a href="discussion.php">MAIL ('.getNumberOfNotRead($bd).')</a></li>';
 			}
 
 		echo'
