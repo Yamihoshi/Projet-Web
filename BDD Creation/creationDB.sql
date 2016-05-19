@@ -106,16 +106,19 @@ create table retouites
 
 create table touitesprives
 (
-	idmsg int not null,
-	idauteur int not null,
-	idreceveur int not null,
-	idmsgsource int,
+	idMsg int not null,
+	idReceveur int not null,
+	idDiscussion int not null,
 	primary key (idmsg),
 	foreign key (idmsg) references touites (idmsg)
 	on delete cascade,
-	foreign key (idauteur) references touitos (id),
 	foreign key (idreceveur) references touitos (id),
-	foreign key (idmsgsource) references touites (idmsg),
-	check (idmsg!=idmsgsource)	
+	foreign key (idDiscussion) references discussion (idDiscussion)
+);
+
+CREATE TABLE discussion
+(
+	idDiscussion int PRIMARY KEY auto_increment,
+	discussionName VARCHAR(50) NOT NULL
 );
 

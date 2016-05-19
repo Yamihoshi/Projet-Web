@@ -8,10 +8,27 @@ if(isset($_POST["editName"]))
 		$connectedUser->_setNom($_POST['editName']);
 		$connectedUser->_setStatut($_POST['editStatut']);
 
-		$FileDir = 'files/pictures/'.$_SESSION['id'].'.jpg';
+		if(!empty($_FILES['profile_pic_upload']['tmp_name']) )
+		{
+			$img = $_FILES['profile_pic_upload']['type'];
+			$type = explode("/", $img);
+			$extension = $type[1];
 
-		if (!empty($_FILES['profile_pic_upload']['tmp_name']) AND move_uploaded_file($_FILES['profile_pic_upload']['tmp_name'], $FileDir)) {
-			$connectedUser->_setPhoto(true);
+			$FileDir = 'files/pictures/'.$_SESSION['id'].'.'.$extension;
+
+			$check = getimagesize($_FILES['profile_pic_upload']['tmp_name']);
+	   		 if($check !== false) 
+	   		 {
+	   		 	foreach(glob("files/pictures/".$_SESSION['id'].".*") as $file)
+			    {
+			            unlink($file);
+			    }
+
+				if (move_uploaded_file($_FILES['profile_pic_upload']['tmp_name'], $FileDir))
+				{
+						$connectedUser->_setPhoto(true);
+				}
+			}
 		}
 
 		updateTouitos($bd,$connectedUser);

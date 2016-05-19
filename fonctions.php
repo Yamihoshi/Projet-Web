@@ -4,6 +4,8 @@
 	require_once("classes/touitosHandler.class.php");
 	require_once("classes/TouiteHandler.class.php");
 	require_once("classes/Touite.render.class.php");
+	require_once("classes/touitePrive.class.php");
+	require_once("classes/touitePriveHandler.class.php");
 	require_once("config/connexion.php");
 	session_start();
 
@@ -112,7 +114,12 @@
 	function getPhoto($user,$id)
 	{
 		if($user->getPhoto()==1)
-			return '<img id='.$id.' src="files/pictures/'.$user->getId().'.jpg">';
+		{
+			foreach(glob("files/pictures/".$user->getId().".*") as $file)
+		    {
+		           return '<img id='.$id.' src="'.$file.'">';
+		    }	
+		}
 		else
 			return '<img id='.$id.' src="includes/img/no_pic.png">';
 	}
@@ -416,6 +423,30 @@
 		{
 			echo '<div class="contactRow">';
 			echo '@'.$touitos->getPseudo();
+			echo '</div>';
+		}
+	}
+
+	function getDiscussionList($bd)
+	{
+		$th=new touitePriveHandler($bd);
+		$list=$th->getDiscussionList($_SESSION['id']);
+		foreach($list as $key=>$touite)
+		{
+			echo '<div class="discussionRow">';
+			echo $touite->getDiscussionName();
+			echo '</div>';
+		}
+	}
+
+	function getDiscussionMessage($bd,$id)
+	{
+		$th=new touitePriveHandler($bd);
+		$list=$th->getDiscussionList($id);
+		foreach($list as $key=>$touite)
+		{
+			echo '<div class="discussionMessageRow">';
+			echo $touite->getTexte();
 			echo '</div>';
 		}
 	}

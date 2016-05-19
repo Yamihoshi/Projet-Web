@@ -520,6 +520,13 @@ input[type="search"]
 	vertical-align:top;
 }
 
+.discussionSection
+{
+	display:inline-block;
+	vertical-align:top;
+	width:30%;
+}
+
 .boxHeader
 {
 	
