@@ -206,6 +206,9 @@ $(document).ready(function()
 
         var index = $('td').index(this);
 
+        if(index!=3)
+            $("#profile_left_infos").show();
+
         if(index==0)
         {
             $.get("ajax.php",{getTimeline:true},function(rep){
@@ -226,6 +229,7 @@ $(document).ready(function()
         }
         else if(index == 3){
 
+            $("#profile_left_infos").hide();
 
             var balise = '<div id="edit">';
             balise+='<form id="editForm" action="'+window.location.href+'" method="POST" enctype="multipart/form-data" >';
@@ -242,7 +246,6 @@ $(document).ready(function()
             var select = '<select><option style="background-color:white">white</option>';
             select += '<option style="background-color:blue">blue</option>';
             select += '<option style="background-color:aliceblue">aliceblue</option>';
-            select += '<option style="background-color:green">green</option>';
             select += '</select>';
             balise += select;
             
