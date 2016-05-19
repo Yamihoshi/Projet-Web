@@ -376,7 +376,16 @@ $(document).ready(function()
         var id=$(this).attr("idtouitos");
 
         $.get("ajax.php",{discussion:true,destinataire:id},function(rep){
-            $("#discussionDisplay").html(rep);
+            $("#discussionMessage").html(rep);
+        });
+    });
+
+    $("#pageDisplay").on("click","#sendDiscussion",function()
+    {
+        var idDiscussion=$(this).attr("idDiscussion");
+
+        $.get("ajax.php",{discussion:true,destinataire:id},function(rep){
+            $("#discussionMessage").html(rep);
         });
     });
 

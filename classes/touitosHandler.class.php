@@ -210,6 +210,19 @@ class touitosHandler
 
   }
 
+  public function isContact($user,$user2)
+  {
+      $q = $this->_db->prepare('SELECT * FROM touitos JOIN suivre ON suivre.idDemandeur=touitos.id WHERE idReceveur=:id AND idDemandeur=:id2 demande="V"');
+     $q->bindValue(':id', $user, PDO::PARAM_INT);
+     $q->execute();
+    $donnees = $q->fetch(PDO::FETCH_ASSOC))
+  
+    if(empty($donnees))
+      return false;
+
+    return true;
+  }
+
   function answerRequest($current,$suiveur,$rep)
   {
     $q = $this->_db->prepare('UPDATE suivre SET demande=:rep WHERE idDemandeur=:demandeur AND idReceveur=:receveur');
@@ -242,7 +255,7 @@ class touitosHandler
     $q->bindValue(':id', $id, PDO::PARAM_INT);
     $q->execute();
 
-    $q = $this->_db->prepare('DELETE FROM touitesprives WHERE idAuteur=:id OR idReceveur=:id');
+    $q = $this->_db->prepare('DELETE FROM touitesprives WHERE idReceveur=:id OR idMsg IN(SELECT idMsg FROM touites WHERE idAuteur=:id)');
     $q->bindValue(':id', $id, PDO::PARAM_INT);
     $q->execute();
 

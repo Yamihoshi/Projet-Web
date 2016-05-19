@@ -29,7 +29,7 @@ class touitePriveHandler
       $touites[] = new TouitePrive($donnees);
     }
 
-    $q = $this->_db->prepare('UPDATE touitesprives SET vu=1 WHERE idReceveur=:idUser AND idMsg IN (SELECT idMsg FROM touites WHERE idAuteur=:id)');
+    $q = $this->_db->prepare('UPDATE touitesprives NATURAL JOIN touites SET vu=1  WHERE idReceveur=:idUser AND idAuteur=:id');
     $q->bindValue(':idUser', $user, PDO::PARAM_INT);
     $q->bindValue(':id', $touitos, PDO::PARAM_INT);
     $q->execute();

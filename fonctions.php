@@ -59,7 +59,6 @@
 		echo '<div id="profile_name">'.htmlentities($profile->getNom()).'</div>';
 		echo '<div id="profile_pseudo">@'.htmlentities($profile->getPseudo()).'</div>';
 		echo '<div id="profile_statut">'.htmlentities($profile->getStatut()).'</div>';
-		echo '<input type="hidden" id="touitos_pseudo" value='.htmlentities($profile->getPseudo()).'>';
 
 		echo '</div>'; // Close profil_left
 
@@ -435,6 +434,13 @@
 			echo $touite->getTexte();
 			echo '</div>';
 		}
+
+		echo '<div id="discussionInput">';
+			echo '<textarea placeholder="Votre Message" name="discussionAnswer" id="discussionAnswer"></textarea>';
+			echo '<div><button id="sendDiscussion" replyTo="'.$id.'">Envoyer</button></div>';
+		echo '</div>';
+
+		echo '</div>';
 	}
 
 	function getNumberOfNotRead($bd)

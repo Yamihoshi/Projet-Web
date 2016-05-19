@@ -112,7 +112,6 @@ create table touitesprives
 	primary key (idmsg),
 	foreign key (idmsg) references touites (idmsg)
 	on delete cascade,
-	foreign key (idreceveur) references touitos (id),
-	foreign key (idDiscussion) references discussion (idDiscussion)
+	foreign key (idreceveur) references touitos (id)
 );
 
