@@ -215,7 +215,7 @@ class touitosHandler
       $q = $this->_db->prepare('SELECT * FROM touitos JOIN suivre ON suivre.idDemandeur=touitos.id WHERE idReceveur=:id AND idDemandeur=:id2 demande="V"');
      $q->bindValue(':id', $user, PDO::PARAM_INT);
      $q->execute();
-    $donnees = $q->fetch(PDO::FETCH_ASSOC));
+    $donnees = $q->fetch(PDO::FETCH_ASSOC);
   
     if(empty($donnees))
       return false;
