@@ -47,7 +47,7 @@ date_default_timezone_set("Europe/Paris");
                         $this->renderPic($auteur);
                         echo '<div class="containeur">';
                             echo '<header class= "info">';
-                                echo '<div class="pseudo">@' . htmlentities($auteur->getPseudo()) .'</div>';
+                                echo '<div class="pseudo"><a href="profile.php?user='.$auteur->getPseudo().'">@' . htmlentities($auteur->getPseudo()) .'</a></div>';
                                 echo '<div class="date">'. $newDate = date("d/m/Y", strtotime($touite->getLaDate())) . '</div>';
                         echo '</header>';
                         $this->echo_message($touite);
@@ -62,11 +62,12 @@ date_default_timezone_set("Europe/Paris");
 
 		 public function renderPic($auteur){
 
-		 	echo '
+		 	echo '<a href="profile.php?user='.$auteur->getPseudo().'">
 		 			<picture>
 						<source src="http://'. $_SERVER['SERVER_NAME']. '/projet-web/files/pictures/Megumin.jpg">
 						<img src="http://'. $_SERVER['SERVER_NAME']. '/projet-web/files/pictures/Megumin.jpg">
 					</picture>
+                </a>
             ';
 		 }
          public function renderFooter($message){

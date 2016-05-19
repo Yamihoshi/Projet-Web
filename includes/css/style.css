@@ -64,6 +64,11 @@ fieldset{
 	font-weight:bold;
 }
 
+.pseudo:hover
+{
+	text-decoration: underline;
+}
+
 .message > div:last-child {
     flex: 1;
     order:3;
