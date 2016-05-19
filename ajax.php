@@ -116,4 +116,9 @@ require_once('classes/touite.class.php');
 		}
 	}
 
+	else if(isset($_GET['discussion']))
+	{
+		getDiscussionMessage($bd,$_GET['destinataire']);
+	}
+
 ?>

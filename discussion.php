@@ -11,15 +11,11 @@ include('nav.php');
 			header('Location: index.php');
 		else
 		{
-			echo '<div id="discussionList" class="discussionSection"><div class="boxHeader">Mes discussions</div>';
-				getDiscussionList($bd);
-			echo '</div>';
-
 			echo '<div id="discussionDisplay" class="discussionSection"><div class="boxHeader">Discussions</div>';
-				getDiscussionMessage($bd,1);
+				echo 'Choisissez une discussion';
 			echo '</div>';
 
-						echo '<div id="contactList" class="discussionSection"><div class="boxHeader">Liste des contacts</div>';
+			echo '<div id="contactList" class="discussionSection"><div class="boxHeader">Liste des contacts</div>';
 				getContact($bd);
 			echo '</div>';
 		}

@@ -17,36 +17,30 @@ class touitePriveHandler
     $this->_db = $db;
   }
 
-  public function getDiscussionList($idTouitos)
-  {
-  	$touites = [];
-    $q = $this->_db->prepare('SELECT * FROM discussion NATURAL JOIN touitesprives NATURAL JOIN touites WHERE idAuteur = :id OR idReceveur=:id ORDER BY ladate DESC');
-    $q->bindValue(':id', $idTouitos, PDO::PARAM_INT);
-    $q->execute();
-    while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
-    {
-      $touites[] = new TouitePrive($donnees);
-    }
-    return $touites;
-  }
-
-  public function getDiscussionMessage($idDiscussion)
+  public function getDiscussionMessage($user,$touitos)
   {
     $touites = [];
-    $q = $this->_db->prepare('SELECT * FROM discussion NATURAL JOIN touitesprives NATURAL JOIN touites WHERE idDiscussion=:id ORDER BY ladate DESC');
-    $q->bindValue(':id', $idDiscussion, PDO::PARAM_INT);
+    $q = $this->_db->prepare('SELECT * FROM touitesprives NATURAL JOIN touites WHERE (idReceveur=:idUser AND idAuteur=:id) OR (idReceveur=:id AND idAuteur=:idUser) ORDER BY ladate DESC');
+    $q->bindValue(':idUser', $user, PDO::PARAM_INT);
+    $q->bindValue(':id', $touitos, PDO::PARAM_INT);
     $q->execute();
     while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
     {
       $touites[] = new TouitePrive($donnees);
     }
+
+    $q = $this->_db->prepare('UPDATE touitesprives SET vu=1 WHERE idReceveur=:idUser AND idMsg IN (SELECT idMsg FROM touites WHERE idAuteur=:id)');
+    $q->bindValue(':idUser', $user, PDO::PARAM_INT);
+    $q->bindValue(':id', $touitos, PDO::PARAM_INT);
+    $q->execute();
+
     return $touites;
   }
 
   public function getNumberOfNotRead($idTouitos)
   {
     $touites = [];
-    $q = $this->_db->prepare('SELECT COUNT(*) as nb FROM discussion NATURAL JOIN touitesprives NATURAL JOIN touites WHERE idReceveur=:id AND vu=0');
+    $q = $this->_db->prepare('SELECT COUNT(*) as nb FROM touitesprives NATURAL JOIN touites WHERE idReceveur=:id AND vu=0');
     $q->bindValue(':id', $idTouitos, PDO::PARAM_INT);
     $q->execute();
     $donnees = $q->fetch(PDO::FETCH_ASSOC);

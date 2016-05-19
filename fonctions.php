@@ -412,8 +412,6 @@
 		$th->deleteAccount($_SESSION['id']);
 	}
 
-
-
 	/* Discussion*/
 	function getContact($bd)
 	{
@@ -421,20 +419,8 @@
 		$list=$th->getContact($_SESSION['id']);
 		foreach($list as $key=>$touitos)
 		{
-			echo '<div class="contactRow">';
-			echo '@'.$touitos->getPseudo();
-			echo '</div>';
-		}
-	}
-
-	function getDiscussionList($bd)
-	{
-		$th=new touitePriveHandler($bd);
-		$list=$th->getDiscussionList($_SESSION['id']);
-		foreach($list as $key=>$touite)
-		{
-			echo '<div class="discussionRow">';
-			echo $touite->getDiscussionName();
+			echo '<div class="contactRow" idtouitos='.$touitos->getId().'>';
+				echo '@'.$touitos->getPseudo();
 			echo '</div>';
 		}
 	}
@@ -442,7 +428,7 @@
 	function getDiscussionMessage($bd,$id)
 	{
 		$th=new touitePriveHandler($bd);
-		$list=$th->getDiscussionList($id);
+		$list=$th->getDiscussionMessage($_SESSION['id'],$id);
 		foreach($list as $key=>$touite)
 		{
 			echo '<div class="discussionMessageRow">';

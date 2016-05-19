@@ -371,4 +371,13 @@ $(document).ready(function()
         });
     });
 
+    $(".contactRow").click(function()
+    {
+        var id=$(this).attr("idtouitos");
+
+        $.get("ajax.php",{discussion:true,destinataire:id},function(rep){
+            $("#discussionDisplay").html(rep);
+        });
+    });
+
 });

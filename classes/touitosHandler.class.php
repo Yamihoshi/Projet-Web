@@ -199,7 +199,7 @@ class touitosHandler
   public function getContact($user)
   {
       $contact = [];
-      $q = $this->_db->prepare('SELECT * FROM touitos JOIN suivre ON suivre.idDemandeur=touitos.id WHERE idReceveur=:id AND demande="V" AND idDemandeur IN (SELECT idReceveur FROM suivre WHERE idDemandeur=:id AND demande="V")');
+      $q = $this->_db->prepare('SELECT * FROM touitos JOIN suivre ON suivre.idDemandeur=touitos.id WHERE idReceveur=:id AND demande="V" AND idDemandeur IN (SELECT idReceveur FROM suivre WHERE idDemandeur=:id AND demande="V") ORDER BY pseudo');
      $q->bindValue(':id', $user, PDO::PARAM_INT);
      $q->execute();
       while ($donnees = $q->fetch(PDO::FETCH_ASSOC))

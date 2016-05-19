@@ -108,18 +108,11 @@ create table touitesprives
 (
 	idMsg int not null,
 	idReceveur int not null,
-	idDiscussion int not null,
 	vu BOOLEAN NOT NULL,
 	primary key (idmsg),
 	foreign key (idmsg) references touites (idmsg)
 	on delete cascade,
 	foreign key (idreceveur) references touitos (id),
 	foreign key (idDiscussion) references discussion (idDiscussion)
-);
-
-CREATE TABLE discussion
-(
-	idDiscussion int PRIMARY KEY auto_increment,
-	discussionName VARCHAR(50) NOT NULL
 );
 
