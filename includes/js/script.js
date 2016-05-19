@@ -99,14 +99,16 @@ $(document).ready(function()
                     id:$(message).attr('id'),
                     voirMessage:true
                 },
-            dataType:'json'
+                success:function(response, status){
+                    $(message).append(response);
+            }
          });
     });
     //voir réponse
     $('.icon-bubble').on('click', function(event){
         var id =$(this).parents('article').attr('id');
-        modalIni('Répondre', '<form id="RetouiterModalForm"><textarea placeholder="Entrez votre message..." name="touite" maxlength="140" required=""></textarea><input type="submit"></form>');
-        $('#touiterModalForm').submit(function(event){
+        modalIni('Répondre', '<form id="RepondreModalForm"><textarea placeholder="Entrez votre message..." name="touite" maxlength="140" required=""></textarea><input type="submit"></form>');
+        $('#RepondreModalForm').submit(function(event){
             event.preventDefault();
             $.ajax({
                 type:"POST",
@@ -114,10 +116,10 @@ $(document).ready(function()
                 data:
                     {
                         id:id,
-                        message:$('#RetouiterModalForm > textarea').val(),
+                        message:$('#RepondreModalForm > textarea').val(),
                         discution:true
                     },
-                dataType:'json'
+                dataType:'html'
              });
          });
     });

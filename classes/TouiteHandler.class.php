@@ -15,6 +15,7 @@ class touiteHandler
   {
     if(strlen($Touite->gettexte()) <= 140){
       date_default_timezone_set("Europe/Paris");
+      $Touite->setLadate (date("Y-m-d H:i:s"));
       $q = $this->_db->prepare('INSERT INTO Touites VALUES(NULL,:dateT, :texte, :auteur)');
       $q->bindValue(':dateT', $Touite->getLaDate(), PDO::PARAM_STR);
       $q->bindValue(':texte', $Touite->getTexte(), PDO::PARAM_STR);
@@ -98,12 +99,9 @@ class touiteHandler
   }
   public function addReponse(Touite $touite, $idSource){
     $idMessage = $this->add($touite);
-    print_r("hihi " . $idMessage. "heyou");
-    print_r("hoho" . $idSource);
     $q = $this->_db->prepare('INSERT INTO TouitesReponses VALUES(:idR, :idS)');
     $q->bindValue(':idR', $idMessage, PDO::PARAM_INT);
     $q->bindValue(':idS', $idSource, PDO::PARAM_INT);
-    print("\n" . $idMessage);
     $q->execute();
   }
 
