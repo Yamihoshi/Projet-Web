@@ -100,4 +100,20 @@ require_once('classes/touite.class.php');
 		getMoreProfileTouite($bd,intval($_GET['offset']),$_GET['id']);
 	}
 
+	else if(isset($_POST['deleteAccount']))
+	{
+		$th=new touitosHandler($bd);
+		$connectedUser=$th->getByAttr("pseudo",$_SESSION['user'],PDO::PARAM_STR);
+
+		if($connectedUser->getPWD()!=md5($_POST['password']))
+		{
+			echo '<div>Mot de Passe incorrect</div>';
+		}
+		else
+		{
+			echo "OK";
+			deleteAccount($bd);
+		}
+	}
+
 ?>

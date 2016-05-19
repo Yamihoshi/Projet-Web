@@ -250,6 +250,7 @@ $(document).ready(function()
             balise += select;
             
             balise+='<input type="submit" id="saveEdit" value="Enregistrer les modifications">';
+            balise+='<div><button id="deleteAccount" type="button">Supprimer le compte</button></div>';
             balise += '</fieldset>';
 
             balise +='</form></div>';
@@ -260,6 +261,21 @@ $(document).ready(function()
 
             $("#profile_photo_uploadDiv").append($img);
         }
+    });
+
+    $('#pageDisplay').on("click","#deleteAccount",function(){
+
+        modalIni('Confirmer la suppression', '<label for="password">Entrez votre mot de passe</label><input type="password" id="password" name="password" placeholder="Mot de Passe" required><button id="confirmAccountSuppression" type="button">Confirmer</button>');
+
+    });
+
+    $('#myModal').on("click","#confirmAccountSuppression",function(){
+        $.post("ajax.php",{deleteAccount:true,password:$("#password").val()},function(rep){
+            if(rep!='OK')
+                $("#confirmAccountSuppression").parents('.modal-content').find('.modal-footer').html(rep);
+            else
+                window.location.replace("logout.php");
+        });
     });
 
     $('#pageDisplay').on("click",".subscribe",function(){

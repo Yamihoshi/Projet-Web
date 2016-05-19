@@ -240,28 +240,30 @@
 			if(empty($refusedRequestList) && empty($sendedRequestList))
 				echo '<div class="boxHeader">Demandes en attente</div><div>Aucune demande en attente</div>';
 
-
-			echo '<div id="refusedRequestList" class="requestDiv"><div class="boxHeader">Demandes refusées</div>';
-			foreach($refusedRequestList as $key=>$data)
+			else
 			{
-				echo '<div id="requestLine">';
+				echo '<div id="refusedRequestList" class="requestDiv"><div class="boxHeader">Demandes refusées</div>';
+				foreach($refusedRequestList as $key=>$data)
+				{
+					echo '<div id="requestLine">';
 
-					echo '<div id="requestPseudo" class="requestInfo"><a href="profile.php?user='.htmlentities($data['pseudo']).'">@'.htmlentities($data['pseudo']).'</a></div>';
+						echo '<span id="requestPseudo" class="requestInfo"><a href="profile.php?user='.htmlentities($data['pseudo']).'">@'.htmlentities($data['pseudo']).'</a></span>';
 
+					echo '</div>';
+				}
+				echo '</div>';
+
+				echo '<div id="sendedRequestList" class="requestDiv"><div class="boxHeader">Demandes en attente</div>';
+				foreach($sendedRequestList as $key=>$data)
+				{
+					echo '<div id="requestLine">';
+
+						echo '<span id="requestPseudo" class="requestInfo"><a href="profile.php?user='.htmlentities($data['pseudo']).'">@'.htmlentities($data['pseudo']).'</a></span>';
+
+					echo '</div>';
+				}
 				echo '</div>';
 			}
-			echo '</div>';
-
-			echo '<div id="sendedRequestList" class="requestDiv"><div class="boxHeader">Demandes en attente</div>';
-			foreach($sendedRequestList as $key=>$data)
-			{
-				echo '<div id="requestLine">';
-
-					echo '<div id="requestPseudo" class="requestInfo"><a href="profile.php?user='.htmlentities($data['pseudo']).'">@'.htmlentities($data['pseudo']).'</a></div>';
-
-				echo '</div>';
-			}
-			echo '</div>';
 
 
 
@@ -283,39 +285,60 @@
 	{
 		$th=new touitosHandler($bd);
 		$connectedUser=$th->getByAttr("pseudo",$_SESSION['user'],PDO::PARAM_STR);
-		$requestList=$th->getFollowRequest($connectedUser);
+		$refusedRequestList=$th->getFollowRequest($connectedUser,"R");
+		$sendedRequestList=$th->getFollowRequest($connectedUser,"E");
 		$list=$th->getFollowers($connectedUser);
 
 		echo '<div id="followedByDiv">';
 
-		if(empty($list) && empty($requestList))
+		if(empty($list) && empty($refusedRequestList) && empty($sendedRequestList))
 		{
-			echo '<div> Vous n\'êtes suivi par personne</div>';
+			echo '<div>Vous n\'êtes suivi par personne</div>';
 		}
 
-		foreach($requestList as $key=>$data)
+		else
 		{
-			echo 'Une demande vous a été envoyé par :';
-			echo '<div>'.htmlentities($data["pseudo"]);
+			echo '<div id="followedByRequest">';
+			if(empty($refusedRequestList) && empty($sendedRequestList))
+				echo '<div class="boxHeader">Demandes en attente</div><div>Aucune demande en attente</div>';
 
-			echo '<span id="requestButton">';
+			else
+			{
+				echo '<div id="refusedRequestList" class="requestDiv"><div class="boxHeader">Demandes refusées</div>';
+				foreach($refusedRequestList as $key=>$data)
+				{
+						echo '<div id="requestLine">';
 
-			if($data['demande']!='R')
-				echo'<button id="refuseRequest" touitosId="'.htmlentities($data['id']).'">Refuser</button>';
+							echo '<span id="requestPseudo" class="requestInfo"><a href="profile.php?user='.htmlentities($data['pseudo']).'">@'.htmlentities($data['pseudo']).'</a></span>';
+							echo '<span id="requestButton">';
+								echo '<button id="acceptRequest" touitosId="'.htmlentities($data['id']).'">Accepter</button>';
+							echo '</span>';
+						echo '</div>';
+				}
+					echo '</div>';
 
-			if($data['demande']!='V')
-				echo '<button id="acceptRequest" touitosId="'.htmlentities($data['id']).'">Accepter</button>';
+				echo '<div id="sendedRequestList" class="requestDiv"><div class="boxHeader">Demandes en attente</div>';
+				foreach($sendedRequestList as $key=>$data)
+				{
+					echo '<div id="requestLine">';
 
-			echo '</span>';
-
-
+						echo '<span id="requestPseudo" class="requestInfo"><a href="profile.php?user='.htmlentities($data['pseudo']).'">@'.htmlentities($data['pseudo']).'</a></span>';
+						echo '<span id="requestButton">';
+							echo'<button id="refuseRequest" touitosId="'.htmlentities($data['id']).'">Refuser</button>';
+							echo '<button id="acceptRequest" touitosId="'.htmlentities($data['id']).'">Accepter</button>';
+						echo '</span>';
+					echo '</div>';
+				}
+			}
 			echo '</div>';
-		}
 
-		foreach($list as $key=>$touitos)
-		{
-			echo '<div><button title="Annuler le suivi" class="unAcceptRequest" idtouitos="'.$touitos->getId().'">X</button>';
-			echo  gettouitosVignette($bd,$touitos);
+			foreach($list as $key=>$touitos)
+			{
+				echo '<div><button title="Annuler le suivi" class="unAcceptRequest" idtouitos="'.$touitos->getId().'">X</button>';
+				echo  gettouitosVignette($bd,$touitos);
+				echo '</div>';
+			}
+
 			echo '</div>';
 		}
 
@@ -327,7 +350,7 @@
 		$th=new touitosHandler($bd);
 		$connectedUser=$th->getByAttr("pseudo",$_SESSION['user'],PDO::PARAM_STR);
 
-		if($accept==true)
+		if($accept=="true")
 			$th->answerRequest($connectedUser,$user,"V");
 		else
 			$th->answerRequest($connectedUser,$user,"R");
@@ -374,6 +397,27 @@
 			return false;
 
 		return true;
+	}
+
+	function deleteAccount($bd)
+	{
+		$th=new touitosHandler($bd);
+		$th->deleteAccount($_SESSION['id']);
+	}
+
+
+
+	/* Discussion*/
+	function getContact($bd)
+	{
+		$th=new touitosHandler($bd);
+		$list=$th->getContact($_SESSION['id']);
+		foreach($list as $key=>$touitos)
+		{
+			echo '<div class="contactRow">';
+			echo '@'.$touitos->getPseudo();
+			echo '</div>';
+		}
 	}
 
 

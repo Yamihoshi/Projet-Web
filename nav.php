@@ -20,9 +20,7 @@ require_once('fonctions.php');
 				$th=new TouitosHandler($bd);
 				$usr=$th->getByAttr("pseudo",$_SESSION['user'],PDO::PARAM_STR);
 				echo '<li><a href="profile.php?user='.htmlentities($_SESSION['user']).'">'.getPhoto($usr,"profile_picture_nav").'</a></li>';
-			}
-			if(isset($_SESSION['user']))
-			{
+
 				echo '<li><button id="touiter" type="button"><span class="icon-bubbles2"></span> Publier un touite</button></li>';
 			}
 			echo '<li id="connectLink">';
@@ -40,6 +38,11 @@ require_once('fonctions.php');
 						</form>';
 				}
 				echo '</li>';
+
+			if(isset($_SESSION['user']))
+			{
+				echo '<li><a href="discussion.php">MAIL</a></li>';
+			}
 
 		echo'
 					<li><input type="search" placeholder="Chercher un Touitos" id="searchBar" name="search"></li>

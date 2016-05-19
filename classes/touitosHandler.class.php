@@ -167,11 +167,12 @@ class touitosHandler
       return $request;
   }
 
-  public function getFollowRequest(touitos $current)
+  public function getFollowRequest(touitos $current,$demande)
   {
       $request = [];
-      $q = $this->_db->prepare('SELECT * FROM touitos JOIN suivre ON suivre.idDemandeur=touitos.id WHERE idReceveur=:id AND demande!="V"');
+      $q = $this->_db->prepare('SELECT * FROM touitos JOIN suivre ON suivre.idDemandeur=touitos.id WHERE idReceveur=:id AND demande=:demande');
       $q->bindValue(':id', $current->getId(), PDO::PARAM_INT);
+      $q->bindValue(':demande', $demande, PDO::PARAM_STR);
       $q->execute();
       while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
       {
@@ -195,12 +196,63 @@ class touitosHandler
 
   }
 
+  public function getContact($user)
+  {
+      $contact = [];
+      $q = $this->_db->prepare('SELECT * FROM touitos JOIN suivre ON suivre.idDemandeur=touitos.id WHERE idReceveur=:id AND demande="V" AND idDemandeur IN (SELECT idReceveur FROM suivre WHERE idDemandeur=:id AND demande="V")');
+     $q->bindValue(':id', $user, PDO::PARAM_INT);
+     $q->execute();
+      while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+      {
+        $contact[] = new touitos($donnees);
+      }
+      return $contact;
+
+  }
+
   function answerRequest($current,$suiveur,$rep)
   {
     $q = $this->_db->prepare('UPDATE suivre SET demande=:rep WHERE idDemandeur=:demandeur AND idReceveur=:receveur');
     $q->bindValue(':rep',$rep, PDO::PARAM_STR);
     $q->bindValue(':demandeur', $suiveur->getId(), PDO::PARAM_INT);
     $q->bindValue(':receveur', $current->getId(), PDO::PARAM_INT);
+    $q->execute();
+  }
+
+  public function deleteAccount($id)
+  {
+
+    $q = $this->_db->prepare('DELETE FROM touitespublics WHERE idMsg IN (SELECT idMsg FROM touites WHERE idAuteur=:id)');
+    $q->bindValue(':id', $id, PDO::PARAM_INT);
+    $q->execute();
+
+    $q = $this->_db->prepare('DELETE FROM retouites WHERE idMsgRet IN (SELECT idMsg FROM touites WHERE idAuteur=:id)');
+    $q->bindValue(':id', $id, PDO::PARAM_INT);
+    $q->execute();
+
+    $q = $this->_db->prepare('DELETE FROM retouites WHERE idMsgSource IN (SELECT idMsg FROM touites WHERE idAuteur=:id)');
+    $q->bindValue(':id', $id, PDO::PARAM_INT);
+    $q->execute();
+
+    $q = $this->_db->prepare('DELETE FROM touitesreponses WHERE idMsgRep IN (SELECT idMsg FROM touites WHERE idAuteur=:id)');
+    $q->bindValue(':id', $id, PDO::PARAM_INT);
+    $q->execute();
+
+    $q = $this->_db->prepare('DELETE FROM touitesreponses WHERE idMsgSource IN (SELECT idMsg FROM touites WHERE idAuteur=:id)');
+    $q->bindValue(':id', $id, PDO::PARAM_INT);
+    $q->execute();
+
+    $q = $this->_db->prepare('DELETE FROM touitesprives WHERE idAuteur=:id OR idReceveur=:id');
+    $q->bindValue(':id', $id, PDO::PARAM_INT);
+    $q->execute();
+
+    $q = $this->_db->prepare('DELETE FROM touites WHERE idAuteur=:id');
+    $q->bindValue(':id', $id, PDO::PARAM_INT);
+    $q->execute();
+
+
+    $q = $this->_db->prepare('DELETE FROM touitos WHERE id=:id');
+    $q->bindValue(':id', $id, PDO::PARAM_INT);
     $q->execute();
   }
 

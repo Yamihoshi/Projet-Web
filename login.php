@@ -3,6 +3,10 @@ header('content-type: application/json');
 require_once('config/connexion.php');
 session_start();
 
+if(!isset($_POST['login']))
+	header('Location: index.php');
+
+
 $unknow=false;
 $badLogin=false;
 
