@@ -16,7 +16,7 @@ date_default_timezone_set("Europe/Paris");
 
 		public function renderMessage($offset){
 		 	$db_touite = new TouiteHandler($this->getBd());
-		 	$db_touitos = new TouitosHandler($this->getBd());
+		 	$db_touitos = new touitosHandler($this->getBd());
 		 	$auteur = $db_touitos->get($this->id);
 		 	$message = $db_touite->getListMessage($this->id,$offset);
 		 	if(!empty($message)){
@@ -31,7 +31,7 @@ date_default_timezone_set("Europe/Paris");
 		 }
          public function renderReponse(){
             $db_touite = new TouiteHandler($this->getBd());
-            $db_touitos = new TouitosHandler($this->getBd());
+            $db_touitos = new touitosHandler($this->getBd());
             //$auteur = $db_touitos->get($this->id);
             $message = $db_touite->getReponse($this->id);
             if(!empty($message)){

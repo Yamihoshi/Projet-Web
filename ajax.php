@@ -24,7 +24,7 @@ require_once('classes/touite.class.php');
 
 	/*else if(isset($_POST['editProfile']))
 	{
-		updateTouitos($bd,$_POST['touitos'],$_POST['editProfile']);
+		updatetouitos($bd,$_POST['touitos'],$_POST['editProfile']);
 	}*/
 
 
@@ -80,13 +80,13 @@ require_once('classes/touite.class.php');
 
 	else if(isset($_GET['getTimeline']))
 	{
-		$touitos = getTouitos($bd, $_SESSION['id']);
+		$touitos = gettouitos($bd, $_SESSION['id']);
 		show_timeline($touitos, $bd);
 	}
 
 	else if(isset($_POST['acceptRequest']))
 	{
-		$touitos = getTouitos($bd, $_POST['suiveur']);
+		$touitos = gettouitos($bd, $_POST['suiveur']);
 		anwserRequest($bd,$touitos,$_POST['acceptRequest']);
 	}
 

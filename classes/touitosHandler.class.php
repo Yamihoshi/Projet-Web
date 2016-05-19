@@ -7,7 +7,7 @@ class touitosHandler
   {
     $this->setDb($db);
   }
-  public function add(Touitos $perso)
+  public function add(touitos $perso)
   {
     $q = $this->_db->prepare('INSERT INTO touitos(nom,pseudo,mail,pwd,statut,photo) VALUES(:nom,:pseudo, :mail, :PWD, :statut, :photo)');
     $q->bindValue(':pseudo', $perso->getPseudo(), PDO::PARAM_STR);
@@ -20,7 +20,7 @@ class touitosHandler
     return $this->_db->lastInsertId();
   }
 
-  public function delete(Touitos $perso)
+  public function delete(touitos $perso)
   {
     $this->_db->exec('DELETE FROM touitos CASCADE WHERE id = '.$perso->getId());
   }
@@ -28,24 +28,24 @@ class touitosHandler
   public function get($id)
   {
     $id = (int) $id;
-    $q = $this->_db->query('SELECT id, nom,pseudo, mail, PWD, photo, statut FROM Touitos WHERE id = '. $id);
+    $q = $this->_db->query('SELECT id, nom,pseudo, mail, PWD, photo, statut FROM touitos WHERE id = '. $id);
     //$q->bindValue(':id', $id, PDO::PARAM_INT);
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
     if(!empty($donnees))
-      return new Touitos($donnees);
+      return new touitos($donnees);
     else
       return null;
   }
 
   public function getbyPseudo($name)
   {
-    $q = $this->_db->prepare('SELECT id, nom,pseudo, mail, PWD, photo, statut FROM Touitos WHERE pseudo = :usr');
+    $q = $this->_db->prepare('SELECT id, nom,pseudo, mail, PWD, photo, statut FROM touitos WHERE pseudo = :usr');
     $q->bindValue(':usr', $name, PDO::PARAM_STR);
      $q->execute();
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
 
     if(!empty($donnees))
-      return new Touitos($donnees);
+      return new touitos($donnees);
     else
       return null;
   }
@@ -53,14 +53,14 @@ class touitosHandler
   //A TESTER
   public function getbyAttr($attrName,$val,$paramType)
   {
-    $q = $this->_db->prepare('SELECT id, nom,pseudo, mail, PWD, photo, statut FROM Touitos WHERE '.$attrName.' = :val');
+    $q = $this->_db->prepare('SELECT id, nom,pseudo, mail, PWD, photo, statut FROM touitos WHERE '.$attrName.' = :val');
     $q->bindValue(':val', $val, $paramType);
      $q->execute();
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
 
 
     if(!empty($donnees))
-      return new Touitos($donnees);
+      return new touitos($donnees);
     else
       return null;
   }
@@ -68,10 +68,10 @@ class touitosHandler
   public function getList()
   {
     $persos = [];
-    $q = $this->_db->query('SELECT id, nom, mail,pseudo, statut, photo, statut FROM Touitos ORDER BY nom');
+    $q = $this->_db->query('SELECT id, nom, mail,pseudo, statut, photo, statut FROM touitos ORDER BY nom');
     while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
     {
-      $persos[] = new Touitos($donnees);
+      $persos[] = new touitos($donnees);
     }
     return $persos;
   }
@@ -79,20 +79,20 @@ class touitosHandler
   public function searchByName($name,$offset)
   {
     $persos = [];
-    $q = $this->_db->prepare('SELECT id, nom, mail,pseudo, statut, photo, statut FROM Touitos WHERE nom LIKE :nom OR pseudo LIKE :nom ORDER BY nom LIMIT 16 OFFSET :offset');
+    $q = $this->_db->prepare('SELECT id, nom, mail,pseudo, statut, photo, statut FROM touitos WHERE nom LIKE :nom OR pseudo LIKE :nom ORDER BY nom LIMIT 16 OFFSET :offset');
     $q->bindValue(':nom',"%$name%", PDO::PARAM_STR);
     $q->bindValue(':offset',$offset, PDO::PARAM_INT);
     $q->execute();
     while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
     {
-      $persos[] = new Touitos($donnees);
+      $persos[] = new touitos($donnees);
     }
     return $persos;
   }
 
-  public function update(Touitos $perso)
+  public function update(touitos $perso)
   {
-    $q = $this->_db->prepare('UPDATE Touitos SET mail = :mail, pseudo=:pseudo,nom = :nom, statut = :statut, photo = :photo WHERE id = :id');
+    $q = $this->_db->prepare('UPDATE touitos SET mail = :mail, pseudo=:pseudo,nom = :nom, statut = :statut, photo = :photo WHERE id = :id');
 
     $q->bindValue(':mail', $perso->getMail(), PDO::PARAM_STR);
     $q->bindValue(':nom', $perso->getNom(), PDO::PARAM_STR);
@@ -127,36 +127,36 @@ class touitosHandler
     $q->execute();
   }
 
-  public function getWhoIFollow(Touitos $current)
+  public function getWhoIFollow(touitos $current)
   {
       $followers = [];
-      $q = $this->_db->prepare('SELECT * FROM Touitos JOIN suivre ON suivre.idReceveur=touitos.id WHERE idDemandeur=:id AND demande="V"');
+      $q = $this->_db->prepare('SELECT * FROM touitos JOIN suivre ON suivre.idReceveur=touitos.id WHERE idDemandeur=:id AND demande="V"');
       $q->bindValue(':id', $current->getId(), PDO::PARAM_INT);
       $q->execute();
       while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
       {
-        $followers[] = new Touitos($donnees);
+        $followers[] = new touitos($donnees);
       }
       return $followers;
   }
 
-    public function getFollowers(Touitos $current)
+    public function getFollowers(touitos $current)
   {
       $followers = [];
-      $q = $this->_db->prepare('SELECT * FROM Touitos JOIN suivre ON suivre.idDemandeur=touitos.id WHERE idReceveur=:id AND demande="V"');
+      $q = $this->_db->prepare('SELECT * FROM touitos JOIN suivre ON suivre.idDemandeur=touitos.id WHERE idReceveur=:id AND demande="V"');
       $q->bindValue(':id', $current->getId(), PDO::PARAM_INT);
       $q->execute();
       while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
       {
-        $followers[] = new Touitos($donnees);
+        $followers[] = new touitos($donnees);
       }
       return $followers;
   }
 
-  public function getWhoIRequest(Touitos $current,$demande)
+  public function getWhoIRequest(touitos $current,$demande)
   {
       $request = [];
-      $q = $this->_db->prepare('SELECT * FROM Touitos JOIN suivre ON suivre.idReceveur=touitos.id WHERE idDemandeur=:id AND demande=:demande');
+      $q = $this->_db->prepare('SELECT * FROM touitos JOIN suivre ON suivre.idReceveur=touitos.id WHERE idDemandeur=:id AND demande=:demande');
       $q->bindValue(':id', $current->getId(), PDO::PARAM_INT);
       $q->bindValue(':demande', $demande, PDO::PARAM_STR);
       $q->execute();
@@ -167,10 +167,10 @@ class touitosHandler
       return $request;
   }
 
-  public function getFollowRequest(Touitos $current)
+  public function getFollowRequest(touitos $current)
   {
       $request = [];
-      $q = $this->_db->prepare('SELECT * FROM Touitos JOIN suivre ON suivre.idDemandeur=touitos.id WHERE idReceveur=:id AND demande!="V"');
+      $q = $this->_db->prepare('SELECT * FROM touitos JOIN suivre ON suivre.idDemandeur=touitos.id WHERE idReceveur=:id AND demande!="V"');
       $q->bindValue(':id', $current->getId(), PDO::PARAM_INT);
       $q->execute();
       while ($donnees = $q->fetch(PDO::FETCH_ASSOC))

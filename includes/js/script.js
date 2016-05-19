@@ -199,7 +199,7 @@ $(document).ready(function()
     $("#ongletSelect td").click(function()
     {   
         /*
-            0 -> Touites
+            0 -> touites
             1 -> Suivi
             2 -> Suiveurs
         */

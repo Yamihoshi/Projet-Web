@@ -1,121 +1,121 @@
 /*création des tables*/
 
 
-CREATE TABLE Touitos 
+create table touitos 
 (
-	id INT NOT NULL AUTO_INCREMENT,
-	nom VARCHAR(50),
-	pseudo VARCHAR(50) NOT NULL UNIQUE,
-	mail VARCHAR(50) NOT NULL,
-	PWD VARCHAR(20) NOT NULL,
-	photo BOOLEAN,
-	statut VARCHAR(100),
-	PRIMARY KEY (id)
+	id int not null auto_increment,
+	nom varchar(50),
+	pseudo varchar(50) not null unique,
+	mail varchar(50) not null,
+	pwd varchar(20) not null,
+	photo boolean,
+	statut varchar(100),
+	primary key (id)
 );
 
-CREATE TABLE Suivre
+create table suivre
 (
-	idDemandeur INT NOT NULL,
-	idReceveur INT NOT NULL,
-	demande VARCHAR(7) NOT NULL,
-	PRIMARY KEY(idDemandeur, idReceveur),
-	CHECK (demande='E' OR demande='V' OR demande='R'),
-  	FOREIGN KEY (idDemandeur) REFERENCES Touitos (id),
-	FOREIGN KEY (idReceveur) REFERENCES Touitos (id)
+	iddemandeur int not null,
+	idreceveur int not null,
+	demande varchar(7) not null,
+	primary key(iddemandeur, idreceveur),
+	check (demande='e' or demande='v' or demande='r'),
+  	foreign key (iddemandeur) references touitos (id),
+	foreign key (idreceveur) references touitos (id)
 );
 
-CREATE TABLE Touites
+create table touites
 (
-	idMsg INT NOT NULL AUTO_INCREMENT,
-	laDate DATETIME NOT NULL,
-	texte VARCHAR(140) NOT NULL,
-	idAuteur INT NOT NULL,
-	PRIMARY KEY (idMsg),
-	FOREIGN KEY (idAuteur) REFERENCES Touitos (id)
+	idmsg int not null auto_increment,
+	ladate datetime not null,
+	texte varchar(140) not null,
+	idauteur int not null,
+	primary key (idmsg),
+	foreign key (idauteur) references touitos (id)
 );
 
-CREATE TABLE TouitesPublics
+create table touitespublics
 (
-	idMsg INT NOT NULL,
-	PRIMARY KEY (idMsg),
-	FOREIGN KEY (idMsg) REFERENCES Touites (idMsg)
-	ON DELETE CASCADE
+	idmsg int not null,
+	primary key (idmsg),
+	foreign key (idmsg) references touites (idmsg)
+	on delete cascade
 );
 
-CREATE TABLE Hashtags
+create table hashtags
 (
-	idHashtag INT NOT NULL AUTO_INCREMENT,
-	titre VARCHAR(140) NOT NULL,
-	PRIMARY KEY (idHashtag)
+	idhashtag int not null auto_increment,
+	titre varchar(140) not null,
+	primary key (idhashtag)
 );
 
-CREATE TABLE Arobases
+create table arobases
 (
-	idArobase INT NOT NULL AUTO_INCREMENT,
-	Apseudonyme VARCHAR(21) NOT NULL,
-	PRIMARY KEY (idArobase)
+	idarobase int not null auto_increment,
+	apseudonyme varchar(21) not null,
+	primary key (idarobase)
 );
 
-CREATE TABLE ContenuH
+create table contenuh
 (
-	idMsg INT NOT NULL,
-	idHashtag INT NOT NULL,
-	PRIMARY KEY (idMsg, idHashtag),
-	FOREIGN KEY (idMsg) REFERENCES TouitesPublics (idMsg),
-	FOREIGN KEY (idHashtag) REFERENCES Hashtags (idHashtag)
+	idmsg int not null,
+	idhashtag int not null,
+	primary key (idmsg, idhashtag),
+	foreign key (idmsg) references touitespublics (idmsg),
+	foreign key (idhashtag) references hashtags (idhashtag)
 );
 
-CREATE TABLE ContenuA
+create table contenua
 (
-	idMsg INT NOT NULL,
-	idArobase INT NOT NULL,
-	PRIMARY KEY (idMsg, idArobase),
-	FOREIGN KEY (idArobase) REFERENCES Arobases (idArobase),
-	FOREIGN KEY (idMsg) REFERENCES TouitesPublics (idMsg)
+	idmsg int not null,
+	idarobase int not null,
+	primary key (idmsg, idarobase),
+	foreign key (idarobase) references arobases (idarobase),
+	foreign key (idmsg) references touitespublics (idmsg)
 );
 
-CREATE TABLE TouitesNormaux
+create table touitesnormaux
 (
-	idMsg INT NOT NULL,
-	PRIMARY KEY (idMsg),
-	FOREIGN KEY (idMsg) REFERENCES TouitesPublics (idMsg)
-	ON DELETE CASCADE
+	idmsg int not null,
+	primary key (idmsg),
+	foreign key (idmsg) references touitespublics (idmsg)
+	on delete cascade
 );
 
-CREATE TABLE TouitesReponses
+create table touitesreponses
 (
-	idMsgRep INT NOT NULL,
-	idMsgSource INT NOT NULL,
-	PRIMARY KEY (idMsgRep),
-	FOREIGN KEY (idMsgRep) REFERENCES TouitesPublics(idMsg)
-	ON DELETE CASCADE,
-	FOREIGN KEY (idMsgSource) REFERENCES TouitesPublics (idMsg),
-	CHECK(idMsgRep!=idMsgSource)
+	idmsgrep int not null,
+	idmsgsource int not null,
+	primary key (idmsgrep),
+	foreign key (idmsgrep) references touitespublics(idmsg)
+	on delete cascade,
+	foreign key (idmsgsource) references touitespublics (idmsg),
+	check(idmsgrep!=idmsgsource)
 );
 
-CREATE TABLE Retouites
+create table retouites
 (
-	idMsgRet INT NOT NULL,
-	idMsgSource INT NOT NULL,
-	PRIMARY KEY (idMsgRet),
-	FOREIGN KEY (idMsgRet) REFERENCES TouitesPublics (idMsg)
-	ON DELETE CASCADE,
-	FOREIGN KEY (idMsgSource) REFERENCES TouitesPublics (idMsg),
-	CHECK (idMsgRet!=idMsgSource)	
+	idmsgret int not null,
+	idmsgsource int not null,
+	primary key (idmsgret),
+	foreign key (idmsgret) references touitespublics (idmsg)
+	on delete cascade,
+	foreign key (idmsgsource) references touitespublics (idmsg),
+	check (idmsgret!=idmsgsource)	
 );
 
-CREATE TABLE TouitesPrives
+create table touitesprives
 (
-	idMsg INT NOT NULL,
-	idAuteur INT NOT NULL,
-	idReceveur INT NOT NULL,
-	idMsgSource INT,
-	PRIMARY KEY (idMsg),
-	FOREIGN KEY (idMsg) REFERENCES Touites (idMsg)
-	ON DELETE CASCADE,
-	FOREIGN KEY (idAuteur) REFERENCES Touitos (id),
-	FOREIGN KEY (idReceveur) REFERENCES Touitos (id),
-	FOREIGN KEY (idMsgSource) REFERENCES Touites (idMsg),
-	CHECK (idMsg!=idMsgSource)	
+	idmsg int not null,
+	idauteur int not null,
+	idreceveur int not null,
+	idmsgsource int,
+	primary key (idmsg),
+	foreign key (idmsg) references touites (idmsg)
+	on delete cascade,
+	foreign key (idauteur) references touitos (id),
+	foreign key (idreceveur) references touitos (id),
+	foreign key (idmsgsource) references touites (idmsg),
+	check (idmsg!=idmsgsource)	
 );
 

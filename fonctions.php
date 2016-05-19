@@ -1,7 +1,7 @@
 <?php
 	
 	require_once("classes/touitos.class.php");
-	require_once("classes/TouitosHandler.class.php");
+	require_once("classes/touitosHandler.class.php");
 	require_once("classes/TouiteHandler.class.php");
 	require_once("classes/Touite.render.class.php");
 	require_once("config/connexion.php");
@@ -24,9 +24,9 @@
 		{
 			$statut=$handler->getFollowStatut($user,$profile);
 			if ($statut==-1) // NON SUIVI
-				return '<button type="button" idTouitos='.$profile->getId().' class="subscribe">Suivre</button>';
+				return '<button type="button" idtouitos='.$profile->getId().' class="subscribe">Suivre</button>';
 			else if($statut=='V') //VALIDE
-				return '<button type="button" idTouitos='.$profile->getId().' class="unsubscribe followed">Abonné</button>';
+				return '<button type="button" idtouitos='.$profile->getId().' class="unsubscribe followed">Abonné</button>';
 			else if($statut=='R') //REFUSE
 				return '<button title="Cet utilisateur a refusé votre demande" type="button" disabled>Suivre</button>';
 			else if($statut=='E')
@@ -34,9 +34,9 @@
 		}
 	}
 
-	function show_profile(Touitos $profile, $bd)
+	function show_profile(touitos $profile, $bd)
 	{
-		$th = new TouitosHandler($bd);
+		$th = new touitosHandler($bd);
 
 		echo '<div id="touitos_profile_page">';
 				echo '<div id="profile_left_infos">';
@@ -50,7 +50,7 @@
 					echo '<div class="subscribeDiv">'.
 						getFollowButton($th,$connectedUser,$profile)
 					.'</div>';
-			}	
+			}
 		}
 
 		echo '<div id="profile_photo">'.getPhoto($profile,"profile_picture_IMG").'</div>';
@@ -65,7 +65,7 @@
 			echo 	'<div id="ongletDiv">
 						<table id="ongletSelect">
 							<tr>
-								<td>Touites</td>
+								<td>touites</td>
 								<td>Suivi</td>
 								<td>Suiveurs</td>
 								<td><span class="icon-wrench"></span></td>
@@ -79,13 +79,13 @@
 		echo '</div>';
 	}
 
-	function getMoreProfileTouite($bd,$offset,$idTouitos)
+	function getMoreProfileTouite($bd,$offset,$idtouitos)
 	{
-		$tr = new TouiteRender($idTouitos, $bd);
+		$tr = new TouiteRender($idtouitos, $bd);
 		$tr->renderMessage($offset*10);
 	}
 
-	function show_timeline(Touitos $touitos, $bd)
+	function show_timeline(touitos $touitos, $bd)
 	{
 		$tr = new TouiteRender($touitos->getId(), $bd);
 		if(isConnected() AND isOwnProfile($touitos->getPseudo())){
@@ -104,7 +104,7 @@
 		if($touiteAffiche)
 		{
 			echo '<div id="loadMoreTouiteDiv">
-					<button id="loadMoreProfileTouite" next="1" idTouitos="'.$touitos->getId().'">+ de Touites</button>
+					<button id="loadMoreProfileTouite" next="1" idtouitos="'.$touitos->getId().'">+ de touites</button>
 
 				</div>';
 		}
@@ -117,12 +117,12 @@
 			return '<img id='.$id.' src="includes/img/no_pic.png">';
 	}
 
-	function getTouitos($bd, $id){
-		$th = new TouitosHandler($bd);
+	function gettouitos($bd, $id){
+		$th = new touitosHandler($bd);
 		return $th->get($id);
 	}
 
-	function getTouitosVignette($bd,Touitos $touitos)
+	function gettouitosVignette($bd,touitos $touitos)
 	{
 		echo '<div class="touitosDiv"><a href="profile.php?user='.htmlentities($touitos->getPseudo()).'">';
 			echo '<div class="result_photo">'.getPhoto($touitos,"search_result_profile_pic").'</div>';
@@ -143,13 +143,13 @@
 
 	function searchByName($str,$bd)
 	{
-		$th=new TouitosHandler($bd);
+		$th=new touitosHandler($bd);
 		$res=$th->searchByName($str,0);
 		echo '<div id="searchResult">';
 		foreach($res as $key=>$touitos)
 		{
 			if(!isset($_SESSION['user']) || !isOwnProfile($touitos->getPseudo()))
-				getTouitosVignette($bd,$touitos);
+				gettouitosVignette($bd,$touitos);
 		}
 		echo '</div>';
 
@@ -164,34 +164,34 @@
 	function moreSearchResult($str,$bd,$offset)
 	{	
 
-		$th=new TouitosHandler($bd);
+		$th=new touitosHandler($bd);
 		$res=$th->searchByName($str,intval($offset)*16);
 		foreach($res as $key=>$touitos)
 		{
-			getTouitosVignette($bd,$touitos);
+			gettouitosVignette($bd,$touitos);
 		}
 	}
 
 	function attrExists($bd,$attrName,$val,$paramType)
 	{
-		$th=new TouitosHandler($bd);
+		$th=new touitosHandler($bd);
 		$test=$th->getByAttr($attrName,$val,$paramType);
 		return $test!=null;
 	}
 
-	function addTouitos($data,$bd)
+	function addtouitos($data,$bd)
 	{
 		//test si user existe
 		$photo=array('photo' => 'N');
 		$data=$data+$photo;
-		$th=new TouitosHandler($bd);
-		$touitos=new Touitos($data);
+		$th=new touitosHandler($bd);
+		$touitos=new touitos($data);
 
 		return $th->add($touitos);
 	}
-	function updateTouitos($bd,$touitos)
+	function updatetouitos($bd,$touitos)
 	{
-		$th=new TouitosHandler($bd);
+		$th=new touitosHandler($bd);
 		$th->update($touitos);
 	}
 
@@ -203,25 +203,25 @@
 
 	function follow($bd,$suivi)
 	{
-		$th=new TouitosHandler($bd);
+		$th=new touitosHandler($bd);
 		$th->follow($_SESSION['id'],$suivi);
 	}
 
 	function unfollow($bd,$suivi)
 	{
-		$th=new TouitosHandler($bd);
+		$th=new touitosHandler($bd);
 		$th->unfollow($_SESSION['id'],$suivi);
 	}
 
 	function unAcceptRequest($bd,$suiveur)
 	{
-		$th=new TouitosHandler($bd);
+		$th=new touitosHandler($bd);
 		$th->unAcceptRequest($_SESSION['id'],$suiveur);
 	}
 
 	function show_whoIFollow($bd)
 	{
-		$th=new TouitosHandler($bd);
+		$th=new touitosHandler($bd);
 		$connectedUser=$th->getByAttr("pseudo",$_SESSION['user'],PDO::PARAM_STR);
 		$refusedRequestList=$th->getWhoIRequest($connectedUser,"R");
 		$sendedRequestList=$th->getWhoIRequest($connectedUser,"E");
@@ -268,10 +268,10 @@
 
 			echo '</div>';
 
-			echo '<div id="whoIFollow"><div class="boxHeader">Touitos que vous suivez</div>';
+			echo '<div id="whoIFollow"><div class="boxHeader">touitos que vous suivez</div>';
 			foreach($list as $key=>$touitos)
 			{
-				echo  getTouitosVignette($bd,$touitos);
+				echo  gettouitosVignette($bd,$touitos);
 			}
 			echo '</div>';
 		}
@@ -281,7 +281,7 @@
 
 	function show_followers($bd)
 	{
-		$th=new TouitosHandler($bd);
+		$th=new touitosHandler($bd);
 		$connectedUser=$th->getByAttr("pseudo",$_SESSION['user'],PDO::PARAM_STR);
 		$requestList=$th->getFollowRequest($connectedUser);
 		$list=$th->getFollowers($connectedUser);
@@ -315,7 +315,7 @@
 		foreach($list as $key=>$touitos)
 		{
 			echo '<div><button title="Annuler le suivi" class="unAcceptRequest" idtouitos="'.$touitos->getId().'">X</button>';
-			echo  getTouitosVignette($bd,$touitos);
+			echo  gettouitosVignette($bd,$touitos);
 			echo '</div>';
 		}
 
@@ -324,7 +324,7 @@
 
 	function anwserRequest($bd,$user,$accept)
 	{
-		$th=new TouitosHandler($bd);
+		$th=new touitosHandler($bd);
 		$connectedUser=$th->getByAttr("pseudo",$_SESSION['user'],PDO::PARAM_STR);
 
 		if($accept==true)
@@ -358,9 +358,9 @@
 	function displayNews($bd,$offset)
 	{
 		$tth=new TouiteHandler($bd);
-		$th=new TouitosHandler($bd);
+		$th=new touitosHandler($bd);
 		$connectedUser=$th->getByAttr("pseudo",$_SESSION['user'],PDO::PARAM_STR);
-		$touiteList=$tth->getTouitesOfWhoIFollow($connectedUser->getId(),$offset*10);
+		$touiteList=$tth->gettouitesOfWhoIFollow($connectedUser->getId(),$offset*10);
 
 		
 		foreach($touiteList as $key=>$touite)
