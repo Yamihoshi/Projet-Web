@@ -100,7 +100,9 @@ $(document).ready(function()
                     voirMessage:true
                 },
                 success:function(response, status){
-                    $(message).append(response);
+                    if($(message).find('.message'))
+                        $(message).find('.message').remove();
+                    $(message).find('footer').after(response);
             }
          });
     });
