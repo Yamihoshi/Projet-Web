@@ -238,15 +238,15 @@ $(document).ready(function()
             fileUploadDiv+='<p><input  class="modif_left" type="file" onchange="loadNewProfilePic(this)" style="display:none" name="profile_pic_upload" id="profile_pic_upload" accept="image/x-png, image/gif, image/jpeg"></p>';
             balise+=fileUploadDiv;
 
-            var select = '<p><label class="modif" for="editColor">Couleur Fond</label><select id="editColor"><option style="background-color:white">white</option>';
-            select += '<option style="background-color:blue">blue</option>';
-            select += '<option style="background-color:aliceblue">aliceblue</option>';
+            var select = '<p><label class="modif" for="editColor">Couleur Fond</label><select id="editColor" name="editColor"><option style="background-color:white" value="white">white</option>';
+            select += '<option value="blue" style="background-color:blue">blue</option>';
+            select += '<option value="aliceblue" style="background-color:aliceblue">aliceblue</option>';
             select += '</select></p>';
             balise += select;
-            select = '<p><label class="modif" for="editPolice">Police</label><select id="editPolice"><option>Arial</option>';
-            select += '<option>Verdana</option>';
-            select += '<option>Georgia</option>';
-            select += '<option>Impact</option>';
+            select = '<p><label class="modif" for="editPolice">Police</label><select name="editPolice" id="editPolice"><option value="Arial">Arial</option>';
+            select += '<option value="Verdana">Verdana</option>';
+            select += '<option value="Georgia">Georgia</option>';
+            select += '<option value="Impact">Impact</option>';
             select += '</select></p>';
             balise += select;
             balise+='<input type="submit" id="saveEdit" value="Enregistrer les modifications">';

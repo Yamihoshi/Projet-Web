@@ -1,6 +1,5 @@
 ﻿<?php
 require_once('fonctions.php');
-
 if(isset($_POST["editName"]))
 {
 		$th = new TouitosHandler($bd);
@@ -21,15 +20,18 @@ if(isset($_POST["editName"]))
 	   		 {
 	   		 	foreach(glob("files/pictures/".$_SESSION['id'].".*") as $file)
 			    {
-			            unlink($file);
+			      unlink($file);
 			    }
 
 				if (move_uploaded_file($_FILES['profile_pic_upload']['tmp_name'], $FileDir))
 				{
-						$connectedUser->_setPhoto(true);
+					$connectedUser->_setPhoto(true);
 				}
 			}
 		}
+
+		setcookie("color", $_POST['editColor'], time()+100000);
+		setcookie("police", $_POST['editPolice'], time()+100000);
 
 		updateTouitos($bd,$connectedUser);
 }

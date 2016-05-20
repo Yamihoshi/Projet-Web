@@ -48,6 +48,16 @@ require_once('fonctions.php');
 					<li><input type="search" placeholder="Chercher un Touitos" id="searchBar" name="search"></li>
 		</ul>
 	</nav>';
+	if(!empty($_COOKIE['police']) AND !empty($_COOKIE['color'])){
+		echo '<style>
+			body{
+				background-color:'. $_COOKIE['color'] . ';
+			}
+			#discussionMessage{
+			font-family:'. $_COOKIE['police'] . ';
+		}
+		</style>';
+	}
 ?>
 <div id="myModal" class="modal">
 
