@@ -407,13 +407,11 @@
 	{
 		$tth=new TouiteHandler($bd);
 		$th=new touitosHandler($bd);
-		$connectedUser=$th->getByAttr("pseudo",$_SESSION['user'],PDO::PARAM_STR);
-		$touiteList=$tth->gettouitesOfWhoIFollow($connectedUser->getId(),$offset*10);
-
+		$touiteList=$tth->gettouitesOfWhoIFollow($_SESSION['id'],$offset*10);
 		
 		foreach($touiteList as $key=>$touite)
 		{
-			$tr=new TouiteRender($connectedUser->getId(),$bd);
+			$tr=new TouiteRender($_SESSION['id'],$bd);
 			$auteur=$th->getByAttr("id",$touite->getIdAuteur(),PDO::PARAM_STR);
 			$tr->render($touite,$auteur);
 		}
