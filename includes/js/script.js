@@ -402,13 +402,29 @@ $(document).ready(function()
         var id=$(this).attr("idtouitos");
 
         $.get("ajax.php",{discussion:true,destinataire:id},function(rep){
+
             $("#discussionDisplay").html(rep);
+
+            $("#discussionMessage").prop({ scrollTop: $("#discussionMessage").prop("scrollHeight") });
         });
     });
 
     $("#sendPrivateMessage").click(function()
     {
         
+    });
+
+    $("#pageDisplay").on("click","#loadPreviousDiscussion",function()
+    {
+        var goTo=parseInt($(this).attr("index"));
+        var destinataire =$(this).parents('#discussionMessage').attr('destinataire');
+
+        $.get("ajax.php",{loadPreviousDiscussion:true,offset:goTo,destinataire:destinataire},function(rep){
+            $("#loadPreviousDiscussion").remove();
+            $("#discussionMessage").hide();
+            $("#discussionMessage").html(rep+$("#discussionMessage").html());
+            $("#discussionMessage").fadeIn();
+        });
     });
 
     $("#pageDisplay").on("click","#sendDiscussion",function()
@@ -419,8 +435,10 @@ $(document).ready(function()
         $.post("ajax.php",{sendDiscussion:true,destinataire:id,message:message},function(rep){
             $("#discussionMessage").append(rep);
             $("#discussionAnswer").val("");
+            $("#discussionMessage").prop({ scrollTop: $("#discussionMessage").prop("scrollHeight") });
         });
     });
+
 
     setInterval(getNewMessage, 10000);
 

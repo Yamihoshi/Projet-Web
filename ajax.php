@@ -132,4 +132,9 @@ require_once('classes/touite.class.php');
 		echo getNumberOfNotRead($bd);
 	}
 
+	else if(isset($_GET['loadPreviousDiscussion']))
+	{
+		echo loadPreviousDiscussion($bd,$_GET['destinataire'],$_GET['offset']);
+	}
+
 ?>
