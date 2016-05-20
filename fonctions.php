@@ -42,6 +42,7 @@
 
 		echo '<div id="touitos_profile_page">';
 				echo '<div id="profile_left_infos">';
+
 			
 		if(isConnected())
 		{
@@ -59,6 +60,9 @@
 		echo '<div id="profile_name">'.htmlentities($profile->getNom()).'</div>';
 		echo '<div id="profile_pseudo">@'.htmlentities($profile->getPseudo()).'</div>';
 		echo '<div id="profile_statut">'.htmlentities($profile->getStatut()).'</div>';
+
+		if(isset($_SESSION['id']) AND $th->isContact($profile->getId(),$_SESSION['id']))
+			echo '<div><button id="sendPrivateMessage">Envoyer un Touite privé</button></div>';
 
 		echo '</div>'; // Close profil_left
 
@@ -443,9 +447,14 @@
 		echo '<div id="discussionMessage">';
 		foreach($list as $key=>$touite)
 		{
-			echo '<div class="discussionMessageRow">';
-			echo $touite->getTexte();
+			if($touite->getIdAuteur()==$_SESSION['id'])
+				echo '<div class="discussionMessageRow myMessage">';
+			else
+				echo '<div class="discussionMessageRow messageFromOther">';
+				echo $touite->getTexte();
 			echo '</div>';
+
+			echo '<div class="spacer"></div>';
 		}
 		echo '</div>';
 
