@@ -51,7 +51,7 @@ date_default_timezone_set("Europe/Paris");
                                 echo '<div class="date">'. $newDate = date("d/m/Y", strtotime($touite->getLaDate())) . '</div>';
                         echo '</header>';
                         $this->echo_message($touite);
-                         $this->renderFooter($touite);
+                        $this->renderFooter($touite);
                       echo '</div>';
             echo '</article>';
          }

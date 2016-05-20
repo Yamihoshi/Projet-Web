@@ -51,10 +51,10 @@ require_once('fonctions.php');
 	if(!empty($_COOKIE['police']) AND !empty($_COOKIE['color'])){
 		echo '<style>
 			body{
-				background-color:'. $_COOKIE['color'] . ';
+				background-color:'. htmlentities($_COOKIE['color']) . ';
 			}
 			#discussionMessage{
-			font-family:'. $_COOKIE['police'] . ';
+			font-family:'. htmlentities($_COOKIE['police']) . ';
 		}
 		</style>';
 	}
