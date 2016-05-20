@@ -10,12 +10,12 @@ class touitosHandler
   public function add(touitos $perso)
   {
     $q = $this->_db->prepare('INSERT INTO touitos(nom,pseudo,mail,pwd,statut,photo) VALUES(:nom,:pseudo, :mail, :PWD, :statut, :photo)');
-    $q->bindValue(':pseudo', $perso->getPseudo(), PDO::PARAM_STR);
-    $q->bindValue(':nom', $perso->getPseudo(), PDO::PARAM_STR);
-    $q->bindValue(':mail', $perso->getMail(), PDO::PARAM_STR);
-    $q->bindValue(':PWD', md5($perso->getPWD()), PDO::PARAM_STR);
-    $q->bindValue(':statut', $perso->getStatut(), PDO::PARAM_STR);
-    $q->bindValue(':photo', $perso->getPhoto(), PDO::PARAM_STR);
+    $q->bindValue(':pseudo', trim($perso->getPseudo()), PDO::PARAM_STR);
+    $q->bindValue(':nom', trim($perso->getPseudo()), PDO::PARAM_STR);
+    $q->bindValue(':mail', trim($perso->getMail()), PDO::PARAM_STR);
+    $q->bindValue(':PWD', md5(trim($perso->getPWD())), PDO::PARAM_STR);
+    $q->bindValue(':statut', trim($perso->getStatut()), PDO::PARAM_STR);
+    $q->bindValue(':photo', $perso->getPhoto(), PDO::PARAM_INT);
     $q->execute();
     return $this->_db->lastInsertId();
   }
