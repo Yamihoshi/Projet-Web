@@ -272,7 +272,7 @@ $(document).ready(function()
 
             var select = '<p class="editSection"><label class="modif" for="editColor">Couleur Fond</label><select id="editColor" name="editColor"><option style="background-color:white" value="white">white</option>';
             select += '<option value="blue" style="background-color:blue">blue</option>';
-            select += '<option value="aliceblue" style="background-color:aliceblue">aliceblue</option>';
+            select += '<option selected="selected" value="aliceblue" style="background-color:aliceblue">aliceblue</option>';
             select += '</select></p>';
             balise += select;
             select = '<p class="editSection"><label class="modif" for="editPolice">Police</label><select name="editPolice" id="editPolice"><option value="Arial">Arial</option>';
