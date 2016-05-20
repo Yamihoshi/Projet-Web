@@ -29,6 +29,12 @@ class touiteHandler
   public function addPublic($id){
     $this->_db->query('INSERT INTO touitespublics VALUES('.$id.')');
   }
+
+  public function addNormaux($id){
+    $this->addPublic($id);
+    $this->_db->query('INSERT INTO touitesnormaux VALUES('.$id.')');
+  }
+
   public function delete($id)
   {
     $q = $this->_db->prepare('DELETE FROM touites WHERE idMsg = :id');
@@ -67,7 +73,7 @@ class touiteHandler
   {
     $touites = [];
     $id = (int) $id;
-    $q = $this->_db->prepare('SELECT idAuteur, idMsg as idMessage, texte, ladate FROM touites NATURAL JOIN touitespublics  WHERE idAuteur = :id  ORDER BY ladate DESC LIMIT 10 OFFSET :offset');
+    $q = $this->_db->prepare('(SELECT idAuteur, idMsg as idMessage, texte, ladate, 1 as type FROM touites NATURAL JOIN touitesnormaux WHERE idAuteur = :id) UNION (SELECT idAuteur, idMsg as idMessage, texte, ladate, 2 as type FROM touites  JOIN retouites ON idMsg= idMsgSource ) ORDER BY ladate DESC LIMIT 10 OFFSET :offset');
     $q->bindValue(':id', $id, PDO::PARAM_INT);
     $q->bindValue(':offset', $offset, PDO::PARAM_INT);
     $q->execute();

@@ -215,7 +215,7 @@
 	function addTouite($data, $bd){
 		$t= new TouiteHandler($bd);
 		$id = $t->add($data);
-		$t->addPublic($id);
+		$t->addNormaux($id);
 	}
 
 

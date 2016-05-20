@@ -21,9 +21,13 @@ date_default_timezone_set("Europe/Paris");
 		 	$message = $db_touite->getListMessage($this->id,$offset);
 		 	if(!empty($message)){
 				foreach($message as $key=>$touite){
-				 	$this->render($touite, $auteur);
+                    if($touite->getType() == 1){
+				 	  $this->render($touite, $auteur);
+                 }
+                 else{
+                    $this->renderRetouite($touite);
+                 }
 		 	    }
-
                 return true;
 		      }
 
@@ -59,7 +63,21 @@ date_default_timezone_set("Europe/Paris");
 		 public function echo_message(Touite $message){
 		 	echo '<div class="contenu_message">' . htmlentities($message->getTexte()) .'</div>';
 		 }
-
+         public function renderRetouite(Touitos $touitos, touitosHandler $db){
+            $auteur = $db_touitos->get($this->id);
+            echo '<article class = "message" id="'. $touite->getIdMessage() .'">';
+            echo '<div> this is a retouite</div>';
+            $this->renderPic($auteur);
+            echo '<div class="containeur">';
+                echo '<header class= "info">';
+                    echo '<div class="pseudo"><a href="profile.php?user='.$auteur->getPseudo().'">@' . htmlentities($auteur->getPseudo()) .'</a></div>';
+                    echo '<div class="date">'. $newDate = date("d/m/Y", strtotime($touite->getLaDate())) . '</div>';
+            echo '</header>';
+            $this->echo_message($touite);
+            $this->renderFooter($touite);
+          echo '</div>';
+            echo '</article>';
+         }
 		 public function renderPic(Touitos $auteur){
 
 		 	echo '<a href="profile.php?user='.$auteur->getPseudo().'">';
