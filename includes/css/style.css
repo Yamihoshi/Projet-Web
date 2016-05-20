@@ -26,6 +26,7 @@ nav ul{
 	flex-flow: row nowrap;
 	justify-content: space-around;
 	align-items:center;
+	height: 60px;
 }
 nav li input, nav li button{
 	margin:auto;
@@ -266,10 +267,6 @@ button, textarea, input[type="submit"]{
 	margin-top: 20px;
 }
 
-nav ul input[type="submit"]{
-	margin-top: 0px;
-}
-
 .spacer
 {
 	clear:both;
@@ -437,11 +434,11 @@ input[type="search"]
 
 @font-face {
     font-family: 'icomoon';
-    src:    url('fonts/icomoon.eot?za7meo');
-    src:    url('fonts/icomoon.eot?za7meo#iefix') format('embedded-opentype'),
-        url('fonts/icomoon.ttf?za7meo') format('truetype'),
-        url('fonts/icomoon.woff?za7meo') format('woff'),
-        url('fonts/icomoon.svg?za7meo#icomoon') format('svg');
+    src:    url('fonts/icomoon.eot?mrx6e2');
+    src:    url('fonts/icomoon.eot?mrx6e2#iefix') format('embedded-opentype'),
+        url('fonts/icomoon.ttf?mrx6e2') format('truetype'),
+        url('fonts/icomoon.woff?mrx6e2') format('woff'),
+        url('fonts/icomoon.svg?mrx6e2#icomoon') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -460,8 +457,9 @@ input[type="search"]
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
-[class^="icon-"]:hover, [class*=" icon-"]:hover{
-    cursor: pointer;
+
+.icon-bubble2:before {
+    content: "\e96e";
 }
 .icon-home:before {
     content: "\e900";
@@ -496,6 +494,8 @@ input[type="search"]
 .icon-star-full:before {
     content: "\e905";
 }
+
+
 
 #requestPseudo
 {

@@ -21,10 +21,8 @@ require_once('fonctions.php');
 				$usr=$th->getByAttr("pseudo",$_SESSION['user'],PDO::PARAM_STR);
 				echo '<li><a href="profile.php?user='.htmlentities($_SESSION['user']).'">'.getPhoto($usr,"profile_picture_nav").'</a></li>';
 
-				echo '<li><button id="touiter" type="button"><span class="icon-bubbles2"></span> Publier un touite</button></li>';
+				echo '<li><button id="touiter" type="button"><span class="icon-bubble"></span> Publier un touite</button></li>';
 			}
-			echo '<li id="connectLink">';
-
 
 				if(!isset($_SESSION['user']))
 				{
@@ -33,26 +31,26 @@ require_once('fonctions.php');
 				}
 				else
 				{
+					$nb=getNumberOfNotRead($bd);
+					echo '<li><a href="discussion.php"><button type="button"><span class="icon-bubbles2"></span> Message privé</button> ';
+					
+					echo '<span id="notViewedCounter">';
+					if($nb!=0)
+					{
+						echo "($nb)";
+					}
+					echo '</span>';
+					
+					echo '</a></li>';
+					echo '<li id="connectLink">';
 					echo '<form action="logout.php" method="post" >
 							<input id="disconnectButton" class="connectButton" type="submit" value="Se déconnecter">
 						</form>';
+					echo '</li>';
 				}
-				echo '</li>';
+				
 
-			if(isset($_SESSION['user']))
-			{
-				$nb=getNumberOfNotRead($bd);
-				echo '<li><a href="discussion.php">MAIL ';
-				
-				echo '<span id="notViewedCounter">';
-				if($nb!=0)
-				{
-					echo "($nb)";
-				}
-				echo '</span>';
-				
-				echo '</a></li>';
-			}
+
 
 		echo'
 					<li><input type="search" placeholder="Chercher un Touitos" id="searchBar" name="search"></li>
