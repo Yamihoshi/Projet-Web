@@ -259,8 +259,8 @@ $(document).ready(function()
             balise +='<p class="editSection"><label class="modif" for="editName">Nom</label></span><input id="editName" type="text" name="editName" value="'+htmlEncode($("#profile_name").text())+'"></p>';
             balise += '<p class="editSection"><label class="modif" for="editStatut">Description</label><textarea name="editStatut" form="editForm" placeholder = "Description..." id="editStatut" >'+$("#profile_statut").text()+'</textarea></p>';
             
-            var fileUploadDiv='<p class="editSection"><label for="profile_pic_upload">Photo</label>';
-            fileUploadDiv+='<label for="profile_pic_upload"><span id="profile_photo_uploadDiv"></span></label></p>';
+            var fileUploadDiv='<p class="editSection"><label for="profile_pic_upload">Photo';
+            fileUploadDiv+='<span id="profile_photo_uploadDiv"></span></label></p>';
             fileUploadDiv+='<input  class="modif_left" type="file" onchange="loadNewProfilePic(this)" style="display:none" name="profile_pic_upload" id="profile_pic_upload" accept="image/x-png, image/gif, image/jpeg">';
             balise+=fileUploadDiv;
 

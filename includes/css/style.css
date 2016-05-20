@@ -69,15 +69,15 @@ fieldset{
 .contenu_message, .pseudo, .date{
 	padding: 0 10px;
 }
-form#editForm label { display:inline-block; width:140px;vertical-align: middle;}
+form#editForm label { display:inline-block; width:140px;vertical-align: top;}
 form#editForm input 
 { 
 	display:inline-block;
 }
 
 
-.editSection
-{
+#editForm .editSection textarea{
+	display: inline-block;
 }
 
 .pseudo
@@ -85,6 +85,9 @@ form#editForm input
 	font-weight:bold;
 }
 
+#profile_picture_forUpload{
+	margin-left: 140px;
+}
 
 .modif{
 	width: 30%;
