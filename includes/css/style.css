@@ -2,6 +2,7 @@ body{
 	font-family:"Verdana";
 	background-color: aliceblue;
 	text-align: start;
+	font-size: 1em;
 }
 ::-moz-selection{
 	background: pink;
@@ -17,7 +18,7 @@ nav
 	z-index:100;
 	padding:10px;
 }
-nav, .message, #profile_left_infos, #timeline #touite-box, #ongletDiv, #edit{
+nav, .message, #profile_left_infos, #timeline #touite-box, #ongletDiv, #edit, .fond{
 	background-color: #fff;
 	box-shadow: 0 1px 2px rgba(0,0,0,.1);
 }
@@ -30,6 +31,7 @@ nav ul{
 }
 nav li input, nav li button{
 	margin:auto;
+	font-size: 0.9em;
 }
 
 nav input[type="submit"]{
@@ -138,17 +140,45 @@ button:disabled
 	width: 1500px;
 	margin:auto;
 }
+#timeline, #ongletDiv{
+	float: left;
+	width: 71%;
+}
+@media screen and (max-width: 2500px){
+	#timeline, #ongletDiv{
+		margin:0 15px;
+	}
+}
+@media screen and (max-width: 1600px){
+	#pageDisplay{
+		width: 1100px;
+	}
+}
+@media screen and (max-width: 1200px){
+	#pageDisplay{
+		width: 900px;
+
+	}
+	#ongletDiv,#timeline{
+		margin: auto!important;
+		width: 100%;
+	}
+	#profile_left_infos{
+		display: none;
+	}
+}
+@media screen and (max-width: 900px){
+	#pageDisplay{
+		width: 600px;
+	}
+}
 #touite-box{
 	padding-top:30px;
 }
 #ongletSelect{
 	float: right;
 }
-#timeline, #ongletDiv{
-	float: left;
-	width: 71%;
-	margin:0 15px;
-}
+
 #ongletDiv td{
 	cursor: pointer;
 	border: 2px solid white;
@@ -562,7 +592,7 @@ input[type="search"]
 #discussionDisplay
 {
 	width:70%;
-	height:500px;
+	max-height:500px;
 	text-align:center;
 }
 
