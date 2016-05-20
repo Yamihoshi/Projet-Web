@@ -434,11 +434,19 @@
 	function getContact($bd)
 	{
 		$th=new touitosHandler($bd);
+		$tPh=new touitePriveHandler($bd);
 		$list=$th->getContact($_SESSION['id']);
 		foreach($list as $key=>$touitos)
 		{
 			echo '<div class="contactRow" idtouitos='.$touitos->getId().'>';
 				echo '@'.htmlentities($touitos->getPseudo());
+
+			$nb = $tPh->getNumberOfNotReadByTouitos($_SESSION['id'],$touitos->getId());
+			if($nb!=0)
+			{
+				echo " <b>($nb)</b>";
+			}
+
 			echo '</div>';
 		}
 	}

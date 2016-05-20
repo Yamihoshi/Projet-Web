@@ -39,7 +39,6 @@ class touitePriveHandler
 
   public function getNumberOfNotRead($idTouitos)
   {
-    $touites = [];
     $q = $this->_db->prepare('SELECT COUNT(*) as nb FROM touitesprives NATURAL JOIN touites WHERE idReceveur=:id AND vu=0');
     $q->bindValue(':id', $idTouitos, PDO::PARAM_INT);
     $q->execute();
@@ -65,6 +64,17 @@ class touitePriveHandler
     $q->bindValue(':receveur', $destinataire, PDO::PARAM_INT);
     $q->execute();
 
+  }
+
+  public function getNumberOfNotReadByTouitos($id,$idAuteur)
+  {
+    $q = $this->_db->prepare('SELECT COUNT(*) as nb FROM touitesprives NATURAL JOIN touites WHERE idAuteur=:idAuteur AND idReceveur=:id AND vu=0');
+    $q->bindValue(':id', $id, PDO::PARAM_INT);
+    $q->bindValue(':idAuteur', $idAuteur, PDO::PARAM_INT);
+    $q->execute();
+    $donnees = $q->fetch(PDO::FETCH_ASSOC);
+
+    return $donnees['nb'];
   }
 
 }
