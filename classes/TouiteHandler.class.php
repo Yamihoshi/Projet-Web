@@ -82,7 +82,6 @@ class touiteHandler
     $q = $this->_db->prepare('(SELECT idAuteur, idMsg as idMessage, texte, ladate, 1 as type FROM touites NATURAL JOIN touitesnormaux WHERE idAuteur = :id) UNION (SELECT idAuteur, idMsg as idMessage, texte, ladate, 2 as type FROM touites JOIN retouites ON idMsg= idMsgSource WHERE idmsgret IN (SELECT idmsgret FROM retouites JOIN touites ON idmsgret = idmsg WHERE idAuteur=:id)) ORDER BY ladate DESC LIMIT 10 OFFSET :offset');
     
     $q->bindValue(':id', $id, PDO::PARAM_INT);
-    $q->bindValue(':id', $id, PDO::PARAM_INT);
     $q->bindValue(':offset', $offset, PDO::PARAM_INT);
     $q->execute();
     while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
@@ -128,7 +127,7 @@ class touiteHandler
 
   public function gettouitesOfWhoIFollow($id,$offset)
   {
-    $q = $this->_db->prepare('(SELECT idMsg,laDate,texte,idAuteur,1 as type FROM touites NATURAL JOIN touitespublics,touitos,suivre WHERE idAuteur=id AND idDemandeur=:id AND idReceveur=idAuteur AND suivre.demande="V") UNION (SELECT idMsg,laDate,texte,idAuteur,2 as type FROM touites NATURAL JOIN retouites,touitos,suivre WHERE idAuteur=id AND idDemandeur=:id AND idReceveur=idAuteur AND suivre.demande="V") ORDER BY ladate DESC LIMIT 10 OFFSET :offset');
+    $q = $this->_db->prepare('(SELECT DISTINCT idMsg,laDate,texte,idAuteur,1 as type FROM touites NATURAL JOIN touitesnormaux JOIN suivre ON touites.idAuteur=idReceveur WHERE demande="V" AND idDemandeur=:id) UNION (SELECT DISTINCT idMsg,laDate,texte,idAuteur,2 as type FROM touites JOIN retouites ON idMsgSource=touites.idMsg JOIN suivre ON touites.idAuteur=idReceveur WHERE idDemandeur=:id AND demande="V") ORDER BY ladate DESC LIMIT 10 OFFSET :offset');
     $q->bindValue(':id', $id, PDO::PARAM_INT);
     $q->bindValue(':offset', $offset, PDO::PARAM_INT);
     $q->execute();

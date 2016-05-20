@@ -146,7 +146,12 @@ $(document).ready(function()
                         message:$('#RepondreModalForm > textarea').val(),
                         discution:true
                     },
-                dataType:'html'
+                dataType:'html',
+                success:function()
+                {
+                    $(".modal-body").html("");
+                    $("#myModal").hide();
+                }
              });
          });
     });
