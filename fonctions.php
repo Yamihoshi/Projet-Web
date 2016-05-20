@@ -454,6 +454,7 @@
 	function getDiscussionMessage($bd,$id)
 	{
 		$th=new touitePriveHandler($bd);
+		$touitosHandler= new touitosHandler($bd);
 		$list=$th->getDiscussionMessage($_SESSION['id'],$id);
 		echo '<div id="discussionMessage">';
 		foreach($list as $key=>$touite)
@@ -462,7 +463,11 @@
 				echo '<div class="discussionMessageRow myMessage">';
 			else
 				echo '<div class="discussionMessageRow messageFromOther">';
-				echo $touite->getTexte();
+
+			echo getPhotMessage($touitosHandler->getByAttr("id",$touite->getIdAuteur(),PDO::PARAM_INT));
+				echo '<span class="discussionMessageRowText">';	
+					echo $touite->getTexte();
+				echo '</span>';
 			echo '</div>';
 
 			echo '<div class="spacer"></div>';
