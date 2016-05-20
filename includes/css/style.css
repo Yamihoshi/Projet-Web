@@ -54,15 +54,13 @@ img{
 	padding: 10px;
   border: none;
 }
-	float:right;
-}
-input:not([type='submit']){
+input:not([type="submit"]){
   padding: 10px;
   border: none;
   border-bottom: solid 2px #c9c9c9;
   transition: border 0.3s;
 }
-input:not([type='submit']):focus {
+input:not([type="submit"]):focus {
   border-bottom: solid 2px #dc5656;
 }
 fieldset{
@@ -580,7 +578,9 @@ input[type="search"]
 
 .discussionMessageRow
 {
-	height:50px;
+	margin-bottom:15px;
+	padding:10px;
+	border-radius: 15px;
 }
 
 .spacer
@@ -591,11 +591,15 @@ input[type="search"]
 .myMessage
 {
 	float:left;
+	background-color:#e9f7f7;
+	border : 1px solid #d1dede;
 }
 
 .messageFromOther
 {
 	float:right;
+	background-color:#53c8d8;
+	border : 1px solid #4ab4c2;
 }
 
 .contactRow:hover
