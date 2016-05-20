@@ -20,7 +20,7 @@ class touitePriveHandler
   public function getDiscussionMessage($user,$touitos)
   {
     $touites = [];
-    $q = $this->_db->prepare('SELECT * FROM touitesprives NATURAL JOIN touites WHERE (idReceveur=:idUser AND idAuteur=:id) OR (idReceveur=:id AND idAuteur=:idUser) ORDER BY ladate DESC');
+    $q = $this->_db->prepare('SELECT * FROM touitesprives NATURAL JOIN touites WHERE (idReceveur=:idUser AND idAuteur=:id) OR (idReceveur=:id AND idAuteur=:idUser) ORDER BY ladate');
     $q->bindValue(':idUser', $user, PDO::PARAM_INT);
     $q->bindValue(':id', $touitos, PDO::PARAM_INT);
     $q->execute();
@@ -46,6 +46,25 @@ class touitePriveHandler
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
 
     return $donnees['nb'];
+  }
+
+  public function sendPrivateMessage($expediteur,$destinataire,$message)
+  {
+    date_default_timezone_set("Europe/Paris");
+
+    $q = $this->_db->prepare('INSERT INTO touites(laDate,texte,idAuteur) VALUES(:dateT,:texte,:id)');
+    $q->bindValue(':id', $expediteur, PDO::PARAM_INT);
+    $q->bindValue(':texte', $message, PDO::PARAM_STR);
+    $q->bindValue(':dateT', date("Y-m-d H:i:s"), PDO::PARAM_INT);
+    $q->execute();
+
+    $id = $this->_db->lastInsertId();
+
+    $q = $this->_db->prepare('INSERT INTO touitesprives VALUES(:id,:receveur,0)');
+    $q->bindValue(':id', $id, PDO::PARAM_INT);
+    $q->bindValue(':receveur', $destinataire, PDO::PARAM_INT);
+    $q->execute();
+
   }
 
 }

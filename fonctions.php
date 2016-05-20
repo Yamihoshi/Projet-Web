@@ -419,7 +419,7 @@
 		foreach($list as $key=>$touitos)
 		{
 			echo '<div class="contactRow" idtouitos='.$touitos->getId().'>';
-				echo '@'.$touitos->getPseudo();
+				echo '@'.htmlentities($touitos->getPseudo());
 			echo '</div>';
 		}
 	}
@@ -428,18 +428,18 @@
 	{
 		$th=new touitePriveHandler($bd);
 		$list=$th->getDiscussionMessage($_SESSION['id'],$id);
+		echo '<div id="discussionMessage">';
 		foreach($list as $key=>$touite)
 		{
 			echo '<div class="discussionMessageRow">';
 			echo $touite->getTexte();
 			echo '</div>';
 		}
+		echo '</div>';
 
 		echo '<div id="discussionInput">';
 			echo '<textarea placeholder="Votre Message" name="discussionAnswer" id="discussionAnswer"></textarea>';
 			echo '<div><button id="sendDiscussion" replyTo="'.$id.'">Envoyer</button></div>';
-		echo '</div>';
-
 		echo '</div>';
 	}
 
@@ -449,6 +449,17 @@
 		$nb=$th->getNumberOfNotRead($_SESSION['id']);
 
 		return $nb;
+	}
+
+	function sendPrivateMessage($bd,$destinataire,$message)
+	{
+		$th=new touitePriveHandler($bd);
+		$touitosHandler= new touitosHandler($bd);
+
+		if($touitosHandler->isContact($_SESSION['id'],$destinataire))
+		{
+			$th->sendPrivateMessage($_SESSION['id'],$destinataire,$message);
+		}
 	}
 
 

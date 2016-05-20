@@ -18,6 +18,17 @@ function loadNewProfilePic(input)
         reader.readAsDataURL(input.files[0]);
 }
 
+function getNewMessage()
+{
+    
+
+    $.get("ajax.php",{numberNewMessage:true},function(rep){
+        $("#notViewedCounter").html("");
+        if(rep!=0)
+            $("#notViewedCounter").html("("+rep+")");
+    });
+}
+
 $(document).ready(function()
 {
 	//Appui de la touche Entrer -> activer recherche
@@ -376,17 +387,21 @@ $(document).ready(function()
         var id=$(this).attr("idtouitos");
 
         $.get("ajax.php",{discussion:true,destinataire:id},function(rep){
-            $("#discussionMessage").html(rep);
+            $("#discussionDisplay").html(rep);
         });
     });
 
     $("#pageDisplay").on("click","#sendDiscussion",function()
     {
-        var idDiscussion=$(this).attr("idDiscussion");
+        var id=$(this).attr("replyto");
+        var message = $("#discussionAnswer").val();
 
-        $.get("ajax.php",{discussion:true,destinataire:id},function(rep){
-            $("#discussionMessage").html(rep);
+        $.post("ajax.php",{sendDiscussion:true,destinataire:id,message:message},function(rep){
+            $("#discussionMessage").append(rep);
+            $("#discussionAnswer").val("");
         });
     });
+
+    setInterval(getNewMessage, 10000);
 
 });
