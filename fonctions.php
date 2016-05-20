@@ -98,7 +98,7 @@
 			<div id="touite-box">
 							<form id="touite">
 									<textarea id="touiteArea" placeholder="Entrez votre message..." name="touite" maxlength="140" required></textarea>
-									<input type="submit"></input>
+									<input type="submit">
 							</form>
 			</div>';
 		}
