@@ -212,8 +212,9 @@ class touitosHandler
 
   public function isContact($user,$user2)
   {
-      $q = $this->_db->prepare('SELECT * FROM touitos JOIN suivre ON suivre.idDemandeur=touitos.id WHERE idReceveur=:id AND idDemandeur=:id2 demande="V"');
+      $q = $this->_db->prepare('SELECT * FROM suivre WHERE idReceveur=:id AND idDemandeur=:id2 AND demande="V" AND idDemandeur IN (SELECT idReceveur FROM suivre WHERE idDemandeur=:id AND idReceveur=:id2 )');
      $q->bindValue(':id', $user, PDO::PARAM_INT);
+     $q->bindValue(':id2', $user2, PDO::PARAM_INT);
      $q->execute();
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
   

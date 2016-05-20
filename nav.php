@@ -41,7 +41,17 @@ require_once('fonctions.php');
 
 			if(isset($_SESSION['user']))
 			{
-				echo '<li><a href="discussion.php">MAIL ('.getNumberOfNotRead($bd).')</a></li>';
+				$nb=getNumberOfNotRead($bd);
+				echo '<li><a href="discussion.php">MAIL ';
+				
+				echo '<span id="notViewedCounter">';
+				if($nb!=0)
+				{
+					echo "($nb)";
+				}
+				echo '</span>';
+				
+				echo '</a></li>';
 			}
 
 		echo'

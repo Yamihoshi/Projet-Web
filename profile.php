@@ -54,6 +54,11 @@ include('nav.php');
 					show_profile($usr,$bd);
 			}
 
+			else
+			{
+				searchByName("",$bd);
+			}
+
 	?>
 
 	</div>

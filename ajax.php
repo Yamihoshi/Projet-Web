@@ -32,7 +32,7 @@ require_once('classes/touite.class.php');
 		$touite = array("texte" => $_POST['message'], "idAuteur" => $_SESSION['id']);
 		envoyer_reponse($_POST['id'], new Touite($touite), $bd);
 	}
-	else if(!empty($_POST['message'])){
+	else if(!empty($_POST['message']) && !isset($_POST['sendDiscussion'])){
 			$touite = array("texte" => $_POST['message'], "idAuteur" => $_SESSION['id']);
 			if(!empty($_POST['id_message'])){
 				$touite['id_message'] = $_POST['id_message'];
@@ -119,6 +119,16 @@ require_once('classes/touite.class.php');
 	else if(isset($_GET['discussion']))
 	{
 		getDiscussionMessage($bd,$_GET['destinataire']);
+	}
+
+	else if(isset($_POST['sendDiscussion']))
+	{
+		sendPrivateMessage($bd,$_POST['destinataire'],$_POST['message']);
+	}
+
+	else if(isset($_GET['numberNewMessage']))
+	{
+		echo getNumberOfNotRead($bd);
 	}
 
 ?>
