@@ -117,6 +117,19 @@ $(document).ready(function()
             }
          });
     });
+
+    $('.icon-star-empty').on('click', function(event){
+        var message =$(this).parents('article');
+        $.ajax({
+            type:"GET",
+            url:"ajax.php",
+            data:
+                {
+                    id:$(message).attr('id'),
+                    retouite:true
+                }
+         });
+    });
     //voir réponse
     $('.icon-bubble').on('click', function(event){
         var id =$(this).parents('article').attr('id');

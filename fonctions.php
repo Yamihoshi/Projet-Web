@@ -393,7 +393,10 @@
 		$th=new TouiteRender($id, $bd);
 		$th->renderReponse($id, $bd);
 	}
-
+	function recordRetouite($id, $bd){
+		$th=new TouiteHandler($bd);
+		$th->addRetouite($id, $_SESSION['id']);
+	}
 	function envoyer_reponse($id, Touite $message, $bd){
 		$th=new TouiteHandler($bd);
 		$th->addReponse($message, $id);
@@ -482,6 +485,7 @@
 			$th->sendPrivateMessage($_SESSION['id'],$destinataire,$message);
 		}
 	}
+
 
 
 ?>

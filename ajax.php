@@ -49,8 +49,9 @@ require_once('classes/touite.class.php');
 
 			$tr->render($message,$user);
 		}
-
-
+	}
+	else if(!empty($_GET['retouite'])){
+		recordRetouite($_GET['id'], $bd);
 	}
 
 	else if(isset($_POST['follow']))

@@ -21,11 +21,12 @@ date_default_timezone_set("Europe/Paris");
 		 	$message = $db_touite->getListMessage($this->id,$offset);
 		 	if(!empty($message)){
 				foreach($message as $key=>$touite){
+                    print_r($touite);
                     if($touite->getType() == 1){
 				 	  $this->render($touite, $auteur);
                  }
                  else{
-                    $this->renderRetouite($touite);
+                    $this->renderRetouite($touite, $db_touitos);
                  }
 		 	    }
                 return true;
@@ -63,7 +64,7 @@ date_default_timezone_set("Europe/Paris");
 		 public function echo_message(Touite $message){
 		 	echo '<div class="contenu_message">' . htmlentities($message->getTexte()) .'</div>';
 		 }
-         public function renderRetouite(Touitos $touitos, touitosHandler $db){
+         public function renderRetouite(Touite $touite, touitosHandler $db_touitos){
             $auteur = $db_touitos->get($this->id);
             echo '<article class = "message" id="'. $touite->getIdMessage() .'">';
             echo '<div> this is a retouite</div>';
