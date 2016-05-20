@@ -82,3 +82,8 @@ require_once('fonctions.php');
 
 </div>
 
+
+<div>
+	<button id="openContactBox">Afficher les contacts</button>
+</div>
+

@@ -137,4 +137,14 @@ require_once('classes/touite.class.php');
 		echo loadPreviousDiscussion($bd,$_GET['destinataire'],$_GET['offset']);
 	}
 
+	else if(isset($_GET['getContact']))
+	{
+		getContact($bd);
+	}
+
+	else if(isset($_GET['getPrivateMessage']))
+	{
+		getDiscussionMessage($bd,$_GET['destinataire']);
+	}
+
 ?>

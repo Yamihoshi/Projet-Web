@@ -261,7 +261,7 @@ $(document).ready(function()
             
             var fileUploadDiv='<p class="editSection"><label for="profile_pic_upload">Photo';
             fileUploadDiv+='<span id="profile_photo_uploadDiv"></span></label></p>';
-            fileUploadDiv+='<input  class="modif_left" type="file" onchange="loadNewProfilePic(this)" style="display:none" name="profile_pic_upload" id="profile_pic_upload" accept="image/x-png, image/gif, image/jpeg">';
+            fileUploadDiv+='<input  class="modif_left" type="file" onchange="loadNewProfilePic(this)" style="display:none" name="profile_pic_upload" id="profile_pic_upload" accept="image/x-png, image/jpeg">';
             balise+=fileUploadDiv;
 
             var select = '<p class="editSection"><label class="modif" for="editColor">Couleur Fond</label><select id="editColor" name="editColor"><option style="background-color:white" value="white">white</option>';
@@ -397,21 +397,39 @@ $(document).ready(function()
         });
     });
 
-    $(".contactRow").click(function()
+    $("#pageDisplay").on("click",".contactRow",function()
     {
-        var id=$(this).attr("idtouitos");
+        console.log("OK");
 
-        $.get("ajax.php",{discussion:true,destinataire:id},function(rep){
+        if($(this).parents("#privateBox").attr('id')===undefined)
+        {   //Discussion.php
 
-            $("#discussionDisplay").html(rep);
+            var id=$(this).attr("idtouitos");
 
-            $("#discussionMessage").prop({ scrollTop: $("#discussionMessage").prop("scrollHeight") });
-        });
-    });
+            $.get("ajax.php",{discussion:true,destinataire:id},function(rep){
 
-    $("#sendPrivateMessage").click(function()
-    {
-        
+                $("#discussionDisplay").html(rep);
+
+                $("#discussionMessage").prop({ scrollTop: $("#discussionMessage").prop("scrollHeight") });
+            });
+        }
+
+        else
+        {
+            //fenêtre volante
+            var id=$(this).attr("idtouitos");
+
+            $.get("ajax.php",{getPrivateMessage:true,destinataire:id},function(rep){
+
+                //CREATEBOX
+                 $("#pageDisplay").append('<div id="privateBoxMessageDisplay"></div>');
+
+                $("#privateBoxMessageDisplay").html(rep);
+
+                $("#discussionMessage").prop({ scrollTop: $("#discussionMessage").prop("scrollHeight") });
+            });
+        }
+
     });
 
     $("#pageDisplay").on("click","#loadPreviousDiscussion",function()
@@ -437,6 +455,28 @@ $(document).ready(function()
             $("#discussionAnswer").val("");
             $("#discussionMessage").prop({ scrollTop: $("#discussionMessage").prop("scrollHeight") });
         });
+    });
+
+    $("#openContactBox").click(function()
+    {
+        $.get("ajax.php",{getContact:true},function(rep){
+            $("#openContactBox").hide();
+            var balise='<div id="privateBox">';
+            balise+='<button id="closePrivateBox">X</button>';
+            balise+='<div class="privateBoxTitle">Liste des contacts </div>';
+            balise+='<div id="contactList">';
+            balise+="</div>";
+            balise+=rep;
+            balise+="</div>";
+            $("#pageDisplay").append(balise);
+        });
+    });
+
+    $("#pageDisplay").on("click","#closePrivateBox",function()
+    {
+        $("#privateBox").remove();
+        $("#privateBoxMessageDisplay").remove();
+        $("#openContactBox").show();
     });
 
 

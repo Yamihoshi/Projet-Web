@@ -563,7 +563,7 @@ input[type="search"]
 
 #discussionAnswer,#discussionMessage
 {
-	width:70%;
+	width:100%;
 }
 
 #discussionMessage
@@ -629,3 +629,55 @@ input[type="search"]
 	text-decoration:underline;
 }
 
+#privateBox
+{
+	position:fixed;
+	bottom:0;
+	right:5px;
+	background-color:white;
+	width:20%;
+	height:80%;
+	border:2px solid black;
+	overflow-y:auto;
+}
+
+#privateBoxMessageDisplay
+{
+	position:fixed;
+	bottom:0;
+	right:45%;
+	background-color:white;
+	width:50%;
+	height:80%;
+	border:2px solid black;
+	text-align:center;
+}
+
+#privateBoxMessageDisplay #discussionMessage
+{
+	height:80%;
+}
+
+#closePrivateBox
+{
+	margin-top:0px;
+}
+
+.privateBoxTitle
+{
+	text-align:center;
+	margin:auto;
+	font-weight:bold;
+}
+
+#openContactBox
+{
+	position:fixed;
+	bottom:0;
+	right:0;
+}
+
+#contactList
+{
+	overflow-y:auto;
+}

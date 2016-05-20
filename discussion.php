@@ -12,7 +12,6 @@ include('nav.php');
 		else
 		{
 			echo '<div id="discussionDisplay" class="discussionSection"><div class="boxHeader">Discussions</div>';
-				
 					echo 'Choisissez une discussion';
 			echo '</div>';
 

@@ -61,8 +61,8 @@
 		echo '<div id="profile_pseudo">@'.htmlentities($profile->getPseudo()).'</div>';
 		echo '<div id="profile_statut">'.htmlentities($profile->getStatut()).'</div>';
 
-		if(isset($_SESSION['id']) AND $th->isContact($profile->getId(),$_SESSION['id']))
-			echo '<div><button id="sendPrivateMessage">Envoyer un Touite privé</button></div>';
+		/*if(isset($_SESSION['id']) AND $th->isContact($profile->getId(),$_SESSION['id']))
+			echo '<div><button id="sendPrivateMessage">Envoyer un Touite privé</button></div>';*/
 
 		echo '</div>'; // Close profil_left
 
