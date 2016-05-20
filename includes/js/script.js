@@ -92,10 +92,11 @@ $(document).ready(function()
                 {
                     message:$('#touiterModalForm textarea').val()
                 },
-            dataType:'json',
             success:function(response, status){
-
-            }
+                $(".modal-body").html("");
+                $("#myModal").hide();
+                $("#touiteList").html(response+$("#touiteList").html());
+            },
         });
 
     });

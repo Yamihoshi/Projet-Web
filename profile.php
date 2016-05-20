@@ -62,14 +62,5 @@ include('nav.php');
 	?>
 
 	</div>
-<!--
-<div id="privateBox">
-	<button id="closePrivateBox">X</button>
-	<div class="privateBoxTitle">Liste des contacts </div>
-	<div id="contactList">
-		<?php getContact($bd); ?>
-	</div>
-</div>-->
-
 </body>
 </html>
