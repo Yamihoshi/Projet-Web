@@ -554,6 +554,7 @@ input[type="search"]
 #discussionDisplay
 {
 	width:70%;
+	height:500px;
 	text-align:center;
 }
 
@@ -565,6 +566,8 @@ input[type="search"]
 #discussionMessage
 {
 	margin:auto;
+	overflow-y:auto; 
+	height:100%;
 }
 .discussionMessageRow
 {
