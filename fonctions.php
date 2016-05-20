@@ -458,50 +458,92 @@
 			else
 				echo '<div class="discussionMessageRow messageFromOther">';
 
+			if($touite->getIdAuteur()==$_SESSION['id'])
 			echo getPhotMessage($auteur);
+
 				echo '<span class="discussionMessageRowText">';	
 					echo $touite->getTexte();
 				echo '</span>';
+			if($touite->getIdAuteur()!=$_SESSION['id'])
+				echo getPhotMessage($auteur);
+
 			echo '</div>';
 
 			echo '<div class="spacer"></div>';
+	}
+
+	function loadPreviousDiscussion($bd,$dest,$offset)
+	{
+		$th=new touitePriveHandler($bd);
+		$touitosHandler= new touitosHandler($bd);
+		if($touitosHandler->isContact($_SESSION['id'],$dest))
+		{
+			$list=$th->getDiscussionMessage($_SESSION['id'],$dest,intval($offset)*10);
+			echo '<div><button id="loadPreviousDiscussion" index="'.$offset.'">Charger les anciens messages</button></div>';
+
+			$dateCourante=substr($list[0]->getLaDate(),0,4+3+3);
+
+			echo '<div class="datePrivate">';
+			
+			echo date("d/m/Y", strtotime($dateCourante));
+
+			echo '</div>';
+
+
+			foreach($list as $key=>$touite)
+			{
+				if(strtotime(substr($touite->getLaDate(),0,4+3+3)) > strtotime($dateCourante))
+				{
+					echo '<div class="datePrivate">';
+						$dateCourante=substr($touite->getLaDate(),0,4+3+3);
+						echo date("d/m/Y", strtotime($dateCourante));
+					echo '</div>';
+				}
+
+				renderDiscussionMessage($touite,$touitosHandler->getByAttr("id",$touite->getIdAuteur(),PDO::PARAM_INT));
+			}
+			echo '</div>';
+		}
 	}
 
 	function getDiscussionMessage($bd,$id)
 	{
 		$th=new touitePriveHandler($bd);
 		$touitosHandler= new touitosHandler($bd);
-		$list=$th->getDiscussionMessage($_SESSION['id'],$id);
-		echo '<div id="discussionMessage">';
-
-
-		$dateCourante=substr($list[0]->getLaDate(),0,4+3+3);
-
-		echo '<div class="datePrivate">';
-		
-		echo date("d/m/Y", strtotime($dateCourante));
-
-		echo '</div>';
-
-
-		foreach($list as $key=>$touite)
+		if($touitosHandler->isContact($_SESSION['id'],$id))
 		{
-			if(strtotime(substr($touite->getLaDate(),0,4+3+3)) > strtotime($dateCourante))
+			$list=$th->getDiscussionMessage($_SESSION['id'],$id,0);
+			echo '<div id="discussionMessage" destinataire="'.$id.'">';
+			echo '<div><button id="loadPreviousDiscussion" index="1">Charger les anciens messages</button></div>';
+
+			$dateCourante=substr($list[0]->getLaDate(),0,4+3+3);
+
+			echo '<div class="datePrivate">';
+			
+			echo date("d/m/Y", strtotime($dateCourante));
+
+			echo '</div>';
+
+
+			foreach($list as $key=>$touite)
 			{
-				echo '<div class="datePrivate">';
-					$dateCourante=substr($touite->getLaDate(),0,4+3+3);
-					echo date("d/m/Y", strtotime($dateCourante));
-				echo '</div>';
+				if(strtotime(substr($touite->getLaDate(),0,4+3+3)) > strtotime($dateCourante))
+				{
+					echo '<div class="datePrivate">';
+						$dateCourante=substr($touite->getLaDate(),0,4+3+3);
+						echo date("d/m/Y", strtotime($dateCourante));
+					echo '</div>';
+				}
+
+				renderDiscussionMessage($touite,$touitosHandler->getByAttr("id",$touite->getIdAuteur(),PDO::PARAM_INT));
 			}
+			echo '</div>';
 
-			renderDiscussionMessage($touite,$touitosHandler->getByAttr("id",$touite->getIdAuteur(),PDO::PARAM_INT));
+			echo '<div id="discussionInput">';
+				echo '<textarea placeholder="Votre Message" name="discussionAnswer" id="discussionAnswer"></textarea>';
+				echo '<div><button id="sendDiscussion" replyTo="'.$id.'">Envoyer</button></div>';
+			echo '</div>';
 		}
-		echo '</div>';
-
-		echo '<div id="discussionInput">';
-			echo '<textarea placeholder="Votre Message" name="discussionAnswer" id="discussionAnswer"></textarea>';
-			echo '<div><button id="sendDiscussion" replyTo="'.$id.'">Envoyer</button></div>';
-		echo '</div>';
 	}
 
 	function getNumberOfNotRead($bd)
@@ -525,6 +567,8 @@
 			renderDiscussionMessage($touite,$touitosHandler->getByAttr("id",$_SESSION['id'],PDO::PARAM_INT));
 		}
 	}
+
+
 
 
 

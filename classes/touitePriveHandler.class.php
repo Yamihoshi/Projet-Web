@@ -17,12 +17,13 @@ class touitePriveHandler
     $this->_db = $db;
   }
 
-  public function getDiscussionMessage($user,$touitos)
+  public function getDiscussionMessage($user,$touitos,$offset)
   {
     $touites = [];
-    $q = $this->_db->prepare('SELECT * FROM touitesprives NATURAL JOIN touites WHERE (idReceveur=:idUser AND idAuteur=:id) OR (idReceveur=:id AND idAuteur=:idUser) ORDER BY ladate');
+    $q = $this->_db->prepare('(SELECT * FROM touitesprives NATURAL JOIN touites WHERE (idReceveur=:idUser AND idAuteur=:id) OR (idReceveur=:id AND idAuteur=:idUser) ORDER BY ladate DESC LIMIT 10 OFFSET :offset) ORDER BY ladate');
     $q->bindValue(':idUser', $user, PDO::PARAM_INT);
     $q->bindValue(':id', $touitos, PDO::PARAM_INT);
+    $q->bindValue(':offset', $offset, PDO::PARAM_INT);
     $q->execute();
     while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
     {
