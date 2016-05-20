@@ -38,7 +38,7 @@ nav input[type="submit"]{
 img{
 	box-shadow: 0 1px 2px rgba(0,0,0,.1);
 }
-.message{
+.message_container{
 	margin-top: 20px;
 	word-break: break-all;
 	display: flex;
@@ -75,11 +75,15 @@ form#editForm input
 	display:inline-block;
 }
 
-
+article p{
+	box-shadow: 0 1px 2px rgba(0,0,0,.1);
+}
 #editForm .editSection textarea{
 	display: inline-block;
 }
-
+#connectLink form{
+	margin: auto;
+}
 .pseudo
 {
 	font-weight:bold;
@@ -466,6 +470,7 @@ input[type="search"]
     font-variant: normal;
     text-transform: none;
     line-height: 1;
+    cursor: pointer;
 
     /* Better Font Rendering =========== */
     -webkit-font-smoothing: antialiased;

@@ -21,12 +21,11 @@ date_default_timezone_set("Europe/Paris");
 		 	$message = $db_touite->getListMessage($this->id,$offset);
 		 	if(!empty($message)){
 				foreach($message as $key=>$touite){
-                    print_r($touite);
                     if($touite->getType() == 1){
 				 	  $this->render($touite, $auteur);
                  }
                  else{
-                    $this->renderRetouite($touite, $db_touitos);
+                    $this->renderRetouite($touite, $db_touitos, htmlentities($auteur->getPseudo()));
                  }
 		 	    }
                 return true;
@@ -49,6 +48,7 @@ date_default_timezone_set("Europe/Paris");
 
          public function render($touite, $auteur){
             echo '<article class = "message" id="'. $touite->getIdMessage() .'">';
+            echo '<div class="message_container">';
                         $this->renderPic($auteur);
                         echo '<div class="containeur">';
                             echo '<header class= "info">';
@@ -57,17 +57,18 @@ date_default_timezone_set("Europe/Paris");
                         echo '</header>';
                         $this->echo_message($touite);
                         $this->renderFooter($touite);
-                      echo '</div>';
+                      echo '</div></div>';
             echo '</article>';
          }
 
 		 public function echo_message(Touite $message){
 		 	echo '<div class="contenu_message">' . htmlentities($message->getTexte()) .'</div>';
 		 }
-         public function renderRetouite(Touite $touite, touitosHandler $db_touitos){
-            $auteur = $db_touitos->get($this->id);
+         public function renderRetouite(Touite $touite, touitosHandler $db_touitos, $pseudo){
+            $auteur = $db_touitos->get($touite->getIdAuteur());
             echo '<article class = "message" id="'. $touite->getIdMessage() .'">';
-            echo '<div> this is a retouite</div>';
+            echo '<p><a  class="pseudo" href="profile.php?user='.$pseudo.'">@' . $pseudo .'</a>a retouité</p>';
+            echo '<div class="message_container">';
             $this->renderPic($auteur);
             echo '<div class="containeur">';
                 echo '<header class= "info">';
@@ -76,7 +77,7 @@ date_default_timezone_set("Europe/Paris");
             echo '</header>';
             $this->echo_message($touite);
             $this->renderFooter($touite);
-          echo '</div>';
+          echo '</div></div>';
             echo '</article>';
          }
 		 public function renderPic(Touitos $auteur){
