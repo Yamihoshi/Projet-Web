@@ -29,7 +29,12 @@ date_default_timezone_set("Europe/Paris");
                  }
 		 	    }
                 return true;
-		      }
+		      }else{
+                if(isOwnProfile($auteur->getNom()))
+                     echo '<div class="fond nothing"><h1>Commencez à écrire un message !</h1></div>';
+                else
+                    echo '<div class="fond nothing"><h1>Cet utilisateur n\'a pas encore écrit de message !</h1></div>';
+              }
 
             return false;
 		 }
@@ -41,7 +46,7 @@ date_default_timezone_set("Europe/Paris");
             if(!empty($message)){
                 foreach($message as $key=>$touite){
                     $auteur = $db_touitos->get($touite->getIdAuteur());
-                    $this->render($touite, $auteur);
+                    $this->renderC($touite, $auteur);
                 }
               }
          }
@@ -60,7 +65,20 @@ date_default_timezone_set("Europe/Paris");
                       echo '</div></div>';
             echo '</article>';
          }
-
+        public function renderC($touite, $auteur){
+            echo '<article class = "message" id="'. $touite->getIdMessage() .'">';
+            echo '<div class="message_container">';
+                        $this->renderPic($auteur);
+                        echo '<div class="containeur">';
+                            echo '<header class= "info">';
+                                echo '<div class="pseudo"><a href="profile.php?user='.$auteur->getPseudo().'">@' . htmlentities($auteur->getPseudo()) .'</a></div>';
+                                echo '<div class="date">'. $newDate = date("d/m/Y", strtotime($touite->getLaDate())) . '</div>';
+                        echo '</header>';
+                        $this->echo_message($touite);
+                        $this->renderFooterC($touite);
+                      echo '</div></div>';
+            echo '</article>';
+         }
 		 public function echo_message(Touite $message){
 		 	echo '<div class="contenu_message">' . htmlentities($message->getTexte()) .'</div>';
 		 }
@@ -97,6 +115,17 @@ date_default_timezone_set("Europe/Paris");
                         echo '<span class="icon-star-empty" title="Retouite"></span>';
                         echo '<span class="icon-bubble" title="Répondre"></span>';
                     }
+                }
+            echo '</footer';
+         }
+
+        public function renderFooterC($message){
+            echo '<footer>';
+                echo '<span class="icon-undo2" title="Voir les réponses"></span>';
+                //echo '<span class="icon-star-full"></span>';
+                if(!empty($_SESSION['id'])){
+                        echo '<span class="icon-star-empty" title="Retouite"></span>';
+                        echo '<span class="icon-bubble" title="Répondre"></span>';
                 }
             echo '</footer';
          }

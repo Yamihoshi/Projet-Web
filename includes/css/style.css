@@ -59,9 +59,20 @@ img{
 	flex-wrap: column wrap;
 	
 }
+.nothing{
+	text-align: center;
+	min-height: 300px;
+	vertical-align: middle;
+}
+.nothing h1{
+	font-size: 1.5em;
+	margin: auto 0;
+	line-height: 253px;
+}
 .containeur{
 	width: 86%;
 }
+
 #editForm select{
 	padding: 10px;
   border: none;
@@ -209,6 +220,9 @@ button:disabled
 	background-color: #f8f8f8;
 	border-radius: 12px;
 	box-shadow: 0 1px 2px rgba(0,0,0,.1);
+}
+textarea{
+	resize: none;
 }
 .modal textarea{
 	width: 90%;
@@ -605,6 +619,7 @@ footer [class^="icon-"], footer [class*=" icon-"]{
 #discussionDisplay
 {
 	width:70%;
+	height: 500px;
 	max-height:500px;
 	text-align:center;
 }
