@@ -70,7 +70,7 @@
 			echo 	'<div id="ongletDiv">
 						<table id="ongletSelect">
 							<tr>
-								<td>touites</td>
+								<td>Touites</td>
 								<td>Suivi</td>
 								<td>Suiveurs</td>
 								<td><span class="icon-wrench"></span></td>
