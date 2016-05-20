@@ -256,24 +256,24 @@ $(document).ready(function()
             var balise = '<div id="edit">';
             balise+='<form id="editForm" action="'+window.location.href+'" method="POST" enctype="multipart/form-data" >';
             balise += '<fieldset><legend>Modification</legend>';
-            balise +='<div class="editSection"><label class="modif" for="editName">Nom</label></span><input id="editName" type="text" name="editName" value="'+htmlEncode($("#profile_name").text())+'"></div>';
-            balise += '<div class="editSection"><label class="modif" for="editStatut">Description</label><textarea name="editStatut" form="editForm" placeholder = "Description..." id="editStatut" >'+$("#profile_statut").text()+'</textarea></div>';
+            balise +='<p class="editSection"><label class="modif" for="editName">Nom</label></span><input id="editName" type="text" name="editName" value="'+htmlEncode($("#profile_name").text())+'"></p>';
+            balise += '<p class="editSection"><label class="modif" for="editStatut">Description</label><textarea name="editStatut" form="editForm" placeholder = "Description..." id="editStatut" >'+$("#profile_statut").text()+'</textarea></p>';
             
-            var fileUploadDiv='<div class="editSection"><label for="profile_pic_upload">Photo';
-            fileUploadDiv+='<span id="profile_photo_uploadDiv" class="modif modif_left"></span></label></div>';
+            var fileUploadDiv='<p class="editSection"><label for="profile_pic_upload">Photo';
+            fileUploadDiv+='<span id="profile_photo_uploadDiv" class="modif modif_left"></span></label></p>';
             fileUploadDiv+='<input  class="modif_left" type="file" onchange="loadNewProfilePic(this)" style="display:none" name="profile_pic_upload" id="profile_pic_upload" accept="image/x-png, image/gif, image/jpeg">';
             balise+=fileUploadDiv;
 
-            var select = '<div class="editSection"><label class="modif" for="editColor">Couleur Fond</label><select id="editColor" name="editColor"><option style="background-color:white" value="white">white</option>';
+            var select = '<p class="editSection"><label class="modif" for="editColor">Couleur Fond</label><select id="editColor" name="editColor"><option style="background-color:white" value="white">white</option>';
             select += '<option value="blue" style="background-color:blue">blue</option>';
             select += '<option value="aliceblue" style="background-color:aliceblue">aliceblue</option>';
-            select += '</select></div>';
+            select += '</select></p>';
             balise += select;
-            select = '<div class="editSection"><label class="modif" for="editPolice">Police</label><select name="editPolice" id="editPolice"><option value="Arial">Arial</option>';
+            select = '<p class="editSection"><label class="modif" for="editPolice">Police</label><select name="editPolice" id="editPolice"><option value="Arial">Arial</option>';
             select += '<option value="Verdana">Verdana</option>';
             select += '<option value="Georgia">Georgia</option>';
             select += '<option value="Impact">Impact</option>';
-            select += '</select></div>';
+            select += '</select></p>';
             balise += select;
             balise+='<input type="submit" id="saveEdit" value="Enregistrer les modifications">';
             balise+='<span><button id="deleteAccount" type="button">Supprimer le compte</button></span>';
