@@ -82,8 +82,13 @@ require_once('fonctions.php');
 
 </div>
 
+<?php
 
-<div>
-	<button id="openContactBox">Afficher les contacts</button>
-</div>
-
+if(isConnected() AND !strpos($_SERVER['PHP_SELF'],"discussion"))
+{
+	echo '
+	<div>
+		<button id="openContactBox">Afficher les contacts</button>
+	</div>';
+}
+?>
