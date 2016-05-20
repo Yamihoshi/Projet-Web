@@ -540,10 +540,51 @@ input[type="search"]
 {
 	display:inline-block;
 	vertical-align:top;
-	width:30%;
 }
 
 .boxHeader
 {
 	
+}
+
+#discussionDisplay
+{
+	width:70%;
+	text-align:center;
+}
+
+#discussionAnswer,#discussionMessage
+{
+	width:70%;
+}
+
+#discussionMessage
+{
+	margin:auto;
+}
+
+.discussionMessageRow
+{
+	height:50px;
+}
+
+.spacer
+{
+	clear:both;
+}
+
+.myMessage
+{
+	float:left;
+}
+
+.messageFromOther
+{
+	float:right;
+}
+
+.contactRow:hover
+{
+	cursor:pointer;
+	text-decoration:underline;
 }

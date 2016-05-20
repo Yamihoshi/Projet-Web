@@ -393,6 +393,11 @@ $(document).ready(function()
         });
     });
 
+    $("#sendPrivateMessage").click(function()
+    {
+        
+    });
+
     $("#pageDisplay").on("click","#sendDiscussion",function()
     {
         var id=$(this).attr("replyto");
