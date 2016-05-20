@@ -46,11 +46,21 @@ img{
 	display: flex;
     flex-flow: row wrap;
 }
+.message_container footer{
+   display: flex;
+   flex-direction: row;
+   justify-content: flex-end;
+ }
+
 .container, .info{
 	display: inline-flex;
 }
 .container{
 	flex-wrap: column wrap;
+	
+}
+.containeur{
+	width: 86%;
 }
 #editForm select{
 	padding: 10px;
@@ -392,7 +402,8 @@ input[type="search"]
 
 #profile_statut
 {
-	width:100%;
+	width: 95%;
+	margin: auto;
 	word-wrap: break-word;
 }
 
@@ -506,7 +517,9 @@ input[type="search"]
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
-
+footer [class^="icon-"], footer [class*=" icon-"]{
+	margin-left: 15px;
+}
 .icon-bubble2:before {
     content: "\e96e";
 }
