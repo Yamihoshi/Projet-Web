@@ -37,6 +37,16 @@ class touitePriveHandler
     return $touites;
   }
 
+  public function getById($id)
+  {
+    $q = $this->_db->prepare('SELECT * FROM touitesprives NATURAL JOIN touites WHERE idMsg=:id');
+    $q->bindValue(':id', $id, PDO::PARAM_INT);
+    $q->execute();
+    $donnees = $q->fetch(PDO::FETCH_ASSOC);
+
+    return $donnees;
+  }
+
   public function getNumberOfNotRead($idTouitos)
   {
     $q = $this->_db->prepare('SELECT COUNT(*) as nb FROM touitesprives NATURAL JOIN touites WHERE idReceveur=:id AND vu=0');
@@ -63,6 +73,8 @@ class touitePriveHandler
     $q->bindValue(':id', $id, PDO::PARAM_INT);
     $q->bindValue(':receveur', $destinataire, PDO::PARAM_INT);
     $q->execute();
+
+    return $id;
 
   }
 

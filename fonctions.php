@@ -451,26 +451,50 @@
 		}
 	}
 
-	function getDiscussionMessage($bd,$id)
+	function renderDiscussionMessage(touitePrive $touite,touitos $auteur)
 	{
-		$th=new touitePriveHandler($bd);
-		$touitosHandler= new touitosHandler($bd);
-		$list=$th->getDiscussionMessage($_SESSION['id'],$id);
-		echo '<div id="discussionMessage">';
-		foreach($list as $key=>$touite)
-		{
 			if($touite->getIdAuteur()==$_SESSION['id'])
 				echo '<div class="discussionMessageRow myMessage">';
 			else
 				echo '<div class="discussionMessageRow messageFromOther">';
 
-			echo getPhotMessage($touitosHandler->getByAttr("id",$touite->getIdAuteur(),PDO::PARAM_INT));
+			echo getPhotMessage($auteur);
 				echo '<span class="discussionMessageRowText">';	
 					echo $touite->getTexte();
 				echo '</span>';
 			echo '</div>';
 
 			echo '<div class="spacer"></div>';
+	}
+
+	function getDiscussionMessage($bd,$id)
+	{
+		$th=new touitePriveHandler($bd);
+		$touitosHandler= new touitosHandler($bd);
+		$list=$th->getDiscussionMessage($_SESSION['id'],$id);
+		echo '<div id="discussionMessage">';
+
+
+		$dateCourante=substr($list[0]->getLaDate(),0,4+3+3);
+
+		echo '<div class="datePrivate">';
+		
+		echo date("d/m/Y", strtotime($dateCourante));
+
+		echo '</div>';
+
+
+		foreach($list as $key=>$touite)
+		{
+			if(strtotime(substr($touite->getLaDate(),0,4+3+3)) > strtotime($dateCourante))
+			{
+				echo '<div class="datePrivate">';
+					$dateCourante=substr($touite->getLaDate(),0,4+3+3);
+					echo date("d/m/Y", strtotime($dateCourante));
+				echo '</div>';
+			}
+
+			renderDiscussionMessage($touite,$touitosHandler->getByAttr("id",$touite->getIdAuteur(),PDO::PARAM_INT));
 		}
 		echo '</div>';
 
@@ -495,7 +519,10 @@
 
 		if($touitosHandler->isContact($_SESSION['id'],$destinataire))
 		{
-			$th->sendPrivateMessage($_SESSION['id'],$destinataire,$message);
+			$id=$th->sendPrivateMessage($_SESSION['id'],$destinataire,$message);
+			$touite=new touitePrive($th->getById($id));
+
+			renderDiscussionMessage($touite,$touitosHandler->getByAttr("id",$_SESSION['id'],PDO::PARAM_INT));
 		}
 	}
 
