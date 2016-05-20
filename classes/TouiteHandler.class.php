@@ -22,11 +22,13 @@ class touiteHandler
       $q->bindValue(':auteur', $Touite->getIdAuteur(), PDO::PARAM_INT);
       $q->execute();
       $id = $this->_db->lastInsertId();
-      $this->_db->query('INSERT INTO touitespublics VALUES('.$id.')');
       return $id;
     }
   }
 
+  public function addPublic($id){
+    $this->_db->query('INSERT INTO touitespublics VALUES('.$id.')');
+  }
   public function delete($id)
   {
     $q = $this->_db->prepare('DELETE FROM touites WHERE idMsg = :id');
@@ -65,7 +67,7 @@ class touiteHandler
   {
     $touites = [];
     $id = (int) $id;
-    $q = $this->_db->prepare('SELECT idAuteur, idMsg as idMessage, texte, ladate FROM touites WHERE idAuteur = :id ORDER BY ladate DESC LIMIT 10 OFFSET :offset');
+    $q = $this->_db->prepare('SELECT idAuteur, idMsg as idMessage, texte, ladate FROM touites NATURAL JOIN touitespublics  WHERE idAuteur = :id  ORDER BY ladate DESC LIMIT 10 OFFSET :offset');
     $q->bindValue(':id', $id, PDO::PARAM_INT);
     $q->bindValue(':offset', $offset, PDO::PARAM_INT);
     $q->execute();

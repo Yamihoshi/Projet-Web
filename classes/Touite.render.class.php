@@ -2,7 +2,7 @@
 
 date_default_timezone_set("Europe/Paris");
 
-	require_once("config/connexion.php");
+    require_once("fonctions.php");
 
 	class TouiteRender
 	{
@@ -60,15 +60,11 @@ date_default_timezone_set("Europe/Paris");
 		 	echo '<div class="contenu_message">' . htmlentities($message->getTexte()) .'</div>';
 		 }
 
-		 public function renderPic($auteur){
+		 public function renderPic(Touitos $auteur){
 
-		 	echo '<a href="profile.php?user='.$auteur->getPseudo().'">
-		 			<picture>
-						<source src="http://'. $_SERVER['SERVER_NAME']. '/projet-web/files/pictures/Megumin.jpg">
-						<img src="http://'. $_SERVER['SERVER_NAME']. '/projet-web/files/pictures/Megumin.jpg">
-					</picture>
-                </a>
-            ';
+		 	echo '<a href="profile.php?user='.$auteur->getPseudo().'">';
+		 			echo getPhotMessage($auteur);
+             echo  '</a>';
 		 }
          public function renderFooter($message){
             echo '<footer>';

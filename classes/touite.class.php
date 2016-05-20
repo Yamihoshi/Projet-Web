@@ -7,6 +7,7 @@
 		protected $_texte;
         protected $_idAuteur;
         protected $_reponse;
+        protected $_type;
 
     public function __construct(array $donnees)
     {
@@ -139,6 +140,30 @@
     public function setReponse($reponse)
     {
         $this->_reponse = $reponse;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of _type.
+     *
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->_type;
+    }
+
+    /**
+     * Sets the value of _type.
+     *
+     * @param mixed $_type the type
+     *
+     * @return self
+     */
+    protected function setType($type)
+    {
+        $this->_type = $type;
 
         return $this;
     }

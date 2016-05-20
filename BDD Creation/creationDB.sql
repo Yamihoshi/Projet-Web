@@ -1,4 +1,4 @@
-/*création des tables*/
+﻿/*création des tables*/
 
 
 create table touitos 
@@ -7,7 +7,7 @@ create table touitos
 	nom varchar(50),
 	pseudo varchar(50) not null unique,
 	mail varchar(50) not null,
-	pwd varchar(20) not null,
+	pwd varchar(200) not null,
 	photo boolean,
 	statut varchar(100),
 	primary key (id)

@@ -122,7 +122,18 @@
 		else
 			return '<img id='.$id.' src="includes/img/no_pic.png">';
 	}
-
+	function getPhotMessage($user)
+	{
+		if($user->getPhoto()==1)
+		{
+			foreach(glob("files/pictures/".$user->getId().".*") as $file)
+		    {
+		           return '<img src="'.$file.'">';
+		    }	
+		}
+		else
+			return '<img src="includes/img/no_pic.png">';
+	}
 	function gettouitos($bd, $id){
 		$th = new touitosHandler($bd);
 		return $th->get($id);
@@ -203,7 +214,8 @@
 
 	function addTouite($data, $bd){
 		$t= new TouiteHandler($bd);
-		$t->add($data);
+		$id = $t->add($data);
+		$t->addPublic($id);
 	}
 
 
