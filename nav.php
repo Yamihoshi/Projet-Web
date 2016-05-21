@@ -6,6 +6,7 @@
 	<link rel="stylesheet" href="includes/css/style.css">
 	<script src="includes/js/jquery-1.11.3.min.js"></script>
 	<script src="includes/js/script.js"></script>
+	<link rel="icon" type="image/png" href="files/favicon.png" />
 </head>
 <body>
 
@@ -14,7 +15,7 @@ require_once('fonctions.php');
 
 	echo '<nav>
 		<ul>
-		<li><a href="index.php"><span class="icon-home"></span> Accueil</a></li>';
+		<li><a href="/"><span class="icon-home"></span> Accueil</a></li>';
 
 			if(isset($_SESSION['user']))
 			{
