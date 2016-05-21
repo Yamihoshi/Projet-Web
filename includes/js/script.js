@@ -434,7 +434,7 @@ $(document).ready(function()
 
                 $("#discussionDisplay").html(rep);
 
-                $("#discussionMessage").prop({ scrollTop: $("#discussionMessage").prop("scrollHeight") });
+                $("#discussionDisplay").prop({ scrollTop: $("#discussionDisplay").prop("scrollHeight") });
             });
         }
 
