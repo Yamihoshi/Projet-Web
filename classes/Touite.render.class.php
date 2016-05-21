@@ -118,7 +118,7 @@ date_default_timezone_set("Europe/Paris");
             echo '<footer>';
                 echo '<span class="icon-undo2" title="Voir les réponses"></span>';
                 //echo '<span class="icon-star-full"></span>';
-                if(!empty($_SESSION['id'])){
+                if(!empty($_SESSION['id']) && $_SESSION['id'] != $message->getIdAuteur()){
                         echo '<span class="icon-star-empty" title="Retouite"></span>';
                         echo '<span class="icon-bubble" title="Répondre"></span>';
                 }
