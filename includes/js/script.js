@@ -95,7 +95,7 @@ $(document).ready(function()
             success:function(response, status){
                 $(".modal-body").html("");
                 $("#myModal").hide();
-                $("#touiteList").html(response+$("#touiteList").html());
+                //$("#touiteList").html(response+$("#touiteList").html());
             },
         });
 
