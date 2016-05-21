@@ -31,6 +31,20 @@ function getNewMessage()
 
 $(document).ready(function()
 {
+    $("#myModal").on("keyup","#login",function()
+    {
+        this.value = this.value.replace(/\s+/g, '_');
+    });
+
+    $("#myModal").on("keyup","#password",function(event)
+    {
+        if(event.keyCode == 32)
+        {
+            this.value = this.value.replace(/\s+/g, '');
+            $(".modal-footer").html("Un mot de passe ne peut pas contenir d'espace");
+        }
+    });
+
 	//Appui de la touche Entrer -> activer recherche
 	$("#searchBar").keyup(function(event){
     	if(event.keyCode == 13)
