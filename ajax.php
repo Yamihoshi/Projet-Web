@@ -17,7 +17,7 @@ require_once('classes/touite.class.php');
 		delete_message($_GET['id'], $_SESSION['id'], $bd);
 	}
 
-	else if(!empty($_SESSION['id']) AND !empty($_GET['voirMessage'])){
+	else if(!empty($_GET['id']) AND !empty($_GET['voirMessage'])){
 		voir_message($_GET['id'], $bd);
 	}
 
