@@ -638,6 +638,7 @@ footer [class^="icon-"], footer [class*=" icon-"]{
 .discussionMessageRow
 {
 	margin-bottom:20px;
+	line-height:3em;
 }
 
 .discussionMessageRow img

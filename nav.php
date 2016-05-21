@@ -32,14 +32,14 @@ require_once('fonctions.php');
 				else
 				{
 					$nb=getNumberOfNotRead($bd);
-					echo '<li><a href="discussion.php"><button type="button"><span class="icon-bubbles2"></span> Message privé</button> ';
+					echo '<li><a href="discussion.php"><button type="button"><span class="icon-bubbles2"></span> Message privé';
 					
 					echo '<span id="notViewedCounter">';
 					if($nb!=0)
 					{
-						echo "($nb)";
+						echo " ($nb)";
 					}
-					echo '</span>';
+					echo '</span></button>';
 					
 					echo '</a></li>';
 					echo '<li id="connectLink">';
