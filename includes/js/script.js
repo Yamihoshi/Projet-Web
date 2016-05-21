@@ -101,7 +101,8 @@ $(document).ready(function()
 
     });
 
-    $('.icon-undo2').on('click', function(event){
+    //Voir réponse
+   $('#touiteList').on('click', '.icon-undo2',function(event){
         var message =$(this).parents('article');
         $.ajax({
             type:"GET",
@@ -112,14 +113,17 @@ $(document).ready(function()
                     voirMessage:true
                 },
                 success:function(response, status){
-                    if($(message).find('.message'))
-                        $(message).find('.message').remove();
-                    $(message).find('footer').after(response);
+                    /*if($(message).find('.message'))
+                        $(message).find('.message').remove();*/
+                    var currentArticle=$("article[id='"+$(message).attr('id')+"']");
+                    currentArticle.find('.reponseDisplayer').html("");
+                    currentArticle.append('<div class="reponseDisplayer">'+response+'</div>');
+
             }
          });
     });
 
-    $('.icon-star-empty').on('click', function(event){
+    $('#touiteList').on('click','.icon-star-empty',function(event){
         var message =$(this).parents('article');
         $.ajax({
             type:"GET",
@@ -131,8 +135,8 @@ $(document).ready(function()
                 }
          });
     });
-    //voir réponse
-     $('footer').on('click', '.icon-bubble' ,function(event){
+    //Répondre
+     $('#touiteList').on('click', '.icon-bubble' ,function(event){
         var id =$(this).parents('article').attr('id');
         modalIni('Répondre', '<form id="RepondreModalForm"><textarea placeholder="Entrez votre message..." name="touite" maxlength="140" required=""></textarea><input type="submit"></form>');
         $('#RepondreModalForm').submit(function(event){
