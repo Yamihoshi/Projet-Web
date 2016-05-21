@@ -1,9 +1,4 @@
-﻿
-<?php 
-
-include('nav.php');
-
-?>
+<?php include('nav.php');?>
 	<div id="pageDisplay">
 
 		<div style="width:70%;margin:auto;">

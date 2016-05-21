@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once('fonctions.php');
 include('nav.php');
 ?>

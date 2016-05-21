@@ -111,7 +111,7 @@ date_default_timezone_set("Europe/Paris");
                         echo '<span class="icon-bubble" title="Répondre"></span>';
                     }
                 }
-            echo '</footer';
+            echo '</footer>';
          }
 
         public function renderFooterC($message){

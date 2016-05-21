@@ -130,11 +130,11 @@
 		{
 			foreach(glob("files/pictures/".$user->getId().".*") as $file)
 		    {
-		           return '<img id='.$id.' src="'.$file.'">';
+		           return '<img id='.$id.' src="'.$file.'" alt="Photo de '. htmlentities($user->getNom()) . '">';
 		    }	
 		}
 		else
-			return '<img id='.$id.' src="includes/img/no_pic.png">';
+			return '<img id='.$id.' src="includes/img/no_pic.png" alt="Photo de '. htmlentities($user->getNom()) . '">';
 	}
 	function getPhotMessage($user)
 	{
@@ -555,11 +555,12 @@
 
 				renderDiscussionMessage($touite,$touitosHandler->getByAttr("id",$touite->getIdAuteur(),PDO::PARAM_INT));
 			}
-			echo '</div>';
+			
 
 			echo '<div id="discussionInput" class="fond"><br>';
 				echo '<textarea placeholder="Votre Message..." name="discussionAnswer" id="discussionAnswer"></textarea>';
-				echo '<div><button id="sendDiscussion" replyTo="'.$id.'">Envoyer</button></div>';
+				echo '<button id="sendDiscussion" replyTo="'.$id.'">Envoyer</button>';
+			echo '</div>';
 			echo '</div>';
 		}
 	}
