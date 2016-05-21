@@ -130,11 +130,11 @@
 		{
 			foreach(glob("files/pictures/".$user->getId().".*") as $file)
 		    {
-		           return '<img id='.$id.' src="'.$file.'">';
+		           return '<img id='.$id.' src="'.$file.'" alt="Photo de '. htmlentities($user->getNom()) . '">';
 		    }	
 		}
 		else
-			return '<img id='.$id.' src="includes/img/no_pic.png">';
+			return '<img id='.$id.' src="includes/img/no_pic.png" alt="Photo de '. htmlentities($user->getNom()) . '">';
 	}
 	function getPhotMessage($user)
 	{

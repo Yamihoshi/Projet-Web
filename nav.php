@@ -1,7 +1,8 @@
-﻿<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
 <head>
 	<title>Touiteur </title>
+	 <meta charset="utf-8">
 	<link rel="stylesheet" href="includes/css/style.css">
 	<script src="includes/js/jquery-1.11.3.min.js"></script>
 	<script src="includes/js/script.js"></script>
