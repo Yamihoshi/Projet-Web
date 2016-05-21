@@ -519,13 +519,18 @@
 			echo '<div id="discussionMessage" destinataire="'.$id.'">';
 			echo '<div><button id="loadPreviousDiscussion" index="1">Charger les anciens messages</button></div>';
 
-			$dateCourante=substr($list[0]->getLaDate(),0,4+3+3);
+			$dateCourante;
 
-			echo '<div class="datePrivate">';
-			
-			echo date("d/m/Y", strtotime($dateCourante));
+			if(!empty($list))
+			{
+				$dateCourante=substr($list[0]->getLaDate(),0,4+3+3);
 
-			echo '</div>';
+				echo '<div class="datePrivate">';
+				
+				echo date("d/m/Y", strtotime($dateCourante));
+
+				echo '</div>';
+			}
 
 
 			foreach($list as $key=>$touite)
