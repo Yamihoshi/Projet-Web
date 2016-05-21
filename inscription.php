@@ -20,7 +20,7 @@ header('content-type: application/json');
 		{
 			//ADD
 			$id=addTouitos($_POST,$bd);
-			$_SESSION['user']=$_POST['pseudo'];
+			$_SESSION['user']=trim($_POST['pseudo']);
 			$_SESSION['id']=$id;
 		}
 

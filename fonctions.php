@@ -16,7 +16,7 @@
 
 	function isOwnProfile($profile)
 	{
-		return (isConnected() && $_SESSION['user']==$profile);
+		return (isConnected() &&  strtoupper($_SESSION['user'])== strtoupper($profile));
 	}
 
 	function getFollowButton($handler,$user,$profile)
