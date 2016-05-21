@@ -555,11 +555,12 @@
 
 				renderDiscussionMessage($touite,$touitosHandler->getByAttr("id",$touite->getIdAuteur(),PDO::PARAM_INT));
 			}
-			echo '</div>';
+			
 
 			echo '<div id="discussionInput" class="fond"><br>';
 				echo '<textarea placeholder="Votre Message..." name="discussionAnswer" id="discussionAnswer"></textarea>';
-				echo '<div><button id="sendDiscussion" replyTo="'.$id.'">Envoyer</button></div>';
+				echo '<button id="sendDiscussion" replyTo="'.$id.'">Envoyer</button>';
+			echo '</div>';
 			echo '</div>';
 		}
 	}
