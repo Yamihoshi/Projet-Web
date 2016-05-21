@@ -33,7 +33,9 @@ nav li input, nav li button{
 	margin:auto;
 	font-size: 0.9em;
 }
-
+#WhoIFollow, #WhoIFollowDiv{
+	padding-bottom: 50px;
+}
 nav input[type="submit"]{
 	margin-top: 0px;
 }
@@ -51,7 +53,9 @@ img{
    flex-direction: row;
    justify-content: flex-end;
  }
-
+.message footer{
+	padding-bottom: 20px;
+}
 .container, .info{
 	display: inline-flex;
 }
@@ -621,10 +625,7 @@ footer [class^="icon-"], footer [class*=" icon-"]{
 	text-align:center;
 }
 
-#discussionMessage
-{
-	width:100%;
-}
+
 #discussionAnswer
 {
 	width: 90%;
@@ -634,7 +635,8 @@ footer [class^="icon-"], footer [class*=" icon-"]{
 {
 	margin:auto;
 	overflow-y:auto; 
-	height:100%;
+	height:70%;
+	width:100%;
 }
 .discussionMessageRow
 {
