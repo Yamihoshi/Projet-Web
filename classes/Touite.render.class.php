@@ -41,7 +41,8 @@ date_default_timezone_set("Europe/Paris");
             if(!empty($message)){
                 foreach($message as $key=>$touite){
                     $auteur = $db_touitos->get($touite->getIdAuteur());
-                    $this->renderC($touite, $auteur);
+                    if($auteur->getPseudo()!='')
+                        $this->renderC($touite, $auteur);
                 }
               }
          }

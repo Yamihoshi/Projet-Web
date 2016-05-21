@@ -117,7 +117,7 @@
 		}
 		else
 		{
-			    if(isOwnProfile($auteur->getNom()))
+			    if(isOwnProfile($touitos->getNom()))
                      echo '<div class="fond nothing"><h1>Commencez à écrire un message !</h1></div>';
                 else
                     echo '<div class="fond nothing"><h1>Cet utilisateur n\'a pas encore écrit de message !</h1></div>';
