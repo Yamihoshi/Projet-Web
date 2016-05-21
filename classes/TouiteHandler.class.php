@@ -116,7 +116,7 @@ class touiteHandler
   public function addReponse(Touite $touite, $idSource){
     $idMessage = $this->add($touite);
     $this->addPublic($idMessage);
-    $q = $this->_db->prepare('INSERT INTO touitesReponses VALUES(:idR, :idS)');
+    $q = $this->_db->prepare('INSERT INTO touitesreponses VALUES(:idR, :idS)');
     $q->bindValue(':idR', $idMessage, PDO::PARAM_INT);
     $q->bindValue(':idS', $idSource, PDO::PARAM_INT);
     $q->execute();
