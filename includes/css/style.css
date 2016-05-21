@@ -669,6 +669,7 @@ footer [class^="icon-"], footer [class*=" icon-"]{
 .myMessage
 {
 	float:left;
+	text-align:left;
 }
 
 .myMessage .discussionMessageRowText
@@ -687,6 +688,7 @@ footer [class^="icon-"], footer [class*=" icon-"]{
 {
 	float:right;
 	margin-right:10px;
+	text-align:right;
 }
 
 .contactRow:hover
