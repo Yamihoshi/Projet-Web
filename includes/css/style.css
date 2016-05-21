@@ -18,7 +18,7 @@ nav
 	z-index:100;
 	padding:10px;
 }
-nav, .message, #profile_left_infos, #timeline #touite-box, #ongletDiv, #edit, .fond, #privateBoxMessageDisplay{
+nav, .message, #profile_left_infos, #timeline #touite-box, #ongletDiv, #edit, .fond, #privateBoxMessageDisplay,#whoIFollowRequest, #whoIFollow, #followedByDiv{
 	background-color: #fff;
 	box-shadow: 0 1px 2px rgba(0,0,0,.1);
 }
@@ -594,12 +594,6 @@ footer [class^="icon-"], footer [class*=" icon-"]{
 	cursor:pointer;
 }
 
-#whoIFollowRequest,#whoIFollow
-{
-	margin-top:40px;
-	background-color: #fff;
-	box-shadow: 0 1px 2px rgba(0,0,0,.1);
-}
 
 .requestDiv
 {
@@ -627,9 +621,13 @@ footer [class^="icon-"], footer [class*=" icon-"]{
 	text-align:center;
 }
 
-#discussionAnswer,#discussionMessage
+#discussionMessage
 {
 	width:100%;
+}
+#discussionAnswer
+{
+	width: 90%;
 }
 
 #discussionMessage
@@ -665,6 +663,9 @@ footer [class^="icon-"], footer [class*=" icon-"]{
 	word-break: break-all;
 	text-align:left;
 }
+#discussionInput{
+		margin-top: 20px;
+}
 
 .spacer
 {
@@ -674,6 +675,7 @@ footer [class^="icon-"], footer [class*=" icon-"]{
 .myMessage
 {
 	float:left;
+	margin-left: 15px;
 }
 
 .myMessage .discussionMessageRowText

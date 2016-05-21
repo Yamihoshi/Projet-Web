@@ -292,7 +292,7 @@
 
 			echo '</div>';
 
-			echo '<div id="whoIFollow"><div class="boxHeader">touitos que vous suivez</div>';
+			echo '<div id="whoIFollow"><div class="boxHeader">Touitos que vous suivez</div>';
 			foreach($list as $key=>$touitos)
 			{
 				echo  gettouitosVignette($bd,$touitos);
@@ -547,8 +547,8 @@
 			}
 			echo '</div>';
 
-			echo '<div id="discussionInput">';
-				echo '<textarea placeholder="Votre Message" name="discussionAnswer" id="discussionAnswer"></textarea>';
+			echo '<div id="discussionInput" class="fond"><br>';
+				echo '<textarea placeholder="Votre Message..." name="discussionAnswer" id="discussionAnswer"></textarea>';
 				echo '<div><button id="sendDiscussion" replyTo="'.$id.'">Envoyer</button></div>';
 			echo '</div>';
 		}
