@@ -18,7 +18,7 @@ nav
 	z-index:100;
 	padding:10px;
 }
-nav, .message, #profile_left_infos, #timeline #touite-box, #ongletDiv, #edit, .fond{
+nav, .message, #profile_left_infos, #timeline #touite-box, #ongletDiv, #edit, .fond, #privateBoxMessageDisplay{
 	background-color: #fff;
 	box-shadow: 0 1px 2px rgba(0,0,0,.1);
 }
@@ -207,7 +207,7 @@ button:disabled
 #ongletDiv td:hover{
 	border-bottom:2px solid #dc5656;
 }
-#timeline textarea, #profile_statut textarea, .modal textarea{ 
+#timeline textarea, #profile_statut textarea, .modal textarea, #discussionAnswer{ 
 	resize:none;
 	width:78%;
 	margin: auto;
@@ -708,8 +708,8 @@ footer [class^="icon-"], footer [class*=" icon-"]{
 	background-color:white;
 	width:20%;
 	height:80%;
-	border:2px solid black;
 	overflow-y:auto;
+	box-shadow: 0 1px 2px rgba(0,0,0,.1);
 }
 
 #privateBoxMessageDisplay
@@ -717,10 +717,8 @@ footer [class^="icon-"], footer [class*=" icon-"]{
 	position:fixed;
 	bottom:0;
 	right:45%;
-	background-color:white;
 	width:50%;
 	height:80%;
-	border:2px solid black;
 	text-align:center;
 }
 
