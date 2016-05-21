@@ -73,7 +73,10 @@ class touiteHandler
     $q->bindValue(':id', $id, PDO::PARAM_INT);
     $q->execute();
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
-    return new Touite($donnees);
+    if($donnees)
+      return new Touite($donnees);
+    else
+      return new Touite([]);
   }
 
   public function getListMessage($id,$offset)

@@ -34,7 +34,7 @@ class touitosHandler
     if(!empty($donnees))
       return new touitos($donnees);
     else
-      return null;
+      return new touitos([]);
   }
 
   public function getbyPseudo($name)
