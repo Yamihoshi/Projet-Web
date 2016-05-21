@@ -34,6 +34,7 @@ class touiteHandler
     $id = $this->add(new Touite(['idAuteur' => $id_auteur, 'texte'=>"retouite"]));
     $this->addPublic($id);
     $this->_db->query('INSERT INTO retouites VALUES('.$id.' ,' .$id_message.')');
+
   }
 
   public function addNormaux($id){
@@ -114,6 +115,7 @@ class touiteHandler
   }
   public function addReponse(Touite $touite, $idSource){
     $idMessage = $this->add($touite);
+    $this->addPublic($idMessage);
     $q = $this->_db->prepare('INSERT INTO touitesReponses VALUES(:idR, :idS)');
     $q->bindValue(':idR', $idMessage, PDO::PARAM_INT);
     $q->bindValue(':idS', $idSource, PDO::PARAM_INT);

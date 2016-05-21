@@ -132,7 +132,7 @@ $(document).ready(function()
          });
     });
     //voir réponse
-    $('.icon-bubble').on('click', function(event){
+     $('footer').on('click', '.icon-bubble' ,function(event){
         var id =$(this).parents('article').attr('id');
         modalIni('Répondre', '<form id="RepondreModalForm"><textarea placeholder="Entrez votre message..." name="touite" maxlength="140" required=""></textarea><input type="submit"></form>');
         $('#RepondreModalForm').submit(function(event){
@@ -147,7 +147,7 @@ $(document).ready(function()
                         discution:true
                     },
                 dataType:'html',
-                success:function()
+                success:function(event)
                 {
                     $(".modal-body").html("");
                     $("#myModal").hide();
