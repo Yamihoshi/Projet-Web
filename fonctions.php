@@ -106,12 +106,22 @@
 		$touiteAffiche=$tr->renderMessage(0);
 		echo '</div>';
 
+
+
 		if($touiteAffiche)
 		{
 			echo '<div id="loadMoreTouiteDiv">
 					<button id="loadMoreProfileTouite" next="1" idtouitos="'.$touitos->getId().'">+ de touites</button>
 
 				</div>';
+		}
+		else
+		{
+			    if(isOwnProfile($auteur->getNom()))
+                     echo '<div class="fond nothing"><h1>Commencez à écrire un message !</h1></div>';
+                else
+                    echo '<div class="fond nothing"><h1>Cet utilisateur n\'a pas encore écrit de message !</h1></div>';
+     
 		}
 	}
 	function getPhoto($user,$id)
